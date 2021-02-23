@@ -17,13 +17,13 @@
 void	data_init(t_data *data)
 {
 	data->i = 0;
-	data->command = NULL; // struct containing list of commands and $ENV
+	// data->command = NULL; // struct containing list of commands and $ENV
 	// data->command->env = NULL; // $ENV
 	// data->command->cmds = NULL; // listof commands
-	data->pipes = NULL; // list of pipes
-	data->simple_cmd = NULL;
+	// data->pipes = NULL; // list of pipes
+	// data->simple_cmd = NULL;
 	// data->simple_cmd->redirections = NULL; // list of redirections
-	data->redirection = NULL;
+	// data->redirection = NULL;
 }
 
 // void	set_env(char **s, t_data *data)

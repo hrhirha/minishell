@@ -93,5 +93,6 @@ char			*dquoted_str(char *line, int *i);
 char			*squoted_str(char *line, int *i);
 char			*unquoted_str(char *line, int *i);
 char			*handle_escape(char *line, t_data *data);
+char			*get_str(char *line, int *i);
 
 #endif
