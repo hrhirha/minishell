@@ -45,7 +45,7 @@ typedef struct	s_command
 	char			**args;			// ["aaaa", "bbbb"]
 	char			**full_args;	// ["echo", "aaaa", "bbbb"]
 	int				option;			// 1 if echo -n, 0 if not
-	t_redirection	*recirections;
+	t_list			*redirections;
 }				t_command;
 
 // typedef struct	s_pipeline
@@ -64,14 +64,14 @@ typedef struct	s_minishell // ;
 typedef struct	s_data
 {
 	int				i;
-	char			**env;
-	// t_list			*cmds;
+	// char			**env;
 	t_minishell		*command;
 	t_list			*pipes;
-	// t_pipeline		*pipeline;
 	t_command		*simple_cmd;
-	t_list			*redirections;
 	t_redirection	*redirection;
+	// t_list			*cmds;
+	// t_pipeline		*pipeline;
+	// t_list			*redirections;
 }				t_data;
 
 /*
@@ -89,6 +89,9 @@ void			get_redirection(char *line, t_data *data);
 */
 int				isblank(int c);
 char			*handle_dquotes(char *line, t_data *data);
+char			*dquoted_str(char *line, int *i);
+char			*squoted_str(char *line, int *i);
+char			*unquoted_str(char *line, int *i);
 char			*handle_escape(char *line, t_data *data);
 
 #endif

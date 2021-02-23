@@ -12,6 +12,14 @@
 
 #include "libft.h"
 
+void	free_strs(char const **s1, char const **s2)
+{
+	free(*(char **)s1);
+	*s1 = NULL;
+	free(*(char **)s2);
+	*s2 = NULL;
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	i;
@@ -37,5 +45,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	str[i] = '\0';
+	free_strs(&s1, &s2);
 	return (str);
 }

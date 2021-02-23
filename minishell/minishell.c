@@ -17,31 +17,28 @@
 void	data_init(t_data *data)
 {
 	data->i = 0;
-	data->command->cmds = NULL;
-	data->pipes = NULL;
-	data->redirections = NULL;
-	if (!(data->command = malloc(sizeof(t_minishell *))))
-		exit_errno(ENOMEM);
-	// if (!(data->pipeline = malloc(sizeof(t_pipeline *))))
-		// exit_errno(ENOMEM);
-	if (!(data->simple_cmd = malloc(sizeof(t_command *))))
-		exit_errno(ENOMEM);
-	
+	data->command = NULL; // struct containing list of commands and $ENV
+	// data->command->env = NULL; // $ENV
+	// data->command->cmds = NULL; // listof commands
+	data->pipes = NULL; // list of pipes
+	data->simple_cmd = NULL;
+	// data->simple_cmd->redirections = NULL; // list of redirections
+	data->redirection = NULL;
 }
 
-void	set_env(char **s, t_data *data)
-{
-	int x;
+// void	set_env(char **s, t_data *data)
+// {
+// 	int x;
 
-	x = 0;
-	while (s[x])
-		x++;
-	if (!(data->env = malloc(x * sizeof(char *) + 1)))
-		exit_errno(ENOMEM);
-	data->env[x] = NULL;
-	while (--x >= 0)
-		data->env[x] = ft_strdup(s[x]);
-}
+// 	x = 0;
+// 	while (s[x])
+// 		x++;
+// 	if (!(data->env = malloc(x * sizeof(char *) + 1)))
+// 		exit_errno(ENOMEM);
+// 	data->env[x] = NULL;
+// 	while (--x >= 0)
+// 		data->env[x] = ft_strdup(s[x]);
+// }
 
 int		main(int ac, char **av, char **env)
 {

@@ -14,18 +14,34 @@
 
 void    get_filename(char *line, t_data *data)
 {
+	char	*substr;
 	char	*tmp;
 
-	tmp = "";
+	tmp = ft_calloc(1, 1);
     while (isblank(line[data->i]) == 0)
         data->i++;
     if (line[data->i] == '>' || line[data->i] == '<' ||
         line[data->i] == '|' || line[data->i] == ';' ||
         line[data->i] == '\0')
         exit_error(SNTXERR, line[data->i]);
-	else if (line[data->i] == '"')
+	while (line[data->i] != ';' && line[data->i] != '|' &&
+			line[data->i] != ' ' && line[data->i])
 	{
-		tmp = ft_strjoin(tmp, handle_dquotes(line, data));
+		if (line[data->i] == '"')
+		{
+			substr = dquoted_str(line, &data->i);
+			tmp = ft_strjoin(tmp, substr);
+		}
+		else if (line[data->i] == '\'')
+		{
+			substr = squoted_str(line, &data->i);
+			tmp = ft_strjoin(tmp, substr);
+		}
+		else
+		{
+			substr = unquoted_str(line, &data->i);
+			tmp = ft_strjoin(tmp, substr);
+		}
 	}
     data->redirection->file_name = tmp;
 	printf("filename = %s\n", tmp);
@@ -53,4 +69,9 @@ void	get_redirection(char *line, t_data *data)
 			exit_error(SNTXERR, line[data->i]);
 	}
     get_filename(line, data);
+	ft_lstadd_back(&data->simple_cmd->redirections,
+				ft_lstnew(data->redirection));
+	// t_redirection redir;
+	// redir = *(t_redirection *)data->simple_cmd->redirections->content;
+	// printf("filename = %s\n", redir.);
 }

@@ -14,6 +14,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft/
+	make bonus -C libft/
 	mv libft/libft.a .
 	$(CC) $(OBJS) libft.a -o $(NAME)
 $(OBJS): $(SRCS)
@@ -26,6 +27,7 @@ clean:
 fclean: clean
 	make fclean -C libft
 	rm -rf $(NAME)
+	rm -rf libft.a
 
 re: fclean $(NAME)
 

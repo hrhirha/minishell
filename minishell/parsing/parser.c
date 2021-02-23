@@ -25,6 +25,9 @@ void	parse_line(char *line, t_data *data)
 		data->i++;
 	if (line[data->i] == '|' || line[data->i] == ';')
 		exit_error(SNTXERR, line[data->i]);
+	if (!(data->simple_cmd = malloc(sizeof(t_command *))))
+		exit_errno(ENOMEM);
+	// data->simple_cmd->redirections = NULL;
 	while (line[data->i])
 	{
 		if (line[data->i] == '>' || line[data->i] == '<')

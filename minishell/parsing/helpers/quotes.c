@@ -34,3 +34,35 @@ char	*handle_dquotes(char *line, t_data *data)
 	}
 	return (quoted_str);
 }
+
+char	*dquoted_str(char *line, int *i)
+{
+	char	*substr;
+	int		j;
+
+	j = 1;
+	while (line[*i + j] != '"' && line[*i + j])
+		j++;
+	substr = ft_substr(line, *i, j + 1);
+	if (line[*i + j] == '"')
+		*i += j + 1;
+	else
+		*i += j;
+	return (substr);
+}
+
+char	*squoted_str(char *line, int *i)
+{
+	char	*substr;
+	int		j;
+
+	j = 1;
+	while (line[*i + j] != '\'' && line[*i + j])
+		j++;
+	substr = ft_substr(line, *i, j + 1);
+	if (line[*i + j] == '\'')
+		*i += j + 1;
+	else
+		*i += j;
+	return (substr);
+}
