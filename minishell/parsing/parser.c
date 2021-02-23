@@ -29,6 +29,6 @@ void	parse_line(char *line, t_data *data)
 	{
 		if (line[data->i] == '>' || line[data->i] == '<')
 			get_redirection(line, data);
-		data->i++;
+		// data->i++;
 	}
 }

@@ -14,13 +14,21 @@
 
 void    get_filename(char *line, t_data *data)
 {
+	char	*tmp;
+
+	tmp = "";
     while (isblank(line[data->i]) == 0)
         data->i++;
     if (line[data->i] == '>' || line[data->i] == '<' ||
         line[data->i] == '|' || line[data->i] == ';' ||
         line[data->i] == '\0')
         exit_error(SNTXERR, line[data->i]);
-    
+	else if (line[data->i] == '"')
+	{
+		tmp = ft_strjoin(tmp, handle_dquotes(line, data));
+	}
+    data->redirection->file_name = tmp;
+	printf("filename = %s\n", tmp);
 }
 
 void	get_redirection(char *line, t_data *data)

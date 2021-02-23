@@ -17,13 +17,13 @@
 void	data_init(t_data *data)
 {
 	data->i = 0;
-	data->cmds = NULL;
+	data->command->cmds = NULL;
 	data->pipes = NULL;
 	data->redirections = NULL;
 	if (!(data->command = malloc(sizeof(t_minishell *))))
 		exit_errno(ENOMEM);
-	if (!(data->pipeline = malloc(sizeof(t_pipeline *))))
-		exit_errno(ENOMEM);
+	// if (!(data->pipeline = malloc(sizeof(t_pipeline *))))
+		// exit_errno(ENOMEM);
 	if (!(data->simple_cmd = malloc(sizeof(t_command *))))
 		exit_errno(ENOMEM);
 	
@@ -52,7 +52,7 @@ int		main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 	data_init(&data);
-	set_env(env, &data);
+	// set_env(env, &data);
 	while (1)
 	{
 		data.i = 0;
@@ -61,5 +61,4 @@ int		main(int ac, char **av, char **env)
 		parse_line(line, &data);
 		free(line);
 	}
-	free(data.cmds);
 }
