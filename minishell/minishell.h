@@ -85,11 +85,14 @@ void			parse_line(char *line, t_data *data);
 */
 void			get_redirection(char *line, t_data *data);
 void			get_command_and_args(char *line, t_data *data);
+void			add_cmd_to_pipes(char *line, t_data *data);
 
 /*
 ** helpers
 */
 int				isblank(int c);
+void			init_cmd(t_data *data);
+
 char			*handle_dquotes(char *line, t_data *data);
 char			*dquoted_str(char *line, int *i);
 char			*squoted_str(char *line, int *i);
