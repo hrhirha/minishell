@@ -12,6 +12,16 @@
 
 #include "../minishell.h"
 
+void	init_cmd(t_data *data)
+{
+	if (!(data->simple_cmd = malloc(sizeof(t_command))))
+		exit_errno(ENOMEM);
+	if (!(data->simple_cmd->cmd = ft_calloc(1, 1)))
+		exit_errno(ENOMEM);
+	data->simple_cmd->redirections = NULL;
+	data->ac = 0;
+}
+
 void	parse_line(char *line, t_data *data)
 {
 	while (isblank(line[data->i]) == 0)
@@ -20,11 +30,7 @@ void	parse_line(char *line, t_data *data)
 		exit_error(SNTXERR, line[data->i]);
 	if (!(data->command = malloc(sizeof(t_minishell))))
 		exit_errno(ENOMEM);
-	if (!(data->simple_cmd = malloc(sizeof(t_command))))
-		exit_errno(ENOMEM);
-	if (!(data->simple_cmd->cmd = ft_calloc(1, 1)))
-		exit_errno(ENOMEM);
-	data->simple_cmd->redirections = NULL;
+	init_cmd(data);
 	data->pipes = NULL;
 	data->command->cmds = NULL;
 	while (line[data->i])
@@ -34,11 +40,17 @@ void	parse_line(char *line, t_data *data)
 		else if (line[data->i] == '|')
 		{
 			// add previous cmd to pipe list
-
+			ft_lstadd_back(&data->pipes, ft_lstnew(data->simple_cmd));
+			init_cmd(data);
+			data->i++;
+			while (isblank(line[data->i]) == 0)
+				data->i++;
 		}
 		else if (line[data->i] == ';')
 		{
+			// add previous cmd to pipe list and 
 			// add previous pipe list to command list
+			data->i++;
 		}
 		else
 		{
@@ -46,6 +58,7 @@ void	parse_line(char *line, t_data *data)
 			get_command_and_args(line, data);
 			// data->i++;
 		}
+		if (!line[data->i])
+			ft_lstadd_back(&data->pipes, ft_lstnew(data->simple_cmd));
 	}
-	printf("count = %d\n", data->ac);
 }

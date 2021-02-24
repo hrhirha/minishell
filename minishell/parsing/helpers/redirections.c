@@ -25,7 +25,6 @@ void    get_filename(char *line, t_data *data)
 	tmp = get_str(line, &data->i);
     data->redirection->file_name = ft_strdup(tmp);
 	free(tmp);
-	// printf("(%d)filename = %s\n", data->redirection->type, data->redirection->file_name);
 }
 
 void	get_redirection(char *line, t_data *data)

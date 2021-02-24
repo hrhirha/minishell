@@ -12,32 +12,47 @@
 
 #include "../../minishell.h"
 
-void	get_command_and_args(char *line, t_data *data)
+char	**get_arg_tab(char *cmd, int acount)
 {
+	char	**args;
 	int		j;
 	int		ac;
+
+	if (!(args = malloc((acount + 1) * sizeof(char *))))
+		exit_errno(ENOMEM);
+	ac = 0;
+	j = 0;
+	while (ac < acount)
+	{
+		args[ac] = get_str(cmd, &j);
+		while (isblank(cmd[j]) == 0)
+			j++;
+		ac++;
+	}
+	args[ac] = NULL;
+	return (args);
+}
+
+void	get_command_and_args(char *line, t_data *data)
+{
 	char	*substr;
+	char	*sp;
 
 	while (isblank(line[data->i]) == 0)
 		data->i++;
-	substr = get_str(line, &data->i);
-	data->simple_cmd->cmd = ft_strjoin(data->simple_cmd->cmd, substr);
-	data->simple_cmd->cmd = ft_strjoin(data->simple_cmd->cmd, " ");
-	data->ac++;
-	if (line[data->i] == '|' || line[data->i] == ';' || line[data->i])
+	if (line[data->i] != '>' && line[data->i] != '<' &&
+		line[data->i] != ';' && line[data->i] != '|' &&
+		line[data->i])
 	{
-		if (!(data->simple_cmd->full_args =
-								malloc(data->ac * sizeof(char *) + 1)))
-			exit_errno(ENOMEM);
-		ac = 0;
-		j = 0;
-		while (ac < data->ac)
+		substr = get_str(line, &data->i);
+		data->simple_cmd->cmd = ft_strjoin(data->simple_cmd->cmd, substr);
+		sp = ft_strdup(" ");
+		data->simple_cmd->cmd = ft_strjoin(data->simple_cmd->cmd, sp);
+		data->ac++;
+		if (line[data->i] == '|' || line[data->i] == ';' || !line[data->i])
 		{
-			data->simple_cmd->full_args[ac] =
-								get_str(data->simple_cmd->cmd, &j);
-			// j++;
-			ac++;
+			data->simple_cmd->full_args =
+							get_arg_tab(data->simple_cmd->cmd, data->ac);
 		}
-		data->simple_cmd->full_args[ac] = NULL;
 	}
 }

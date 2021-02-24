@@ -14,18 +14,18 @@
 
 #define PROMPT "user@minishell$ "
 
-void	data_init(t_data *data)
-{
-	data->i = 0;
-	data->ac = 0;
-	// data->command = NULL; // struct containing list of commands and $ENV
-	// data->command->env = NULL; // $ENV
-	// data->command->cmds = NULL; // listof commands
-	// data->pipes = NULL; // list of pipes
-	// data->simple_cmd = NULL;
-	// data->simple_cmd->redirections = NULL; // list of redirections
-	// data->redirection = NULL;
-}
+// void	data_init(t_data *data)
+// {
+// 	// data->i = 0;
+// 	// data->ac = 0;
+// 	// data->command = NULL; // struct containing list of commands and $ENV
+// 	// data->command->env = NULL; // $ENV
+// 	// data->command->cmds = NULL; // listof commands
+// 	// data->pipes = NULL; // list of pipes
+// 	// data->simple_cmd = NULL;
+// 	// data->simple_cmd->redirections = NULL; // list of redirections
+// 	// data->redirection = NULL;
+// }
 
 // void	set_env(char **s, t_data *data)
 // {
@@ -41,6 +41,31 @@ void	data_init(t_data *data)
 // 		data->env[x] = ft_strdup(s[x]);
 // }
 
+void	test_parsed_line(t_data *data)
+{
+	t_list			*tmp_pipes;
+	t_command		command;
+	t_list			*tmp_redir;
+	t_redirection	redir;
+	int				i = 0;
+
+	tmp_pipes = data->pipes;
+	while (tmp_pipes)
+	{
+		command = *(t_command *)tmp_pipes->content;
+		tmp_redir = command.redirections;
+		while (tmp_redir)
+		{
+			redir = *(t_redirection *)tmp_redir->content;
+			printf("(%d)filename = `%s`\n", redir.type, redir.file_name);
+			tmp_redir = tmp_redir->next;
+		}
+		printf("cmd[%d] = `%s`\n", i, command.cmd);
+		tmp_pipes = tmp_pipes->next;
+		i++;
+	}
+}
+
 int		main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -49,7 +74,7 @@ int		main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
-	data_init(&data);
+	// data_init(&data);
 	// set_env(env, &data);
 	while (1)
 	{
@@ -57,23 +82,8 @@ int		main(int ac, char **av, char **env)
 		write(1, PROMPT, ft_strlen(PROMPT));
 		get_next_line(0, &line);
 		parse_line(line, &data);
-		// t_list *tmp;
-		// t_redirection redir;
-		// tmp = data.simple_cmd->redirections;
-		// printf("tmp length = %d\n", ft_lstsize(tmp));
-		// while  (tmp)
-		// {
-		// 	redir = *(t_redirection *)tmp->content;
-		// 	printf("(%d)filename = |%s|\n", redir.type, redir.file_name);
-		// 	tmp = tmp->next;
-		// }
-		printf("cmd = $%s$\n", data.simple_cmd->cmd);
-		int i = 0;
-		while (data.simple_cmd->full_args[i])
-		{
-			printf("args[%d] = %s\n", i, data.simple_cmd->full_args[i]);
-			i++;
-		}
 		free(line);
+
+		test_parsed_line(&data);
 	}
 }
