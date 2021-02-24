@@ -17,6 +17,7 @@
 void	data_init(t_data *data)
 {
 	data->i = 0;
+	data->ac = 0;
 	// data->command = NULL; // struct containing list of commands and $ENV
 	// data->command->env = NULL; // $ENV
 	// data->command->cmds = NULL; // listof commands
@@ -56,6 +57,23 @@ int		main(int ac, char **av, char **env)
 		write(1, PROMPT, ft_strlen(PROMPT));
 		get_next_line(0, &line);
 		parse_line(line, &data);
+		// t_list *tmp;
+		// t_redirection redir;
+		// tmp = data.simple_cmd->redirections;
+		// printf("tmp length = %d\n", ft_lstsize(tmp));
+		// while  (tmp)
+		// {
+		// 	redir = *(t_redirection *)tmp->content;
+		// 	printf("(%d)filename = |%s|\n", redir.type, redir.file_name);
+		// 	tmp = tmp->next;
+		// }
+		printf("cmd = $%s$\n", data.simple_cmd->cmd);
+		int i = 0;
+		while (data.simple_cmd->full_args[i])
+		{
+			printf("args[%d] = %s\n", i, data.simple_cmd->full_args[i]);
+			i++;
+		}
 		free(line);
 	}
 }

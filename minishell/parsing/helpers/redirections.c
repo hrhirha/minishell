@@ -51,14 +51,5 @@ void	get_redirection(char *line, t_data *data)
 	}
     get_filename(line, data);
 	ft_lstadd_back(&data->simple_cmd->redirections,
-				ft_lstnew(data->redirection)); // SEGFAULT
-	t_list *tmp;
-	tmp = data->simple_cmd->redirections;
-	while  (tmp)
-	{
-		t_redirection redir;
-		redir = *(t_redirection *)tmp->content;
-		printf("filename = %s\n", redir.file_name);
-		tmp = tmp->next;
-	}
+				ft_lstnew(data->redirection));
 }

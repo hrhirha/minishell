@@ -1,11 +1,10 @@
 NAME = minishell
-CC = gcc -Wall -Wextra -Werror -fsanitize=address
+CC = gcc -Wall -Wextra -Werror #-fsanitize=address
 
 SRCS = minishell.c \
 	   get_next_line/*.c \
 	   parsing/*.c \
 	   parsing/errors/*.c \
-	   parsing/redirections/*.c \
 	   parsing/helpers/*.c
 
 OBJS = *.o

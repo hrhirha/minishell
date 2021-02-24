@@ -69,6 +69,7 @@ typedef struct	s_data
 	t_list			*pipes;
 	t_command		*simple_cmd;
 	t_redirection	*redirection;
+	int				ac;
 	// t_list			*cmds;
 	// t_pipeline		*pipeline;
 	// t_list			*redirections;
@@ -80,9 +81,10 @@ typedef struct	s_data
 void			parse_line(char *line, t_data *data);
 
 /*
-** redirections
+** commandParsing
 */
 void			get_redirection(char *line, t_data *data);
+void			get_command_and_args(char *line, t_data *data);
 
 /*
 ** helpers
