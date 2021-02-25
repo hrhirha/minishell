@@ -49,7 +49,6 @@ void	test_parsed_line(t_data *data)
 	t_list			*tmp_redir;
 	t_redirection	redir;
 
-
 	tmp_cmds = data->command->cmds;
 	while (tmp_cmds)
 	{

@@ -16,6 +16,6 @@
 # define SNTXERR 1
 
 void	exit_errno(int errnum);
-void	error(int errnum, char c);
+int		error(int errnum, char c);
 
 #endif

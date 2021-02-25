@@ -13,7 +13,6 @@ void	init_cmd(t_data *data)
 		exit_errno(ENOMEM);
 	if (!(data->simple_cmd->cmd = ft_calloc(1, 1)))
 		exit_errno(ENOMEM);
-	// data->simple_cmd->full_args = NULL;
 	data->simple_cmd->redirections = NULL;
 	data->ac = 0;
 }

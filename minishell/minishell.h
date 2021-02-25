@@ -48,15 +48,8 @@ typedef struct	s_command
 	t_list			*redirections;
 }				t_command;
 
-// typedef struct	s_pipeline
-// {
-// 	int				pipe_count;
-// 	t_command		*commands;
-// }				t_pipeline;
-
 typedef struct	s_minishell // ;
 {
-	// t_pipeline		*pipes;
 	t_list			*cmds;
 	char			**env;
 }				t_minishell;
@@ -64,15 +57,11 @@ typedef struct	s_minishell // ;
 typedef struct	s_data
 {
 	int				i;
-	// char			**env;
 	t_minishell		*command;
 	t_list			*pipes;
 	t_command		*simple_cmd;
 	t_redirection	*redirection;
 	int				ac;
-	// t_list			*cmds;
-	// t_pipeline		*pipeline;
-	// t_list			*redirections;
 }				t_data;
 
 /*
@@ -83,10 +72,10 @@ void			parse_line(char *line, t_data *data);
 /*
 ** commandParsing
 */
-void			get_redirection(char *line, t_data *data);
+int				get_redirection(char *line, t_data *data);
 void			get_command_and_args(char *line, t_data *data);
-void			add_cmd_to_pipes(char *line, t_data *data);
-void			add_pipes_to_cmds(char *line, t_data *data);
+int				add_cmd_to_pipes(char *line, t_data *data);
+int				add_pipes_to_cmds(char *line, t_data *data);
 void			add_last_cmd(char *line, t_data *data);
 
 /*
