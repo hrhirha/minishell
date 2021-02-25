@@ -86,6 +86,8 @@ void			parse_line(char *line, t_data *data);
 void			get_redirection(char *line, t_data *data);
 void			get_command_and_args(char *line, t_data *data);
 void			add_cmd_to_pipes(char *line, t_data *data);
+void			add_pipes_to_cmds(char *line, t_data *data);
+void			add_last_cmd(char *line, t_data *data);
 
 /*
 ** helpers
@@ -93,11 +95,12 @@ void			add_cmd_to_pipes(char *line, t_data *data);
 int				isblank(int c);
 void			init_cmd(t_data *data);
 
-char			*handle_dquotes(char *line, t_data *data);
+char			*get_str(char *line, int *i);
 char			*dquoted_str(char *line, int *i);
 char			*squoted_str(char *line, int *i);
 char			*unquoted_str(char *line, int *i);
+
+char			*handle_dquotes(char *line, t_data *data);
 char			*handle_escape(char *line, t_data *data);
-char			*get_str(char *line, int *i);
 
 #endif

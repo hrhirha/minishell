@@ -21,10 +21,13 @@ void    get_filename(char *line, t_data *data)
     if (line[data->i] == '>' || line[data->i] == '<' ||
         line[data->i] == '|' || line[data->i] == ';' ||
         line[data->i] == '\0')
-        exit_error(SNTXERR, line[data->i]);
-	tmp = get_str(line, &data->i);
-    data->redirection->file_name = ft_strdup(tmp);
-	free(tmp);
+        error(SNTXERR, line[data->i]);
+	else
+	{
+		tmp = get_str(line, &data->i);
+    	data->redirection->file_name = ft_strdup(tmp);
+		free(tmp);
+	}
 }
 
 void	get_redirection(char *line, t_data *data)
@@ -46,7 +49,7 @@ void	get_redirection(char *line, t_data *data)
 		data->redirection->type = LEFT_REDIR;
 		data->i++;
 		if (line[data->i] == '<')
-			exit_error(SNTXERR, line[data->i]);
+			error(SNTXERR, line[data->i]);
 	}
     get_filename(line, data);
 	ft_lstadd_back(&data->simple_cmd->redirections,

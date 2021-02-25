@@ -43,26 +43,45 @@
 
 void	test_parsed_line(t_data *data)
 {
+	t_list			*tmp_cmds;
 	t_list			*tmp_pipes;
 	t_command		command;
 	t_list			*tmp_redir;
 	t_redirection	redir;
-	int				i = 0;
 
-	tmp_pipes = data->pipes;
-	while (tmp_pipes)
+
+	tmp_cmds = data->command->cmds;
+	while (tmp_cmds)
 	{
-		command = *(t_command *)tmp_pipes->content;
-		tmp_redir = command.redirections;
-		while (tmp_redir)
+		int			i = 0;
+		tmp_pipes = tmp_cmds->content;
+		while (tmp_pipes)
 		{
-			redir = *(t_redirection *)tmp_redir->content;
-			printf("(%d)filename = `%s`\n", redir.type, redir.file_name);
-			tmp_redir = tmp_redir->next;
+			int j = 0;
+			command = *(t_command *)tmp_pipes->content;
+			tmp_redir = command.redirections;
+			while (tmp_redir)
+			{
+				printf("redirections\n");
+				redir = *(t_redirection *)tmp_redir->content;
+				printf("(%d)filename = `%s`\n", redir.type, redir.file_name);
+				tmp_redir = tmp_redir->next;
+			}
+			// if (command.cmd)
+				printf("cmd[%d] = `%s`\n", i, command.cmd);
+			if (command.full_args)
+			{
+				while (command.full_args[j])
+				{
+					printf("arg[%d] = `%s`\n", j, command.full_args[j]);
+					j++;
+				}
+			}
+			tmp_pipes = tmp_pipes->next;
+			i++;
 		}
-		printf("cmd[%d] = `%s`\n", i, command.cmd);
-		tmp_pipes = tmp_pipes->next;
-		i++;
+		tmp_cmds = tmp_cmds->next;
+		printf("\n");
 	}
 }
 
