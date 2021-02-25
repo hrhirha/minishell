@@ -61,32 +61,41 @@ void	test_parsed_line(t_data *data)
 			tmp_redir = command.redirections;
 			while (tmp_redir)
 			{
-				printf("redirections\n");
 				redir = *(t_redirection *)tmp_redir->content;
-				printf("(%d)filename = `%s`\n", redir.type, redir.file_name);
+				// printf("(%d)filename = `%s`\n", redir.type, redir.file_name);
+				free(redir.file_name);
+				free(tmp_redir);
 				tmp_redir = tmp_redir->next;
 			}
-			// if (command.cmd)
-				printf("cmd[%d] = `%s`\n", i, command.cmd);
+			free(tmp_redir);
+			// printf("cmd[%d] = `%s`\n", i, command.cmd);
+			free(command.cmd);
 			if (command.full_args)
 			{
 				while (command.full_args[j])
 				{
-					printf("arg[%d] = `%s`\n", j, command.full_args[j]);
+					// printf("arg[%d] = `%s`\n", j, command.full_args[j]);
+					free(command.full_args[j]);
 					j++;
 				}
+				free(command.full_args);
 			}
+			free(tmp_pipes);
 			tmp_pipes = tmp_pipes->next;
 			i++;
 		}
+		free(tmp_pipes);
+		free(tmp_cmds);
 		tmp_cmds = tmp_cmds->next;
-		printf("\n");
+		// printf("\n");
 	}
+	free(tmp_cmds);
+	free(data->command);
 }
 
 int		main(int ac, char **av, char **env)
 {
-	t_data	data;
+	t_data	*data;
 	char	*line;
 
 	(void)ac;
@@ -96,12 +105,20 @@ int		main(int ac, char **av, char **env)
 	// set_env(env, &data);
 	while (1)
 	{
-		data.i = 0;
+		if (!(data = malloc(sizeof(t_data))))
+			exit_errno(ENOMEM);
+		data->i = 0;
 		write(1, PROMPT, ft_strlen(PROMPT));
 		get_next_line(0, &line);
-		parse_line(line, &data);
+		if (parse_line(line, data) == 1)
+		{
+			free(line);
+			free(data);
+			continue ;
+		}
 		free(line);
 
-		test_parsed_line(&data);
+		test_parsed_line(data);
+		free(data);
 	}
 }

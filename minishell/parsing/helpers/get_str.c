@@ -50,6 +50,7 @@ char	*unquoted_str(char *line, int *i)
 
 char	*get_str(char *line, int *i)
 {
+	char	*tmp;
 	char	*substr;
 	char	*str;
 
@@ -64,7 +65,10 @@ char	*get_str(char *line, int *i)
 			substr = squoted_str(line, i);
 		else
 			substr = unquoted_str(line, i);
+		tmp = str;
 		str = ft_strjoin(str, substr);
+		free(tmp);
+		free(substr);
 	}
 	return (str);
 }

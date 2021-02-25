@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	line_loop(char *line, t_data *data)
+int		line_loop(char *line, t_data *data)
 {
 	int		ret;
 
@@ -31,17 +31,19 @@ void	line_loop(char *line, t_data *data)
 		else
 			// Get command and arguments
 			get_command_and_args(line, data);
-			// data->i++;
 		if (ret == 1)
 			break ;
 		if (!line[data->i])
 			add_last_cmd(line, data);
 	}
+	return (ret);
 }
 
-void	parse_line(char *line, t_data *data)
+int		parse_line(char *line, t_data *data)
 {
-	
+	int	ret;
+
+	ret = 0;
 	if (!(data->command = malloc(sizeof(t_minishell))))
 		exit_errno(ENOMEM);
 	data->command->cmds = NULL;
@@ -50,9 +52,10 @@ void	parse_line(char *line, t_data *data)
 	while (isblank(line[data->i]) == 0)
 		data->i++;
 	if (line[data->i] == '|' || line[data->i] == ';')
-		error(SNTXERR, line[data->i]);
+		ret = error(SNTXERR, line[data->i]);
 	else
 	{
-		line_loop(line, data);
+		ret = line_loop(line, data);
 	}
+	return (ret);
 }

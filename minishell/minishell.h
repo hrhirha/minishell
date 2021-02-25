@@ -67,7 +67,7 @@ typedef struct	s_data
 /*
 ** parsing
 */
-void			parse_line(char *line, t_data *data);
+int				parse_line(char *line, t_data *data);
 
 /*
 ** commandParsing

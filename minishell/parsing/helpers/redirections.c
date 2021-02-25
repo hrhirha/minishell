@@ -49,6 +49,8 @@ int	get_redirection(char *line, t_data *data)
 			data->redirection->type = DRIGHT_REDIR;
 			data->i++;
 		}
+		else if (line[data->i] == '|')
+			data->i++;
 	}
 	else if (line[data->i] == '<')
 	{

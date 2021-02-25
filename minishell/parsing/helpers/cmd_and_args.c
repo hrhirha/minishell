@@ -35,24 +35,30 @@ char	**get_arg_tab(char *cmd, int acount)
 
 void	get_command_and_args(char *line, t_data *data)
 {
+	char	*tmp;
 	char	*substr;
-	char	*sp;
+	// char	*sp;
 
 	while (isblank(line[data->i]) == 0)
 		data->i++;
 	if (line[data->i] != '>' && line[data->i] != '<' &&
 		line[data->i] != ';' && line[data->i] != '|' &&
-		line[data->i])
+		line[data->i] != ' ' && line[data->i])
 	{
+		tmp = data->simple_cmd->cmd;
 		substr = get_str(line, &data->i);
 		data->simple_cmd->cmd = ft_strjoin(data->simple_cmd->cmd, substr);
-		sp = ft_strdup(" ");
-		data->simple_cmd->cmd = ft_strjoin(data->simple_cmd->cmd, sp);
+		free(tmp);
+		free(substr);
+		// sp = ft_strdup(" ");
+		tmp = data->simple_cmd->cmd;
+		data->simple_cmd->cmd = ft_strjoin(data->simple_cmd->cmd, " ");
+		free(tmp);
 		data->ac++;
-		if (line[data->i] == '|' || line[data->i] == ';' || !line[data->i])
-		{
-			data->simple_cmd->full_args =
-							get_arg_tab(data->simple_cmd->cmd, data->ac);
-		}
+	}
+	if (line[data->i] == '|' || line[data->i] == ';' || !line[data->i])
+	{
+		data->simple_cmd->full_args =
+						get_arg_tab(data->simple_cmd->cmd, data->ac);
 	}
 }
