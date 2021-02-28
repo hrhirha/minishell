@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-int		line_loop(char *line, t_data *data)
+int	line_loop(char *line, t_data *data)
 {
-	int		ret;
+	int	ret;
 
 	ret = 0;
 	while (line[data->i])
@@ -25,7 +25,7 @@ int		line_loop(char *line, t_data *data)
 			// add previous cmd to pipe list
 			ret = add_cmd_to_pipes(line, data);
 		else if (line[data->i] == ';')
-			// add previous cmd to pipe list and 
+			// add previous cmd to pipe list and
 			// add previous pipe list to command list
 			ret = add_pipes_to_cmds(line, data);
 		else
@@ -39,12 +39,13 @@ int		line_loop(char *line, t_data *data)
 	return (ret);
 }
 
-int		parse_line(char *line, t_data *data)
+int	parse_line(char *line, t_data *data)
 {
 	int	ret;
 
 	ret = 0;
-	if (!(data->command = malloc(sizeof(t_minishell))))
+	data->command = malloc(sizeof(t_minishell));
+	if (!data->command)
 		exit_errno(ENOMEM);
 	data->command->cmds = NULL;
 	data->pipes = NULL;

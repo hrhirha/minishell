@@ -41,55 +41,99 @@
 // 		data->env[x] = ft_strdup(s[x]);
 // }
 
-void	test_parsed_line(t_data *data)
+void	free_redir(t_list *redirs)
 {
-	t_list			*tmp_cmds;
-	t_list			*tmp_pipes;
-	t_command		command;
-	t_list			*tmp_redir;
+	t_list			*tmp;
 	t_redirection	redir;
 
+	while (redirs)
+	{
+		redir = *(t_redirection *)redirs->content;
+		free(redir.file_name);
+		tmp = redirs->next;
+		free(redirs->content);
+		free(redirs);
+		redirs = tmp;
+	}
+}
+
+void	free_cmd(t_command *command)
+{
+	int				j;
+	t_list			*tmp_redir;
+
+	j = 0;
+	tmp_redir = command->redirections;
+	free_redir(tmp_redir);
+	if (*command->cmd)
+	{
+		if (command->full_args == NULL)
+			;
+		else
+		{
+			while (command->full_args[j])
+				free(command->full_args[j++]);
+			free(command->full_args);
+		}
+	}
+	free(command->cmd);
+}
+
+void	free_pipes(t_list *pipes)
+{
+	t_command		command;
+	t_list			*tmp;
+
+	while (pipes)
+	{
+		command = *(t_command *)pipes->content;
+		free_cmd(&command);
+		tmp = pipes->next;
+		free(pipes->content);
+		free(pipes);
+		pipes = tmp;
+	}
+}
+
+void	free_data(t_data *data)
+{
+	t_list			*tmp;
+	t_list			*tmp_cmds;
+	t_list			*tmp_pipes;
+	int i = 0;
+
+	if (!data->command->cmds)
+	{
+		printf("freeing data\n");
+		printf("cmd = %s\n", data->simple_cmd->cmd);
+		free_pipes(data->pipes);
+		free_redir(data->simple_cmd->redirections);
+		if (data->simple_cmd->full_args == NULL)
+		;
+		else
+		{
+			if (*data->simple_cmd->cmd)
+			{
+				while (data->simple_cmd->full_args[i])
+				{
+					printf("arg[i] = %s\n", data->simple_cmd->full_args[i]);
+					free(data->simple_cmd->full_args[i++]);
+				}
+				free(data->simple_cmd->full_args);
+			}
+		}
+		free(data->simple_cmd->cmd);
+		free(data->simple_cmd);
+	}
 	tmp_cmds = data->command->cmds;
 	while (tmp_cmds)
 	{
-		int			i = 0;
 		tmp_pipes = tmp_cmds->content;
-		while (tmp_pipes)
-		{
-			int j = 0;
-			command = *(t_command *)tmp_pipes->content;
-			tmp_redir = command.redirections;
-			while (tmp_redir)
-			{
-				redir = *(t_redirection *)tmp_redir->content;
-				// printf("(%d)filename = `%s`\n", redir.type, redir.file_name);
-				free(redir.file_name);
-				free(tmp_redir);
-				tmp_redir = tmp_redir->next;
-			}
-			free(tmp_redir);
-			// printf("cmd[%d] = `%s`\n", i, command.cmd);
-			free(command.cmd);
-			if (command.full_args)
-			{
-				while (command.full_args[j])
-				{
-					// printf("arg[%d] = `%s`\n", j, command.full_args[j]);
-					free(command.full_args[j]);
-					j++;
-				}
-				free(command.full_args);
-			}
-			free(tmp_pipes);
-			tmp_pipes = tmp_pipes->next;
-			i++;
-		}
-		free(tmp_pipes);
+		free_pipes(tmp_pipes);
+		tmp = tmp_cmds->next;
 		free(tmp_cmds);
-		tmp_cmds = tmp_cmds->next;
-		// printf("\n");
+		tmp_cmds = tmp;
 	}
-	free(tmp_cmds);
 	free(data->command);
 }
 
@@ -97,28 +141,26 @@ int		main(int ac, char **av, char **env)
 {
 	t_data	*data;
 	char	*line;
+	int		parsing_ret;
 
 	(void)ac;
 	(void)av;
 	(void)env;
-	// data_init(&data);
 	// set_env(env, &data);
 	while (1)
 	{
-		if (!(data = malloc(sizeof(t_data))))
+		data = malloc(sizeof(t_data));
+		if (!data)
 			exit_errno(ENOMEM);
 		data->i = 0;
 		write(1, PROMPT, ft_strlen(PROMPT));
 		get_next_line(0, &line);
-		if (parse_line(line, data) == 1)
-		{
-			free(line);
-			free(data);
-			continue ;
-		}
+		parsing_ret = parse_line(line, data);
+		printf("parison_ret = %d\n", parsing_ret);
+		if (parsing_ret == 0)
+		;
 		free(line);
-
-		test_parsed_line(data);
+		free_data(data);
 		free(data);
 	}
 }

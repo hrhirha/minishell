@@ -14,7 +14,6 @@
 
 int		get_filename(char *line, t_data *data)
 {
-	char	*tmp;
 	int		ret;
 
 	ret = 0;
@@ -26,9 +25,9 @@ int		get_filename(char *line, t_data *data)
 		ret = error(SNTXERR, line[data->i]);
 	else
 	{
-		tmp = get_str(line, &data->i);
-		data->redirection->file_name = ft_strdup(tmp);
-		free(tmp);
+		data->redirection->file_name = get_str(line, &data->i);
+		if (line[data->i] == '|' || line[data->i] == ';' || !line[data->i])
+			get_command_and_args(line, data);
 	}
 	return (ret);
 }

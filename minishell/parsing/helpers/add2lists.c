@@ -32,8 +32,11 @@ int		add_pipes_to_cmds(char *line, t_data *data)
 	{
 		ft_lstadd_back(&data->pipes, ft_lstnew(data->simple_cmd));
 		ft_lstadd_back(&data->command->cmds, ft_lstnew(data->pipes));
-		data->pipes = NULL;
-		init_cmd(data);
+		if (line[data->i])
+		{
+			data->pipes = NULL;
+			init_cmd(data);
+		}
 	}
 	return (ret);
 }

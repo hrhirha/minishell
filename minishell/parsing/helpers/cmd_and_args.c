@@ -37,7 +37,6 @@ void	get_command_and_args(char *line, t_data *data)
 {
 	char	*tmp;
 	char	*substr;
-	// char	*sp;
 
 	while (isblank(line[data->i]) == 0)
 		data->i++;
@@ -50,14 +49,13 @@ void	get_command_and_args(char *line, t_data *data)
 		data->simple_cmd->cmd = ft_strjoin(data->simple_cmd->cmd, substr);
 		free(tmp);
 		free(substr);
-		// sp = ft_strdup(" ");
 		tmp = data->simple_cmd->cmd;
 		data->simple_cmd->cmd = ft_strjoin(data->simple_cmd->cmd, " ");
 		free(tmp);
 		data->ac++;
 	}
 	if (line[data->i] == '|' || line[data->i] == ';' || !line[data->i])
-	{
+	{	
 		data->simple_cmd->full_args =
 						get_arg_tab(data->simple_cmd->cmd, data->ac);
 	}
