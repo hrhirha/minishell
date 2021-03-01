@@ -54,7 +54,7 @@ void	get_command_and_args(char *line, t_data *data)
 		free(tmp);
 		data->ac++;
 	}
-	if (line[data->i] == '|' || line[data->i] == ';' || !line[data->i])
+	if ((line[data->i] == '|' || line[data->i] == ';' || !line[data->i]) && data->ac)
 	{	
 		data->simple_cmd->full_args =
 						get_arg_tab(data->simple_cmd->cmd, data->ac);

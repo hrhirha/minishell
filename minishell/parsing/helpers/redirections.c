@@ -23,12 +23,12 @@ int		get_filename(char *line, t_data *data)
 		line[data->i] == '|' || line[data->i] == ';' ||
 		line[data->i] == '\0')
 		ret = error(SNTXERR, line[data->i]);
-	else
-	{
+	// else
+	// {
 		data->redirection->file_name = get_str(line, &data->i);
 		if (line[data->i] == '|' || line[data->i] == ';' || !line[data->i])
 			get_command_and_args(line, data);
-	}
+	// }
 	return (ret);
 }
 
@@ -59,8 +59,8 @@ int	get_redirection(char *line, t_data *data)
 			return (error(SNTXERR, line[data->i]));
 	}
 	if (get_filename(line, data) == 1)
-		return (1);
+		ret = 1;
 	ft_lstadd_back(&data->simple_cmd->redirections,
 				ft_lstnew(data->redirection));
-	return (0);
+	return (ret);
 }

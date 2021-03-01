@@ -31,10 +31,13 @@ int	line_loop(char *line, t_data *data)
 		else
 			// Get command and arguments
 			get_command_and_args(line, data);
-		if (ret == 1)
-			break ;
-		if (!line[data->i])
+		// if (ret == 1)
+		// 	break ;
+		if (!line[data->i] || ret == 1)
+		{
 			add_last_cmd(line, data);
+			break ;
+		}
 	}
 	return (ret);
 }
@@ -47,6 +50,7 @@ int	parse_line(char *line, t_data *data)
 	data->command = malloc(sizeof(t_minishell));
 	if (!data->command)
 		exit_errno(ENOMEM);
+	data->redirection = NULL;
 	data->command->cmds = NULL;
 	data->pipes = NULL;
 	init_cmd(data);

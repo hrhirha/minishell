@@ -41,7 +41,7 @@ char	*unquoted_str(char *line, int *i)
 	while ((line[*i + j] != ';' && line[*i + j] != '|' &&
 			line[*i + j] != '>' && line[*i + j] != '<' && line[*i + j] &&
 			line[*i + j] != ' ' && line[*i + j] != '"' &&
-			line[*i + j] != '\'') || line[*i + j - 1] == '\\')
+			line[*i + j] != '\'') || (line[*i + j - 1] == '\\' && line[*i + j]))
 		j++;
 	substr = ft_substr(line, *i, j);
 	*i += j;

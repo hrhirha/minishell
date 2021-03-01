@@ -92,4 +92,6 @@ char			*unquoted_str(char *line, int *i);
 char			*handle_dquotes(char *line, t_data *data);
 char			*handle_escape(char *line, t_data *data);
 
+void			free_data(t_data *data);
+
 #endif
