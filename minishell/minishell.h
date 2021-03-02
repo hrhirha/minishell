@@ -26,6 +26,8 @@
 # include <sys/errno.h>
 # include <stdio.h>
 
+#define PROMPT "user@minishell$ "
+
 # define BUFFER_SIZE 1024
 
 # define RIGHT_REDIR 1
@@ -57,6 +59,7 @@ typedef struct	s_minishell // ;
 typedef struct	s_data
 {
 	int				i;
+	char			**env;
 	t_minishell		*command;
 	t_list			*pipes;
 	t_command		*simple_cmd;
@@ -73,7 +76,7 @@ int				parse_line(char *line, t_data *data);
 ** commandParsing
 */
 int				get_redirection(char *line, t_data *data);
-void			get_command_and_args(char *line, t_data *data);
+void			get_command_and_args(char *line, t_data *data, int ret);
 int				add_cmd_to_pipes(char *line, t_data *data);
 int				add_pipes_to_cmds(char *line, t_data *data);
 void			add_last_cmd(char *line, t_data *data);
@@ -89,9 +92,16 @@ char			*dquoted_str(char *line, int *i);
 char			*squoted_str(char *line, int *i);
 char			*unquoted_str(char *line, int *i);
 
-char			*handle_dquotes(char *line, t_data *data);
-char			*handle_escape(char *line, t_data *data);
+
+void			set_env(char **s, t_data *data);
 
 void			free_data(t_data *data);
+
+/*
+** special chars `"`, `'`, `\`, `$`
+*/
+void    		clean_command(t_list *pipes);
+void			handle_dquotes(char *s, int *i);
+char			*handle_escape(char *s, int *i);
 
 #endif

@@ -17,6 +17,8 @@ int	line_loop(char *line, t_data *data)
 	int	ret;
 
 	ret = 0;
+	if (!line[data->i])
+		ret = 1;
 	while (line[data->i])
 	{
 		if (line[data->i] == '>' || line[data->i] == '<')
@@ -30,7 +32,7 @@ int	line_loop(char *line, t_data *data)
 			ret = add_pipes_to_cmds(line, data);
 		else
 			// Get command and arguments
-			get_command_and_args(line, data);
+			get_command_and_args(line, data, ret); // modified
 		// if (ret == 1)
 		// 	break ;
 		if (!line[data->i] || ret == 1)
@@ -50,6 +52,7 @@ int	parse_line(char *line, t_data *data)
 	data->command = malloc(sizeof(t_minishell));
 	if (!data->command)
 		exit_errno(ENOMEM);
+	data->command->env = data->env;
 	data->redirection = NULL;
 	data->command->cmds = NULL;
 	data->pipes = NULL;

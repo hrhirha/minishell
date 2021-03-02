@@ -12,34 +12,43 @@
 
 #include "minishell.h"
 
-#define PROMPT "user@minishell$ "
+void	set_env(char **s, t_data *data)
+{
+	int x;
+	int	i;
 
-// void	data_init(t_data *data)
-// {
-// 	// data->i = 0;
-// 	// data->ac = 0;
-// 	// data->command = NULL; // struct containing list of commands and $ENV
-// 	// data->command->env = NULL; // $ENV
-// 	// data->command->cmds = NULL; // listof commands
-// 	// data->pipes = NULL; // list of pipes
-// 	// data->simple_cmd = NULL;
-// 	// data->simple_cmd->redirections = NULL; // list of redirections
-// 	// data->redirection = NULL;
-// }
+	x = 0;
+	while (s[x])
+		x++;
+	data->env = malloc((x + 1) * sizeof(char *));
+	if (!data->env)
+		exit_errno(ENOMEM);
+	i = 0;
+	while (i < x)
+	{
+		data->env[i] = ft_strdup(s[i]);
+		i++;
+	}
+	data->env[i] = NULL;
+}
 
-// void	set_env(char **s, t_data *data)
-// {
-// 	int x;
+void	test(t_minishell *command)
+{
+	t_list	*cmds;
+	t_list	*pipes;
 
-// 	x = 0;
-// 	while (s[x])
-// 		x++;
-// 	if (!(data->env = malloc(x * sizeof(char *) + 1)))
-// 		exit_errno(ENOMEM);
-// 	data->env[x] = NULL;
-// 	while (--x >= 0)
-// 		data->env[x] = ft_strdup(s[x]);
-// }
+	cmds = command->cmds;
+	while (cmds)
+	{
+		pipes = cmds->content;
+		handle_spec_chars(pipes);
+		while (pipes)
+		{
+			pipes = pipes->next;
+		}
+		cmds = cmds->next;
+	}
+}
 
 int		main(int ac, char **av, char **env)
 {
@@ -50,19 +59,21 @@ int		main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
-	// set_env(env, &data);
 	while (1)
 	{
 		data = malloc(sizeof(t_data));
 		if (!data)
 			exit_errno(ENOMEM);
+		set_env(env, data);
 		data->i = 0;
 		write(1, PROMPT, ft_strlen(PROMPT));
 		get_next_line(0, &line);
 		parsing_ret = parse_line(line, data);
-		printf("parison_ret = %d\n", parsing_ret);
 		if (parsing_ret == 0)
+		{
 			printf("Exec\n");
+			test(data->command);
+		}
 		free_data(data);
 		free(line);
 		free(data);

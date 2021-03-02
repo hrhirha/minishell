@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   others.c                                           :+:      :+:    :+:   */
+/*   handle_escape.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 11:53:00 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/03/02 11:53:01 by hrhirha          ###   ########.fr       */
+/*   Created: 2021/03/02 12:41:56 by hrhirha           #+#    #+#             */
+/*   Updated: 2021/03/02 12:41:59 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int		isblank(int c)
+char	*handle_escape(char *s, int *i)
 {
-	if (c == ' ' || c == '\t')
-		return (0);
-	return (1);
-}
+	char *sub;
 
-void	init_cmd(t_data *data)
-{
-	if (!(data->simple_cmd = malloc(sizeof(t_command))))
-		exit_errno(ENOMEM);
-	if (!(data->simple_cmd->cmd = ft_calloc(1, 1)))
-		exit_errno(ENOMEM);
-	data->simple_cmd->redirections = NULL;
-	data->ac = 0;
+	if (s[*i] == '$' || s[*i] == '"' || s[*i] == '\\')
+		*i++;
+	sub = ft_substr(s, *i, 1);
+	return (sub);
 }
-

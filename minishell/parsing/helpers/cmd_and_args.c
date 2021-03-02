@@ -33,7 +33,7 @@ char	**get_arg_tab(char *cmd, int acount)
 	return (args);
 }
 
-void	get_command_and_args(char *line, t_data *data)
+void	get_command_and_args(char *line, t_data *data, int ret)
 {
 	char	*tmp;
 	char	*substr;
@@ -42,7 +42,7 @@ void	get_command_and_args(char *line, t_data *data)
 		data->i++;
 	if (line[data->i] != '>' && line[data->i] != '<' &&
 		line[data->i] != ';' && line[data->i] != '|' &&
-		line[data->i] != ' ' && line[data->i])
+		isblank(line[data->i]) == 1 && line[data->i])
 	{
 		tmp = data->simple_cmd->cmd;
 		substr = get_str(line, &data->i);
@@ -54,7 +54,7 @@ void	get_command_and_args(char *line, t_data *data)
 		free(tmp);
 		data->ac++;
 	}
-	if ((line[data->i] == '|' || line[data->i] == ';' || !line[data->i]) && data->ac)
+	if ((line[data->i] == '|' || line[data->i] == ';' || !line[data->i] || ret == 1) && data->ac)
 	{	
 		data->simple_cmd->full_args =
 						get_arg_tab(data->simple_cmd->cmd, data->ac);

@@ -6,7 +6,8 @@ SRCS = minishell.c \
 	   get_next_line/*.c \
 	   parsing/*.c \
 	   parsing/errors/*.c \
-	   parsing/helpers/*.c
+	   parsing/helpers/*.c \
+	   parsing/spec_chars/*.c
 
 OBJS = *.o
 

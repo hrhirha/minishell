@@ -19,16 +19,14 @@ int		get_filename(char *line, t_data *data)
 	ret = 0;
 	while (isblank(line[data->i]) == 0)
 		data->i++;
-	if (line[data->i] == '>' || line[data->i] == '<' ||
-		line[data->i] == '|' || line[data->i] == ';' ||
-		line[data->i] == '\0')
+	if (line[data->i] == '>' || line[data->i] == '<' || line[data->i] == '|' ||
+		line[data->i] == ';' || line[data->i] == '\0')
+	{	
 		ret = error(SNTXERR, line[data->i]);
-	// else
-	// {
-		data->redirection->file_name = get_str(line, &data->i);
-		if (line[data->i] == '|' || line[data->i] == ';' || !line[data->i])
-			get_command_and_args(line, data);
-	// }
+	}
+	data->redirection->file_name = get_str(line, &data->i);
+	if (line[data->i] == '|' || line[data->i] == ';' || !line[data->i] || ret == 1)
+		get_command_and_args(line, data, ret);
 	return (ret);
 }
 
@@ -48,8 +46,6 @@ int	get_redirection(char *line, t_data *data)
 			data->redirection->type = DRIGHT_REDIR;
 			data->i++;
 		}
-		else if (line[data->i] == '|')
-			data->i++;
 	}
 	else if (line[data->i] == '<')
 	{
