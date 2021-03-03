@@ -12,12 +12,20 @@
 
 #include "../../minishell.h"
 
-char	*handle_escape(char *s, int *i)
+/*
+** escape char '\' if present within double quotes,
+** only skipped if followed by `$` `"` `\`.
+** but it is always skipped withen unquoted string
+*/
+
+char	*handle_escape(char *s, int *i, char c)
 {
 	char *sub;
 
-	if (s[*i] == '$' || s[*i] == '"' || s[*i] == '\\')
-		*i++;
-	sub = ft_substr(s, *i, 1);
+	if ((s[*i + 1] == '$' || s[*i + 1] == '"' || s[*i + 1] == '\\') && c == '"')
+		sub = ft_substr(s, *i + 1, 1);
+	else
+		sub = ft_substr(s, *i, 2);
+	*i += 2;
 	return (sub);
 }

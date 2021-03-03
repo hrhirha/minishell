@@ -12,14 +12,14 @@
 
 #include "../../minishell.h"
 
-void	handle_dquotes(char *s, int *i)
+char	*handle_dquotes(char *s, int *i, char **env)
 {
 	char	*tmp;
 	char	*quoted_str;
 	char	*substr;
 	int	 j;
 
-	*i++;
+	*i += 1;
 	quoted_str = ft_calloc(1, 1);
 	while (s[*i] != '"' && s[*i])
 	{
@@ -36,14 +36,24 @@ void	handle_dquotes(char *s, int *i)
 		if (s[*i] == '\\')
 		{
 			// TODO: handle escape char
-			substr = handle_escape(s, data);
+			tmp = quoted_str;
+			substr = handle_escape(s, i, '"');
 			quoted_str = ft_strjoin(quoted_str, substr);
-			*i++;
+			free(tmp);
+			free(substr);
 		}
 		else if (s[*i] == '$')
 		{
-			// TODO: handle expansion
+			// TODO: handle env expansion($)
+			// can only be followed by alnum values or _
+			tmp = quoted_str;
+			substr = handle_env_expansion(s	, i, env);
+			quoted_str = ft_strjoin(quoted_str, substr);
+			free(tmp);
+			free(substr);
 		}
+		if (s[*i] == '"')
+			*i += 1;
 	}
 	return (quoted_str);
 }

@@ -41,7 +41,7 @@ void	test(t_minishell *command)
 	while (cmds)
 	{
 		pipes = cmds->content;
-		handle_spec_chars(pipes);
+		scan_command(pipes, command->env);
 		while (pipes)
 		{
 			pipes = pipes->next;

@@ -100,8 +100,9 @@ void			free_data(t_data *data);
 /*
 ** special chars `"`, `'`, `\`, `$`
 */
-void    		clean_command(t_list *pipes);
-void			handle_dquotes(char *s, int *i);
-char			*handle_escape(char *s, int *i);
+void    		scan_command(t_list *pipes, char **env);
+char			*handle_dquotes(char *s, int *i, char **env);
+char			*handle_escape(char *s, int *i, char c);
+char    		*handle_env_expansion(char *s, int *i, char **env);
 
 #endif
