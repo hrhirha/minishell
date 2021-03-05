@@ -102,7 +102,9 @@ void			free_data(t_data *data);
 */
 void    		scan_command(t_list *pipes, char **env);
 char			*handle_dquotes(char *s, int *i, char **env);
-char			*handle_escape(char *s, int *i, char c);
-char    		*handle_env_expansion(char *s, int *i, char **env);
+char			*handle_squotes(char *s, int *i);
+char			*handle_noquotes(char *s, int *i, char **env);
+void			handle_escape(char *s, int *i, char c, char **str);
+void			handle_env_expansion(char *s, int *i, char **env, char **str);
 
 #endif

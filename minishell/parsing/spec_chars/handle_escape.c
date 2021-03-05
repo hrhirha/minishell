@@ -18,14 +18,18 @@
 ** but it is always skipped withen unquoted string
 */
 
-char	*handle_escape(char *s, int *i, char c)
+void	handle_escape(char *s, int *i, char c, char **str)
 {
-	char *sub;
+	char	*sub;
+	char	*tmp;
 
-	if ((s[*i + 1] == '$' || s[*i + 1] == '"' || s[*i + 1] == '\\') && c == '"')
-		sub = ft_substr(s, *i + 1, 1);
-	else
+	if (s[*i + 1] != '$' && s[*i + 1] != '"' && s[*i + 1] != '\\' && c == '"')
 		sub = ft_substr(s, *i, 2);
+	else
+		sub = ft_substr(s, *i + 1, 1);
 	*i += 2;
-	return (sub);
+	tmp = *str;
+	*str = ft_strjoin(*str, sub);
+	free(tmp);
+	free(sub);
 }

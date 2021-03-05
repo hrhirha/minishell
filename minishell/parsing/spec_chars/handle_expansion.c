@@ -42,10 +42,11 @@ char	*get_env_value(char *key, char **env)
 	return (env_value);
 }
 
-char	*handle_env_expansion(char *s, int *i, char **env)
+void	handle_env_expansion(char *s, int *i, char **env, char **str)
 {
 	char	*key;
 	char	*value;
+	char	*tmp;
 	int		j;
 
 	*i += 1;
@@ -56,5 +57,8 @@ char	*handle_env_expansion(char *s, int *i, char **env)
 	*i += j;
 	value = get_env_value(key, env);
 	free(key);
-	return (value);
+	tmp = *str;
+	*str = ft_strjoin(*str, value);
+	free(tmp);
+	free(value);
 }

@@ -15,6 +15,7 @@
 char	**get_arg_tab(char *cmd, int acount)
 {
 	char	**args;
+	char	*tmp;
 	int		j;
 	int		ac;
 
@@ -24,9 +25,15 @@ char	**get_arg_tab(char *cmd, int acount)
 	j = 0;
 	while (ac < acount)
 	{
-		args[ac] = get_str(cmd, &j);
 		while (isblank(cmd[j]) == 0)
 			j++;
+		args[ac] = get_str(cmd, &j);
+		if (args[ac][ft_strlen(args[ac]) - 1] == ' ')
+		{
+			tmp = args[ac];
+			args[ac] = ft_substr(args[ac], 0, ft_strlen(args[ac]) - 1);
+			free(tmp);
+		}
 		ac++;
 	}
 	args[ac] = NULL;
