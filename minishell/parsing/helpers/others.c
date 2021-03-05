@@ -6,7 +6,7 @@
 /*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 11:53:00 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/03/02 11:53:01 by hrhirha          ###   ########.fr       */
+/*   Updated: 2021/03/05 18:39:19 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ void	init_cmd(t_data *data)
 	data->simple_cmd->redirections = NULL;
 	data->ac = 0;
 }
-

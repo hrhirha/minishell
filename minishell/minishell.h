@@ -15,7 +15,7 @@
 
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
-#include "parsing/errors/errors.h"
+# include "parsing/errors/errors.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -26,7 +26,7 @@
 # include <sys/errno.h>
 # include <stdio.h>
 
-#define PROMPT "user@minishell$ "
+# define PROMPT "user@minishell$ "
 
 # define BUFFER_SIZE 1024
 
@@ -36,17 +36,17 @@
 
 typedef struct	s_redirection
 {
-	int				type;		   // 1 = > , 2 = >>, 3 = <
+	int				type;
 	char			*file_name;
 }				t_redirection;
 
 typedef struct	s_command
 {
-	char			**full_args;	// ["echo", "aaaa", "bbbb"]
+	char			**full_args;
 	t_list			*redirections;
 }				t_command;
 
-typedef struct	s_minishell // ;
+typedef struct	s_minishell
 {
 	t_list			*cmds;
 	char			**env;
@@ -89,7 +89,6 @@ char			*dquoted_str(char *line, int *i);
 char			*squoted_str(char *line, int *i);
 char			*unquoted_str(char *line, int *i);
 
-
 void			set_env(char **s, t_data *data);
 
 void			free_data(t_data *data);
@@ -97,11 +96,12 @@ void			free_data(t_data *data);
 /*
 ** special chars `"`, `'`, `\`, `$`
 */
-void    		scan_command(t_list *pipes, char **env);
+void			scan_command(t_list *pipes, char **env);
 char			*handle_dquotes(char *s, int *i, char **env);
 char			*handle_squotes(char *s, int *i);
 char			*handle_noquotes(char *s, int *i, char **env);
 void			handle_escape(char *s, int *i, char c, char **str);
 void			handle_env_expansion(char *s, int *i, char **env, char **str);
+void			handle_tilde_expansion(char *s, int *i, char **env, char **str);
 
 #endif

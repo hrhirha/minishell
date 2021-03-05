@@ -6,33 +6,34 @@
 /*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 17:55:51 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/02/21 17:55:52 by hrhirha          ###   ########.fr       */
+/*   Updated: 2021/03/05 18:40:41 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int		get_filename(char *line, t_data *data)
+int	get_filename(char *line, t_data *data)
 {
-	int		ret;
+	int	ret;
 
 	ret = 0;
 	while (isblank(line[data->i]) == 0)
 		data->i++;
-	if (line[data->i] == '>' || line[data->i] == '<' || line[data->i] == '|' ||
-		line[data->i] == ';' || line[data->i] == '\0')
-	{	
+	if (line[data->i] == '>' || line[data->i] == '<' || line[data->i] == '|'
+		|| line[data->i] == ';' || line[data->i] == '\0')
+	{
 		ret = error(SNTXERR, line[data->i]);
 	}
 	data->redirection->file_name = get_str(line, &data->i);
-	if (line[data->i] == '|' || line[data->i] == ';' || !line[data->i] || ret == 1)
+	if (line[data->i] == '|' || line[data->i] == ';'
+		|| !line[data->i] || ret == 1)
 		get_command_and_args(line, data, ret);
 	return (ret);
 }
 
 int	get_redirection(char *line, t_data *data)
 {
-	int		ret;
+	int	ret;
 
 	ret = 0;
 	if (!(data->redirection = malloc(sizeof(t_redirection))))

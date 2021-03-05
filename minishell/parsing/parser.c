@@ -24,17 +24,14 @@ int	line_loop(char *line, t_data *data)
 		if (line[data->i] == '>' || line[data->i] == '<')
 			ret = get_redirection(line, data);
 		else if (line[data->i] == '|')
-			// add previous cmd to pipe list
+// add previous cmd to pipe list
 			ret = add_cmd_to_pipes(line, data);
 		else if (line[data->i] == ';')
-			// add previous cmd to pipe list and
-			// add previous pipe list to command list
+// add previous cmd to pipe list and add previous pipe list to command list
 			ret = add_pipes_to_cmds(line, data);
 		else
-			// Get command and arguments
-			get_command_and_args(line, data, ret); // modified
-		// if (ret == 1)
-		// 	break ;
+// Get command and arguments
+			get_command_and_args(line, data, ret);
 		if (!line[data->i] || ret == 1)
 		{
 			add_last_cmd(line, data);

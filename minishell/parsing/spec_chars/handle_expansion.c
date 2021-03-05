@@ -16,8 +16,8 @@ char	*get_env_value(char *key, char **env)
 {
 	char	*env_key;
 	char	*env_value;
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	env_value = ft_calloc(1, 1);
@@ -60,4 +60,26 @@ void	handle_env_expansion(char *s, int *i, char **env, char **str)
 	*str = ft_strjoin(*str, value);
 	free(tmp);
 	free(value);
+}
+
+void	handle_tilde_expansion(char *s, int *i, char **env, char **str)
+{
+	char	*tmp;
+	char	*tilde;
+
+	if (isblank(s[*i + 1]) == 0 || s[*i + 1] == '/' || !s[*i + 1])
+	{
+		tilde = get_env_value("HOME", env);
+		tmp = *str;
+		*str = ft_strjoin(*str, tilde);
+		free(tilde);
+		free(tmp);
+	}
+	else
+	{
+		tmp = *str;
+		*str = ft_strjoin(*str, "~");
+		free(tmp);
+	}
+	*i += 1;
 }

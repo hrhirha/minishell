@@ -70,10 +70,7 @@ int		main(int ac, char **av, char **env)
 		get_next_line(0, &line);
 		parsing_ret = parse_line(line, data);
 		if (parsing_ret == 0)
-		{
-			printf("Exec\n");
 			test(data->command);
-		}
 		free_data(data);
 		free(line);
 		free(data);

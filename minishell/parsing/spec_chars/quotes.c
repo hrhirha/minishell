@@ -17,16 +17,16 @@ char	*handle_dquotes(char *s, int *i, char **env)
 	char	*tmp;
 	char	*str;
 	char	*substr;
-	int	 j;
+	int		j;
 
 	*i += 1;
 	str = ft_calloc(1, 1);
 	while (s[*i] != '"' && s[*i])
 	{
 		j = 0;
-		while (s[*i + j] != '\\' && s[*i + j] != '"' &&
-				s[*i + j] != '$' && s[*i + j])
-				j++;
+		while (s[*i + j] != '\\' && s[*i + j] != '"'
+			&& s[*i + j] != '$' && s[*i + j])
+			j++;
 		tmp = str;
 		substr = ft_substr(s, *i, j);
 		str = ft_strjoin(str, substr);
@@ -110,7 +110,7 @@ char	*handle_noquotes(char *s, int *i, char **env)
 		else if (s[*i] == '~')
 		{
 			// only works if followed by a blank or /, or a username
-			*i++;
+			handle_tilde_expansion(s, i, env, &str);
 		}
 	}
 	return (str);
