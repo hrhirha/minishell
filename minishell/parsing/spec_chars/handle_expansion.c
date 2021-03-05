@@ -23,7 +23,6 @@ char	*get_env_value(char *key, char **env)
 	env_value = ft_calloc(1, 1);
 	while (env[i])
 	{
-		// printf("[%d]%s\n", i, env[i]);
 		j = 0;
 		while (env[i][j] != '=')
 			j++;

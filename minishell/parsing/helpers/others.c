@@ -23,7 +23,7 @@ void	init_cmd(t_data *data)
 {
 	if (!(data->simple_cmd = malloc(sizeof(t_command))))
 		exit_errno(ENOMEM);
-	if (!(data->simple_cmd->cmd = ft_calloc(1, 1)))
+	if (!(data->cmd = ft_calloc(1, 1)))
 		exit_errno(ENOMEM);
 	data->simple_cmd->redirections = NULL;
 	data->ac = 0;

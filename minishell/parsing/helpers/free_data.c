@@ -38,7 +38,6 @@ void	free_cmd(t_command *command, t_data *data)
 	j = 0;
 	tmp_redir = command->redirections;
 	free_redir(tmp_redir);
-		printf("cmd = `%s`\n", command->cmd);
 	if (command->full_args)
 	{
 		while (command->full_args[j])
@@ -48,7 +47,6 @@ void	free_cmd(t_command *command, t_data *data)
 		}
 		free(command->full_args);
 	}
-	free(command->cmd);
 }
 
 void	free_pipes(t_list *pipes, t_data *data)
@@ -68,13 +66,6 @@ void	free_pipes(t_list *pipes, t_data *data)
 	}
 }
 
-void	free_last_cmd(t_data *data)
-{
-	printf("freeing data, line is Empty\n");
-	free(data->simple_cmd->cmd);
-	free(data->simple_cmd);
-}
-
 void	free_data(t_data *data)
 {
 	int				i;
@@ -83,7 +74,10 @@ void	free_data(t_data *data)
 	t_list			*tmp_pipes;
 
 	if (!data->command->cmds)
-		free_last_cmd(data);
+	{
+		printf("freeing data, line is Empty\n");
+		free(data->simple_cmd);
+	}
 	tmp_cmds = data->command->cmds;
 	while (tmp_cmds)
 	{
@@ -97,7 +91,6 @@ void	free_data(t_data *data)
 	i = 0;
 	while (data->env[i])
 		free(data->env[i++]);
-	// printf("freeing env\n");
 	free(data->env);
 	free(data->command);
 }

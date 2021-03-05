@@ -87,8 +87,8 @@ char	*handle_noquotes(char *s, int *i, char **env)
 	while (s[*i] != '"' && s[*i] != '\'' && s[*i])
 	{
 		j = 0;
-		while (s[*i + j] != '"' && s[*i + j] != '\'' &&
-				s[*i + j] != '\\' && s[*i + j] != '$' && s[*i + j])
+		while (s[*i + j] != '"' && s[*i + j] != '\'' &&s[*i + j] != '\\' &&
+				s[*i + j] != '$' && s[*i + j] != '~' && s[*i + j])
 				j++;
 		tmp = str;
 		substr = ft_substr(s, *i, j);
@@ -106,6 +106,11 @@ char	*handle_noquotes(char *s, int *i, char **env)
 			// TODO: handle env expansion($)
 			// can only be followed by alnum values or _
 			handle_env_expansion(s, i, env, &str);
+		}
+		else if (s[*i] == '~')
+		{
+			// only works if followed by a blank or /, or a username
+			*i++;
 		}
 	}
 	return (str);

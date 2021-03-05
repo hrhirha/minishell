@@ -42,11 +42,7 @@ typedef struct	s_redirection
 
 typedef struct	s_command
 {
-	char			*cmd;			// "echo aaaa	 bbbb" // don't include -n
-	char			*exec;			// "echo"
-	char			**args;			// ["aaaa", "bbbb"]
 	char			**full_args;	// ["echo", "aaaa", "bbbb"]
-	int				option;			// 1 if echo -n, 0 if not
 	t_list			*redirections;
 }				t_command;
 
@@ -60,6 +56,7 @@ typedef struct	s_data
 {
 	int				i;
 	char			**env;
+	char			*cmd;
 	t_minishell		*command;
 	t_list			*pipes;
 	t_command		*simple_cmd;

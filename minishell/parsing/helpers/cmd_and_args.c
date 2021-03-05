@@ -51,19 +51,20 @@ void	get_command_and_args(char *line, t_data *data, int ret)
 		line[data->i] != ';' && line[data->i] != '|' &&
 		isblank(line[data->i]) == 1 && line[data->i])
 	{
-		tmp = data->simple_cmd->cmd;
+		tmp = data->cmd;
 		substr = get_str(line, &data->i);
-		data->simple_cmd->cmd = ft_strjoin(data->simple_cmd->cmd, substr);
+		data->cmd = ft_strjoin(data->cmd, substr);
 		free(tmp);
 		free(substr);
-		tmp = data->simple_cmd->cmd;
-		data->simple_cmd->cmd = ft_strjoin(data->simple_cmd->cmd, " ");
+		tmp = data->cmd;
+		data->cmd = ft_strjoin(data->cmd, " ");
 		free(tmp);
 		data->ac++;
 	}
 	if ((line[data->i] == '|' || line[data->i] == ';' || !line[data->i] || ret == 1) && data->ac)
 	{	
 		data->simple_cmd->full_args =
-						get_arg_tab(data->simple_cmd->cmd, data->ac);
+						get_arg_tab(data->cmd, data->ac);
+		free(data->cmd);
 	}
 }
