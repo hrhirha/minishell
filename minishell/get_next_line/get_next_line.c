@@ -6,7 +6,7 @@
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 12:23:13 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/02/20 15:45:52 by hrhirha          ###   ########.fr       */
+/*   Updated: 2021/03/06 15:46:59 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static	void	ft_free(char **s)
 	*s = NULL;
 }
 
-static	int		ft_line_found(char *s)
+static		int	ft_line_found(char *s)
 {
 	int i;
 
@@ -33,13 +33,14 @@ static	int		ft_line_found(char *s)
 	return (-1);
 }
 
-static	int		ft_read_file(int fd, char **storage)
+static		int	ft_read_file(int fd, char **storage)
 {
 	char	*buf;
 	char	*tmp;
 	int		rd;
 
-	if (!(buf = malloc(BUFFER_SIZE + 1)))
+	buf = malloc(BUFFER_SIZE + 1);
+	if (!buf)
 		return (-1);
 	while (ft_line_found(*storage) == -1)
 	{
@@ -82,7 +83,6 @@ int				get_next_line(int fd, char **line)
 		return (-1);
 	if (!storage && !(storage = ft_calloc(1, 1)))
 		return (-1);
-	signal(SIGQUIT, SIG_IGN);
 	if (ft_line_found(storage) == -1)
 	{
 		rd = ft_read_file(fd, &storage);

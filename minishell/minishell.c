@@ -32,10 +32,35 @@ void	set_env(char **s, t_data *data)
 	data->env[i] = NULL;
 }
 
+void	exec_command(t_command *command)
+{
+	t_list			*redirs;
+	t_redirection	redir;
+	int				j;
+
+	redirs = command->redirections;
+	while (redirs)
+	{
+		redir = *(t_redirection *)redirs->content;
+		printf("[%d]file = `%s`\n", redir.type, redir.file_name);
+		redirs = redirs->next;
+	}
+	if (command->full_args)
+	{
+		j = 0;
+		while (command->full_args[j])
+		{
+			printf("\targ[%d] = `%s`\n", j, command->full_args[j]);
+			j++;
+		}
+	}
+}
+
 void	test(t_minishell *command)
 {
-	t_list	*cmds;
-	t_list	*pipes;
+	t_list		*cmds;
+	t_list		*pipes;
+	t_command	*cmd;
 
 	cmds = command->cmds;
 	while (cmds)
@@ -44,6 +69,8 @@ void	test(t_minishell *command)
 		scan_command(pipes, command->env);
 		while (pipes)
 		{
+			cmd = (t_command *)pipes->content;
+			exec_command(cmd);
 			pipes = pipes->next;
 		}
 		cmds = cmds->next;

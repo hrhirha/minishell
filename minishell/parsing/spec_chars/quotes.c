@@ -63,7 +63,7 @@ char	*handle_squotes(char *s, int *i)
 	*i += 1;
 	str = ft_calloc(1, 1);
 	j = 0;
-	while (s[*i + j] != '\'' && s[*i])
+	while (s[*i + j] != '\'' && s[*i + j])
 		j++;
 	tmp = str;
 	substr = ft_substr(s, *i, j);

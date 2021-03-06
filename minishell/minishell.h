@@ -34,6 +34,8 @@
 # define DRIGHT_REDIR 2
 # define LEFT_REDIR 3
 
+int	g_last_exec;
+
 typedef struct	s_redirection
 {
 	int				type;

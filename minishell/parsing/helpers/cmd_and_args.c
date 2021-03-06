@@ -40,10 +40,25 @@ char	**get_arg_tab(char *cmd, int acount)
 	return (args);
 }
 
-void	get_command_and_args(char *line, t_data *data, int ret)
+void	get_command_as_str(char *line, t_data *data)
 {
 	char	*tmp;
 	char	*substr;
+
+	tmp = data->cmd;
+	substr = get_str(line, &data->i);
+	data->cmd = ft_strjoin(data->cmd, substr);
+	free(tmp);
+	free(substr);
+	tmp = data->cmd;
+	data->cmd = ft_strjoin(data->cmd, " ");
+	free(tmp);
+}
+
+void	get_command_and_args(char *line, t_data *data, int ret)
+{
+	// char	*tmp;
+	// char	*substr;
 
 	while (isblank(line[data->i]) == 0)
 		data->i++;
@@ -51,18 +66,20 @@ void	get_command_and_args(char *line, t_data *data, int ret)
 		line[data->i] != ';' && line[data->i] != '|' &&
 		isblank(line[data->i]) == 1 && line[data->i])
 	{
-		tmp = data->cmd;
-		substr = get_str(line, &data->i);
-		data->cmd = ft_strjoin(data->cmd, substr);
-		free(tmp);
-		free(substr);
-		tmp = data->cmd;
-		data->cmd = ft_strjoin(data->cmd, " ");
-		free(tmp);
+		get_command_as_str(line, data);
+		// tmp = data->cmd;
+		// substr = get_str(line, &data->i);
+		// data->cmd = ft_strjoin(data->cmd, substr);
+		// free(tmp);
+		// free(substr);
+		// tmp = data->cmd;
+		// data->cmd = ft_strjoin(data->cmd, " ");
+		// free(tmp);
 		data->ac++;
 	}
-	if ((line[data->i] == '|' || line[data->i] == ';' || !line[data->i] || ret == 1) && data->ac)
-	{	
+	if ((line[data->i] == '|' || line[data->i] == ';'
+		|| !line[data->i] || ret == 1) && data->ac)
+	{
 		data->simple_cmd->full_args =
 						get_arg_tab(data->cmd, data->ac);
 		free(data->cmd);

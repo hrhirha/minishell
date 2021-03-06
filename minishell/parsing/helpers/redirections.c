@@ -31,13 +31,8 @@ int	get_filename(char *line, t_data *data)
 	return (ret);
 }
 
-int	get_redirection(char *line, t_data *data)
+void	get_redir_type(char *line, t_data *data)
 {
-	int	ret;
-
-	ret = 0;
-	if (!(data->redirection = malloc(sizeof(t_redirection))))
-		exit_errno(ENOMEM);
 	if (line[data->i] == '>')
 	{
 		data->redirection->type = RIGHT_REDIR;
@@ -52,11 +47,19 @@ int	get_redirection(char *line, t_data *data)
 	{
 		data->redirection->type = LEFT_REDIR;
 		data->i++;
-		if (line[data->i] == '<')
-			return (error(SNTXERR, line[data->i]));
 	}
-	if (get_filename(line, data) == 1)
-		ret = 1;
+}
+
+int	get_redirection(char *line, t_data *data)
+{
+	int	ret;
+
+	ret = 0;
+	data->redirection = malloc(sizeof(t_redirection));
+	if (!data->redirection)
+		exit_errno(ENOMEM);
+	get_redir_type(line, data);
+	ret = get_filename(line, data);
 	ft_lstadd_back(&data->simple_cmd->redirections,
 				ft_lstnew(data->redirection));
 	return (ret);

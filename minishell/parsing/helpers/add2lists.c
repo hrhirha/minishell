@@ -22,8 +22,11 @@ int		add_cmd_to_pipes(char *line, t_data *data)
 		data->i++;
 	if (line[data->i] == '|' || line[data->i] == ';' || !line[data->i])
 		ret = error(SNTXERR, line[data->i]);
-	ft_lstadd_back(&data->pipes, ft_lstnew(data->simple_cmd));
-	init_cmd(data);
+	else
+	{
+		ft_lstadd_back(&data->pipes, ft_lstnew(data->simple_cmd));
+		init_cmd(data);
+	}
 	return (ret);
 }
 
@@ -37,13 +40,14 @@ int		add_pipes_to_cmds(char *line, t_data *data)
 		data->i++;
 	if (line[data->i] == '|' || line[data->i] == ';')
 		ret = error(SNTXERR, line[data->i]);
-	ft_lstadd_back(&data->pipes, ft_lstnew(data->simple_cmd));
-	ft_lstadd_back(&data->command->cmds, ft_lstnew(data->pipes));
-	if (line[data->i] && line[data->i] != '|' && line[data->i] != ';')
-	{
-		data->pipes = NULL;
-		init_cmd(data);
-	}
+
+		ft_lstadd_back(&data->pipes, ft_lstnew(data->simple_cmd));
+		ft_lstadd_back(&data->command->cmds, ft_lstnew(data->pipes));
+		if (line[data->i] && line[data->i] != '|' && line[data->i] != ';')
+		{
+			data->pipes = NULL;
+			init_cmd(data);
+		}
 	return (ret);
 }
 
