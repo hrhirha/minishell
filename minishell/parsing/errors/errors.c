@@ -18,8 +18,11 @@ void	exit_errno(int errnum)
 	exit(errno);
 }
 
-void	exit_error(int errnum, char c)
+int		error(int errnum, char c)
 {
+	int	err;
+
+	err = 0;
 	if (errnum == SNTXERR)
 	{
 		ft_putstr_fd("minishell: syntax error near ", 1);
@@ -27,6 +30,7 @@ void	exit_error(int errnum, char c)
 			ft_putstr_fd("'newline'", 1);
 		ft_putchar_fd(c, 1);
 		ft_putchar_fd('\n', 1);
+		err = 1;
 	}
-	exit(errnum);
+	return (err);
 }

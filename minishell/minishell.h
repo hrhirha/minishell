@@ -15,7 +15,7 @@
 
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
-#include "parsing/errors/errors.h"
+# include "parsing/errors/errors.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -26,37 +26,31 @@
 # include <sys/errno.h>
 # include <stdio.h>
 
+# define PROMPT "user@minishell$ "
+
 # define BUFFER_SIZE 1024
 
 # define RIGHT_REDIR 1
 # define DRIGHT_REDIR 2
 # define LEFT_REDIR 3
 
+int	g_last_exec;
+
 typedef struct	s_redirection
 {
-	int				type;		   // 1 = > , 2 = >>, 3 = <
+	int				type;
 	char			*file_name;
 }				t_redirection;
 
 typedef struct	s_command
 {
-	char			*cmd;			// "echo aaaa	 bbbb" // don't include -n
-	char			*exec;			// "echo"
-	char			**args;			// ["aaaa", "bbbb"]
-	char			**full_args;	// ["echo", "aaaa", "bbbb"]
-	int				option;			// 1 if echo -n, 0 if not
-	t_redirection	*recirections;
+	char			**full_args;
+	t_list			*redirections;
 }				t_command;
 
-typedef struct	s_pipeline
+typedef struct	s_minishell
 {
-	int				pipe_count;
-	t_command		*commands;
-}				t_pipeline;
-
-typedef struct	s_minishell // ;
-{
-	t_pipeline		*pipes;
+	t_list			*cmds;
 	char			**env;
 }				t_minishell;
 
@@ -64,28 +58,52 @@ typedef struct	s_data
 {
 	int				i;
 	char			**env;
-	t_list			*cmds;
+	char			*cmd;
 	t_minishell		*command;
 	t_list			*pipes;
-	t_pipeline		*pipeline;
 	t_command		*simple_cmd;
-	t_list			*redirections;
 	t_redirection	*redirection;
+	int				ac;
 }				t_data;
 
 /*
 ** parsing
 */
-void			parse_line(char *line, t_data *data);
+int				parse_line(char **line, t_data *data);
 
 /*
-** redirections
+** commandParsing
 */
-void			get_redirection(char *line, t_data *data);
+int				get_redirection(char *line, t_data *data);
+void			get_command_and_args(char *line, t_data *data, int ret);
+int				add_cmd_to_pipes(char **line, t_data *data);
+int				add_pipes_to_cmds(char *line, t_data *data);
+void			add_last_cmd(char *line, t_data *data);
 
 /*
 ** helpers
 */
 int				isblank(int c);
+void			init_cmd(t_data *data);
+
+char			*get_str(char *line, int *i);
+char			*dquoted_str(char *line, int *i);
+char			*squoted_str(char *line, int *i);
+char			*unquoted_str(char *line, int *i);
+
+void			set_env(char **s, t_data *data);
+
+void			free_data(t_data *data);
+
+/*
+** special chars `"`, `'`, `\`, `$`
+*/
+void			scan_command(t_list *pipes, char **env);
+char			*handle_dquotes(char *s, int *i, char **env);
+char			*handle_squotes(char *s, int *i);
+char			*handle_noquotes(char *s, int *i, char **env);
+void			handle_escape(char *s, int *i, char c, char **str);
+void			handle_env_expansion(char *s, int *i, char **env, char **str);
+void			handle_tilde_expansion(char *s, int *i, char **env, char **str);
 
 #endif

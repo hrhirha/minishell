@@ -12,15 +12,14 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <unistd.h>
+# include "../libft/libft.h"
+# include <signal.h>
 
 # define BUFFER_SIZE 1024
 
 int		get_next_line(int fd, char **line);
-size_t	ft_strlen(const char *str);
-char	*ft_strdup(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
-void	*ft_calloc(size_t count, size_t size);
+void	ft_free(char **s);
+int     ft_line_found(char *s);
+char	*ft_fill_line(char *s);
 
 #endif

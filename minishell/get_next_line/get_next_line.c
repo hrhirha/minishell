@@ -6,41 +6,28 @@
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 12:23:13 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/02/20 15:45:52 by hrhirha          ###   ########.fr       */
+/*   Updated: 2021/03/06 15:46:59 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <signal.h>
 
-static	void	ft_free(char **s)
+void		sig_int(int sig)
 {
-	free(*s);
-	*s = NULL;
+	kill(0, sig);
 }
 
-static	int		ft_line_found(char *s)
-{
-	int i;
-
-	i = 0;
-	while (*s)
-	{
-		if (*s++ == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-static	int		ft_read_file(int fd, char **storage)
+static		int	ft_read_file(int fd, char **storage)
 {
 	char	*buf;
 	char	*tmp;
 	int		rd;
 
-	if (!(buf = malloc(BUFFER_SIZE + 1)))
+	buf = malloc(BUFFER_SIZE + 1);
+	if (!buf)
 		return (-1);
+	// signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_int);
 	while (ft_line_found(*storage) == -1)
 	{
 		rd = read(fd, buf, BUFFER_SIZE);
@@ -55,23 +42,6 @@ static	int		ft_read_file(int fd, char **storage)
 	return (rd);
 }
 
-static	char	*ft_fill_line(char *s)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	if (!(line = malloc(ft_line_found(s) + 1)))
-		return (NULL);
-	while (s[i] != '\n')
-	{
-		line[i] = s[i];
-		i++;
-	}
-	line[i] = '\0';
-	return (line);
-}
-
 int				get_next_line(int fd, char **line)
 {
 	static char *storage;
@@ -82,7 +52,6 @@ int				get_next_line(int fd, char **line)
 		return (-1);
 	if (!storage && !(storage = ft_calloc(1, 1)))
 		return (-1);
-	signal(SIGQUIT, SIG_IGN);
 	if (ft_line_found(storage) == -1)
 	{
 		rd = ft_read_file(fd, &storage);

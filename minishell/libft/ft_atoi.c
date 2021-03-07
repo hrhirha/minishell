@@ -21,7 +21,6 @@ static int	ft_isspace(int c)
 int			ft_atoi(const char *str)
 {
 	int			i;
-	int			j;
 	int			sign;
 	long int	res;
 
@@ -33,7 +32,6 @@ int			ft_atoi(const char *str)
 		sign = -1;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	j = i;
 	res = 0;
 	while (str[i] >= 48 && str[i] <= 57)
 	{
