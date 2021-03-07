@@ -19,7 +19,8 @@ char	**get_arg_tab(char *cmd, int acount)
 	int		j;
 	int		ac;
 
-	if (!(args = malloc((acount + 1) * sizeof(char *))))
+	args = malloc((acount + 1) * sizeof(char *));
+	if (!args)
 		exit_errno(ENOMEM);
 	ac = 0;
 	j = 0;
@@ -57,9 +58,6 @@ void	get_command_as_str(char *line, t_data *data)
 
 void	get_command_and_args(char *line, t_data *data, int ret)
 {
-	// char	*tmp;
-	// char	*substr;
-
 	while (isblank(line[data->i]) == 0)
 		data->i++;
 	if (line[data->i] != '>' && line[data->i] != '<' &&
@@ -67,21 +65,16 @@ void	get_command_and_args(char *line, t_data *data, int ret)
 		isblank(line[data->i]) == 1 && line[data->i])
 	{
 		get_command_as_str(line, data);
-		// tmp = data->cmd;
-		// substr = get_str(line, &data->i);
-		// data->cmd = ft_strjoin(data->cmd, substr);
-		// free(tmp);
-		// free(substr);
-		// tmp = data->cmd;
-		// data->cmd = ft_strjoin(data->cmd, " ");
-		// free(tmp);
 		data->ac++;
 	}
 	if ((line[data->i] == '|' || line[data->i] == ';'
-		|| !line[data->i] || ret == 1) && data->ac)
+		|| !line[data->i] || ret == 1))
 	{
-		data->simple_cmd->full_args =
-						get_arg_tab(data->cmd, data->ac);
+		if (data->ac)
+		{
+			data->simple_cmd->full_args =
+							get_arg_tab(data->cmd, data->ac);
+		}
 		free(data->cmd);
 	}
 }

@@ -34,11 +34,11 @@ void	free_cmd(t_command *command, t_data *data)
 	t_list			*tmp_redir;
 
 	(void)data;
-	j = 0;
 	tmp_redir = command->redirections;
 	free_redir(tmp_redir);
 	if (command->full_args)
 	{
+		j = 0;
 		while (command->full_args[j])
 			free(command->full_args[j++]);
 		free(command->full_args);
