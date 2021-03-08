@@ -95,7 +95,7 @@ int		main(int ac, char **av, char **env)
 		data->i = 0;
 		write(1, PROMPT, ft_strlen(PROMPT));
 		get_next_line(0, &line);
-		parsing_ret = parse_line(line, data);
+		parsing_ret = parse_line(&line, data);
 		if (parsing_ret == 0)
 			test(data->command);
 		free_data(data);
