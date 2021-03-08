@@ -12,12 +12,12 @@
 
 #include "../minishell.h"
 
-int	line_loop(char **old_line, t_data *data)
+int	line_loop(char **curr_line, t_data *data)
 {
 	int	ret;
 	char *line;
 
-	line = *old_line;
+	line = *curr_line;
 	ret = 0;
 	if (!line[data->i])
 		ret = 1;
@@ -26,17 +26,13 @@ int	line_loop(char **old_line, t_data *data)
 		if (line[data->i] == '>' || line[data->i] == '<')
 			ret = get_redirection(line, data);
 		else if (line[data->i] == '|')
-// add previous cmd to pipe list
 		{
-			ret = add_cmd_to_pipes(old_line, data);
-			printf("line = %s\n", *old_line);
-			line = *old_line;
+			ret = add_cmd_to_pipes(curr_line, data);
+			line = *curr_line;
 		}
 		else if (line[data->i] == ';')
-// add previous cmd to pipe list and add previous pipe list to command list
 			ret = add_pipes_to_cmds(line, data);
 		else
-// Get command and arguments
 			get_command_and_args(line, data, ret);
 		if (!line[data->i] || ret == 1)
 		{
@@ -47,12 +43,12 @@ int	line_loop(char **old_line, t_data *data)
 	return (ret);
 }
 
-int	parse_line(char **old_line, t_data *data)
+int	parse_line(char **curr_line, t_data *data)
 {
 	int	ret;
 	char *line;
 
-	line = *old_line;
+	line = *curr_line;
 	ret = 0;
 	data->command = malloc(sizeof(t_minishell));
 	if (!data->command)
@@ -68,8 +64,7 @@ int	parse_line(char **old_line, t_data *data)
 		ret = error(SNTXERR, line[data->i]);
 	else
 	{
-		ret = line_loop(old_line, data);
+		ret = line_loop(curr_line, data);
 	}
-	printf("line = %s\n", *old_line);
 	return (ret);
 }

@@ -69,14 +69,14 @@ typedef struct	s_data
 /*
 ** parsing
 */
-int				parse_line(char **line, t_data *data);
+int				parse_line(char **curr_line, t_data *data);
 
 /*
 ** commandParsing
 */
 int				get_redirection(char *line, t_data *data);
 void			get_command_and_args(char *line, t_data *data, int ret);
-int				add_cmd_to_pipes(char **line, t_data *data);
+int				add_cmd_to_pipes(char **curr_line, t_data *data);
 int				add_pipes_to_cmds(char *line, t_data *data);
 void			add_last_cmd(char *line, t_data *data);
 

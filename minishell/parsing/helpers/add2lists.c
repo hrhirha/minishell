@@ -12,30 +12,46 @@
 
 #include "../../minishell.h"
 
-int		add_cmd_to_pipes(char **old_line, t_data *data)
+int		pipes_miltilines(char **curr_line, t_data *data)
+{
+	int		ret;
+	char	*tmp;
+
+	ret = 0;
+	tmp = *curr_line;
+	while (!tmp[data->i])
+	{
+		write (1, "> ", 2);
+		data->i = 0;
+		tmp = *curr_line;
+		get_next_line(0, curr_line);
+		free(tmp);
+		tmp = *curr_line;
+		while (isblank(tmp[data->i]) == 0)
+			data->i++;
+		if (tmp[data->i] == '|' || tmp[data->i] == ';')
+			ret = error(SNTXERR, tmp[data->i]);
+	}
+	return (ret);
+}
+
+int		add_cmd_to_pipes(char **curr_line, t_data *data)
 {
 	int		ret;
 	char	*line;
-	// char	*tmp;
 
-	line = *old_line;
+	line = *curr_line;
 	ret = 0;
 	data->i++;
 	while (isblank(line[data->i]) == 0)
 		data->i++;
 	if (line[data->i] == '|' || line[data->i] == ';')
 		ret = error(SNTXERR, line[data->i]);
-	// pipes multilines
 	else if (line[data->i] == '\0')
 	{
-		ft_lstadd_back(&data->pipes, ft_lstnew(data->simple_cmd));
-		init_cmd(data);
-		write (1, "> ", 2);
-		data->i = 0;
-		get_next_line(0, old_line);
-		free(line);
+		ret = pipes_miltilines(curr_line, data);
 	}
-	else
+	if (ret == 0)
 	{
 		ft_lstadd_back(&data->pipes, ft_lstnew(data->simple_cmd));
 		init_cmd(data);
