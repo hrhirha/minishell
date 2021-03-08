@@ -63,7 +63,6 @@ void	free_pipes(t_list *pipes, t_data *data)
 
 void	free_data(t_data *data)
 {
-	int				i;
 	t_list			*tmp;
 	t_list			*tmp_cmds;
 	t_list			*tmp_pipes;
@@ -82,9 +81,4 @@ void	free_data(t_data *data)
 		free(tmp_cmds);
 		tmp_cmds = tmp;
 	}
-	i = 0;
-	while (data->env[i])
-		free(data->env[i++]);
-	free(data->env);
-	free(data->command);
 }
