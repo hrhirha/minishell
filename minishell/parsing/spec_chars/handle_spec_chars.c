@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_spec_chars.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/09 10:25:56 by hrhirha           #+#    #+#             */
+/*   Updated: 2021/03/09 10:25:58 by hrhirha          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../minishell.h"
 
 void	scan_str(char **s, char **env)
@@ -43,7 +55,7 @@ void	scan_redirs(t_list *redirs, char **env)
 	}
 }
 
-void    scan_command(t_list *pipes, char **env)
+void	scan_command(t_list *pipes, char **env)
 {
 	int				i;
 	t_list			*tmp;

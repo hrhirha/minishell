@@ -18,7 +18,7 @@ void	ft_free(char **s)
 	*s = NULL;
 }
 
-int	ft_line_found(char *s)
+int		ft_line_found(char *s)
 {
 	int i;
 

@@ -15,7 +15,7 @@
 int		add_cmd_to_pipes(char *line, t_data *data)
 {
 	int		ret;
-	
+
 	ret = 0;
 	data->i++;
 	while (isblank(line[data->i]) == 0)
@@ -52,7 +52,6 @@ int		add_pipes_to_cmds(char *line, t_data *data)
 
 void	add_last_cmd(char *line, t_data *data)
 {
-	(void)line;
 	data->i--;
 	while (isblank(line[data->i]) == 0)
 		data->i--;

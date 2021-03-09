@@ -19,7 +19,7 @@
 
 int		get_next_line(int fd, char **line);
 void	ft_free(char **s);
-int     ft_line_found(char *s);
+int		ft_line_found(char *s);
 char	*ft_fill_line(char *s);
 
 #endif

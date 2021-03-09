@@ -90,7 +90,12 @@ char			*dquoted_str(char *line, int *i);
 char			*squoted_str(char *line, int *i);
 char			*unquoted_str(char *line, int *i);
 
+/*
+* ENV
+*/
+
 void			set_env(char **s, t_data *data);
+char			*get_env_value(char *key, char **env);
 
 void			free_data(t_data *data);
 
