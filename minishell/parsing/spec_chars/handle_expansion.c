@@ -12,54 +12,23 @@
 
 #include "../../minishell.h"
 
-char	*get_env_value(char *key, char **env)
+void	env_val_has_blanks(char *s, int *i, char *value, char **str)
 {
-	char	*env_key;
-	char	*env_value;
-	int		i;
+	if (ft_strchr(value, ' ') || ft_strchr(value, '\t'))
+	{
+		while (s[*i])
+			*i += 1;
+		free(*str);
+		*str = ft_strdup("");
+	}
+}
+
+char	*env_variable(char *s, int *i, char **env, char **str)
+{
 	int		j;
-
-	i = 0;
-	env_value = ft_calloc(1, 1);
-	while (env[i])
-	{
-		j = 0;
-		while (env[i][j] != '=')
-			j++;
-		env_key = ft_substr(env[i], 0, j);
-		if (ft_strcmp(key, env_key) == 0)
-			break ;
-		free(env_key);
-		i++;
-	}
-	if (env[i])
-	{
-		free(env_value);
-		env_value = ft_substr(env[i], j + 1, ft_strlen(env[i]));
-		free(env_key);
-	}
-	return (env_value);
-}
-
-void	ambigious_redirect(char *key, char **value, char *str)
-{
-	if (ft_strchr(*value, ' ') || ft_strchr(*value, '\t') || **value == '\0')
-	{
-		if (*str == '\0')
-			printf("$%s is ambigious redirect\n", key);
-		free(*value);
-		*value = ft_strdup("");
-	}
-}
-
-void	handle_env_expansion(char *s, int *i, char **env, char **str)
-{
 	char	*key;
 	char	*value;
-	char	*tmp;
-	int		j;
 
-	*i += 1;
 	j = 0;
 	while (ft_isalnum(s[*i + j]) == 1 || s[*i + j] == '_')
 		j++;
@@ -68,9 +37,34 @@ void	handle_env_expansion(char *s, int *i, char **env, char **str)
 	value = get_env_value(key, env);
 	if (t_exist.dir && t_exist.quote)
 	{
-		ambigious_redirect(key, &value, *str);
+		if (ft_strchr(value, ' ') || ft_strchr(value, '\t') || *value == '\0')
+		{
+			env_val_has_blanks(s, i, value, str);
+			if (**str == '\0')
+				ft_putstr_fd("ambiguous redirect\n", 2);
+			free(value);
+			value = ft_strdup("");
+		}
 	}
 	free(key);
+	return (value);
+}
+
+void	handle_env_expansion(char *s, int *i, char **env, char **str)
+{
+	char	*value;
+	char	*tmp;
+
+	*i += 1;
+	if (s[*i] == '?')
+	{
+		value = ft_itoa(g_last_exec);
+		*i += 1;
+	}
+	else
+	{
+		value = env_variable(s, i, env, str);
+	}
 	tmp = *str;
 	*str = ft_strjoin(*str, value);
 	free(tmp);

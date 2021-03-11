@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-int	get_filename(char *line, t_data *data)
+int		get_filename(char *line, t_data *data)
 {
 	int	ret;
 
@@ -50,7 +50,7 @@ void	get_redir_type(char *line, t_data *data)
 	}
 }
 
-int	get_redirection(char *line, t_data *data)
+int		get_redirection(char *line, t_data *data)
 {
 	int	ret;
 

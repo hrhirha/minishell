@@ -57,26 +57,6 @@ void	test(t_minishell *command)
 	}
 }
 
-void	set_env(char **s, t_data *data)
-{
-	int x;
-	int	i;
-
-	x = 0;
-	while (s[x])
-		x++;
-	data->command->env = malloc((x + 1) * sizeof(char *));
-	if (!data->command->env)
-		exit_errno(ENOMEM);
-	i = 0;
-	while (i < x)
-	{
-		data->command->env[i] = ft_strdup(s[i]);
-		i++;
-	}
-	data->command->env[i] = NULL;
-}
-
 void	ft_getline(char **line, t_data *data)
 {
 	int parsing_ret;

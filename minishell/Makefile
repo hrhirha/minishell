@@ -17,7 +17,8 @@ $(NAME): $(OBJS)
 	make -C libft/
 	make bonus -C libft/
 	mv libft/libft.a .
-	$(CC) $(OBJS) libft.a -o $(NAME)
+	$(CC) $(OBJS) libft.a -ltermcap -o $(NAME)
+
 $(OBJS): $(SRCS)
 	$(CC) -c $^
 

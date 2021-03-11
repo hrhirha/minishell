@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_spec_chars.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/09 10:25:56 by hrhirha           #+#    #+#             */
+/*   Updated: 2021/03/09 10:25:58 by hrhirha          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../minishell.h"
 
 void	scan_str(char **s, char **env)
@@ -37,62 +49,14 @@ void	scan_redirs(t_list *redirs, char **env)
 	tmp_redirs = redirs;
 	while (tmp_redirs)
 	{
-		redir = (t_redirection *)tmp_redirs->content;
 		t_exist.dir = 1;
+		redir = (t_redirection *)tmp_redirs->content;
 		scan_str(&redir->file_name, env);
 		tmp_redirs = tmp_redirs->next;
 	}
 }
 
-int		tab_size(char **tab)
-{
-	int i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
-
-int		split_arg_exp(int i, t_command *cmd)
-{
-	char	**tab;
-	char	**new_args;
-	int		j;
-	int		k;
-
-	j = 0;
-	while (cmd->full_args[i][j])
-	{
-		if (cmd->full_args[i][j] == '\t')
-			cmd->full_args[i][j] = ' ';
-		j++;
-	}
-	tab = ft_split(cmd->full_args[i], ' ');
-	new_args = malloc((tab_size(cmd->full_args)
-			+ tab_size(tab)) * sizeof(char *));
-	j = -1;
-	while (++j < i)
-		new_args[j] = ft_strdup(cmd->full_args[j]);
-	k = 0;
-	while (tab[k])
-	{
-		new_args[j++] = ft_strdup(tab[k++]);
-	}
-	while (cmd->full_args[++i])
-	{
-		new_args[j] = ft_strdup(cmd->full_args[i]);
-		j++;
-	}
-	new_args[j] = NULL;
-	// free (tab)
-	// free (cmd->full_args)
-	cmd->full_args = new_args;
-	return (tab_size(tab));
-}
-
-void    scan_command(t_list *pipes, char **env)
+void	scan_command(t_list *pipes, char **env)
 {
 	int				i;
 	t_list			*tmp;
@@ -110,12 +74,10 @@ void    scan_command(t_list *pipes, char **env)
 			{
 				t_exist.dir = 0;
 				scan_str(&cmd->full_args[i], env);
-				// printf("i = %d\n", i);
 				if (t_exist.quote)
 					i += split_arg_exp(i, cmd);
 				else
 					i++;
-				// printf("after i = %d\n", i);
 			}
 		}
 		tmp = tmp->next;

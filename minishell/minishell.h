@@ -26,6 +26,9 @@
 # include <sys/errno.h>
 # include <stdio.h>
 
+# include <curses.h>
+# include <term.h>
+
 # define PROMPT "user@minishell$ "
 
 # define BUFFER_SIZE 1024
@@ -36,12 +39,11 @@
 
 int	g_last_exec;
 
-struct s_exist
+struct			s_exist
 {
 	int dir;
 	int	quote;
-}		t_exist;
-
+}				t_exist;
 
 typedef struct	s_redirection
 {
@@ -90,6 +92,8 @@ void			add_last_cmd(char *line, t_data *data);
 ** helpers
 */
 int				isblank(int c);
+int				tab_size(char **t);
+void			free_tab(char **t);
 void			init_cmd(t_data *data);
 
 char			*get_str(char *line, int *i);
@@ -97,7 +101,12 @@ char			*dquoted_str(char *line, int *i);
 char			*squoted_str(char *line, int *i);
 char			*unquoted_str(char *line, int *i);
 
+/*
+** ENV
+*/
+
 void			set_env(char **s, t_data *data);
+char			*get_env_value(char *key, char **env);
 
 void			free_data(t_data *data);
 
@@ -110,6 +119,7 @@ char			*handle_squotes(char *s, int *i);
 char			*handle_noquotes(char *s, int *i, char **env);
 void			handle_escape(char *s, int *i, char c, char **str);
 void			handle_env_expansion(char *s, int *i, char **env, char **str);
+int				split_arg_exp(int i, t_command *cmd);
 void			handle_tilde_expansion(char *s, int *i, char **env, char **str);
 
 #endif

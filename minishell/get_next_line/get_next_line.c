@@ -12,11 +12,6 @@
 
 #include "get_next_line.h"
 
-void		sig_int(int sig)
-{
-	kill(0, sig);
-}
-
 static		int	ft_read_file(int fd, char **storage)
 {
 	char	*buf;
@@ -26,8 +21,6 @@ static		int	ft_read_file(int fd, char **storage)
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (-1);
-	// signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_int);
 	while (ft_line_found(*storage) == -1)
 	{
 		rd = read(fd, buf, BUFFER_SIZE);

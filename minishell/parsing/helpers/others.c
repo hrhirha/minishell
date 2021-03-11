@@ -19,6 +19,26 @@ int		isblank(int c)
 	return (1);
 }
 
+int		tab_size(char **t)
+{
+	int i;
+
+	i = 0;
+	while (t[i])
+		i++;
+	return (i);
+}
+
+void	free_tab(char **t)
+{
+	int i;
+
+	i = 0;
+	while (t[i])
+		free(t[i++]);
+	free(t);
+}
+
 void	init_cmd(t_data *data)
 {
 	if (!(data->simple_cmd = malloc(sizeof(t_command))))
