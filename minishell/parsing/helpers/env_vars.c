@@ -32,9 +32,26 @@ void	set_env(char **s, t_data *data)
 	data->command->env[i] = NULL;
 }
 
+int		search_env(char *key, char **env, int i, int *j)
+{
+	char *env_key;
+
+	*j = 0;
+	while (env[i][*j] != '=')
+		*j += 1;
+	env_key = ft_substr(env[i], 0, *j);
+	if (ft_strcmp(key, env_key) == 0)
+	{
+		free(env_key);
+		return (0);
+	}
+	free(env_key);
+	return (1);
+}
+
 char	*get_env_value(char *key, char **env)
 {
-	char	*env_key;
+	char	*tmp;
 	char	*env_value;
 	int		i;
 	int		j;
@@ -43,20 +60,17 @@ char	*get_env_value(char *key, char **env)
 	env_value = ft_calloc(1, 1);
 	while (env[i])
 	{
-		j = 0;
-		while (env[i][j] != '=')
-			j++;
-		env_key = ft_substr(env[i], 0, j);
-		if (ft_strcmp(key, env_key) == 0)
+		if (search_env(key, env, i, &j) == 0)
 			break ;
-		free(env_key);
 		i++;
 	}
 	if (env[i])
 	{
 		free(env_value);
 		env_value = ft_substr(env[i], j + 1, ft_strlen(env[i]));
-		free(env_key);
 	}
+	tmp = env_value;
+	env_value = ft_strtrim(env_value, "\t ");
+	free(tmp);
 	return (env_value);
 }
