@@ -12,26 +12,6 @@
 
 #include "minishell.h"
 
-void	set_env(char **s, t_data *data)
-{
-	int x;
-	int	i;
-
-	x = 0;
-	while (s[x])
-		x++;
-	data->env = malloc((x + 1) * sizeof(char *));
-	if (!data->env)
-		exit_errno(ENOMEM);
-	i = 0;
-	while (i < x)
-	{
-		data->env[i] = ft_strdup(s[i]);
-		i++;
-	}
-	data->env[i] = NULL;
-}
-
 void	exec_command(t_command *command)
 {
 	t_list			*redirs;
@@ -77,29 +57,63 @@ void	test(t_minishell *command)
 	}
 }
 
+void	set_env(char **s, t_data *data)
+{
+	int x;
+	int	i;
+
+	x = 0;
+	while (s[x])
+		x++;
+	data->command->env = malloc((x + 1) * sizeof(char *));
+	if (!data->command->env)
+		exit_errno(ENOMEM);
+	i = 0;
+	while (i < x)
+	{
+		data->command->env[i] = ft_strdup(s[i]);
+		i++;
+	}
+	data->command->env[i] = NULL;
+}
+
+void	ft_getline(char **line, t_data *data)
+{
+	int parsing_ret;
+
+	data->i = 0;
+	write(1, PROMPT, ft_strlen(PROMPT));
+	get_next_line(0, line);
+	parsing_ret = parse_line(*line, data);
+	if (parsing_ret == 0)
+		test(data->command);
+	free_data(data);
+}
+
 int		main(int ac, char **av, char **env)
 {
+	int		i;
 	t_data	*data;
 	char	*line;
-	int		parsing_ret;
 
 	(void)ac;
 	(void)av;
-	(void)env;
+	data = malloc(sizeof(t_data));
+	if (!data)
+		exit_errno(ENOMEM);
+	data->command = malloc(sizeof(t_minishell));
+	if (!data->command)
+		exit_errno(ENOMEM);
+	set_env(env, data);
 	while (1)
 	{
-		data = malloc(sizeof(t_data));
-		if (!data)
-			exit_errno(ENOMEM);
-		set_env(env, data);
-		data->i = 0;
-		write(1, PROMPT, ft_strlen(PROMPT));
-		get_next_line(0, &line);
-		parsing_ret = parse_line(&line, data);
-		if (parsing_ret == 0)
-			test(data->command);
-		free_data(data);
+		ft_getline(&line, data);
 		free(line);
-		free(data);
 	}
+	i = 0;
+	while (data->command->env[i])
+		free(data->command->env[i++]);
+	free(data->command->env);
+	free(data->command);
+	free(data);
 }

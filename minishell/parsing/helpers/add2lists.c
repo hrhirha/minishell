@@ -12,45 +12,16 @@
 
 #include "../../minishell.h"
 
-int		pipes_miltilines(char **curr_line, t_data *data)
+int		add_cmd_to_pipes(char *line, t_data *data)
 {
 	int		ret;
-	char	*tmp;
-
-	ret = 0;
-	tmp = *curr_line;
-	while (!tmp[data->i])
-	{
-		write (1, "> ", 2);
-		data->i = 0;
-		tmp = *curr_line;
-		get_next_line(0, curr_line);
-		free(tmp);
-		tmp = *curr_line;
-		while (isblank(tmp[data->i]) == 0)
-			data->i++;
-		if (tmp[data->i] == '|' || tmp[data->i] == ';')
-			ret = error(SNTXERR, tmp[data->i]);
-	}
-	return (ret);
-}
-
-int		add_cmd_to_pipes(char **curr_line, t_data *data)
-{
-	int		ret;
-	char	*line;
-
-	line = *curr_line;
+	
 	ret = 0;
 	data->i++;
 	while (isblank(line[data->i]) == 0)
 		data->i++;
-	if (line[data->i] == '|' || line[data->i] == ';')
+	if (line[data->i] == '|' || line[data->i] == ';' || line[data->i] == '\0')
 		ret = error(SNTXERR, line[data->i]);
-	else if (line[data->i] == '\0')
-	{
-		ret = pipes_miltilines(curr_line, data);
-	}
 	if (ret == 0)
 	{
 		ft_lstadd_back(&data->pipes, ft_lstnew(data->simple_cmd));

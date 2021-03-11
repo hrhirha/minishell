@@ -36,6 +36,13 @@
 
 int	g_last_exec;
 
+struct s_exist
+{
+	int dir;
+	int	quote;
+}		t_exist;
+
+
 typedef struct	s_redirection
 {
 	int				type;
@@ -57,7 +64,6 @@ typedef struct	s_minishell
 typedef struct	s_data
 {
 	int				i;
-	char			**env;
 	char			*cmd;
 	t_minishell		*command;
 	t_list			*pipes;
@@ -69,14 +75,14 @@ typedef struct	s_data
 /*
 ** parsing
 */
-int				parse_line(char **curr_line, t_data *data);
+int				parse_line(char *line, t_data *data);
 
 /*
 ** commandParsing
 */
 int				get_redirection(char *line, t_data *data);
 void			get_command_and_args(char *line, t_data *data, int ret);
-int				add_cmd_to_pipes(char **curr_line, t_data *data);
+int				add_cmd_to_pipes(char *line, t_data *data);
 int				add_pipes_to_cmds(char *line, t_data *data);
 void			add_last_cmd(char *line, t_data *data);
 

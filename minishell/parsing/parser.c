@@ -12,12 +12,10 @@
 
 #include "../minishell.h"
 
-int	line_loop(char **curr_line, t_data *data)
+int	line_loop(char *line, t_data *data)
 {
 	int	ret;
-	char *line;
 
-	line = *curr_line;
 	ret = 0;
 	if (!line[data->i])
 		ret = 1;
@@ -27,8 +25,7 @@ int	line_loop(char **curr_line, t_data *data)
 			ret = get_redirection(line, data);
 		else if (line[data->i] == '|')
 		{
-			ret = add_cmd_to_pipes(curr_line, data);
-			line = *curr_line;
+			ret = add_cmd_to_pipes(line, data);
 		}
 		else if (line[data->i] == ';')
 			ret = add_pipes_to_cmds(line, data);
@@ -43,17 +40,11 @@ int	line_loop(char **curr_line, t_data *data)
 	return (ret);
 }
 
-int	parse_line(char **curr_line, t_data *data)
+int	parse_line(char *line, t_data *data)
 {
 	int	ret;
-	char *line;
 
-	line = *curr_line;
 	ret = 0;
-	data->command = malloc(sizeof(t_minishell));
-	if (!data->command)
-		exit_errno(ENOMEM);
-	data->command->env = data->env;
 	data->redirection = NULL;
 	data->command->cmds = NULL;
 	data->pipes = NULL;
@@ -64,7 +55,7 @@ int	parse_line(char **curr_line, t_data *data)
 		ret = error(SNTXERR, line[data->i]);
 	else
 	{
-		ret = line_loop(curr_line, data);
+		ret = line_loop(line, data);
 	}
 	return (ret);
 }

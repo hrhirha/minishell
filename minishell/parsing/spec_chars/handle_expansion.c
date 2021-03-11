@@ -41,6 +41,17 @@ char	*get_env_value(char *key, char **env)
 	return (env_value);
 }
 
+void	ambigious_redirect(char *key, char **value, char *str)
+{
+	if (ft_strchr(*value, ' ') || ft_strchr(*value, '\t') || **value == '\0')
+	{
+		if (*str == '\0')
+			printf("$%s is ambigious redirect\n", key);
+		free(*value);
+		*value = ft_strdup("");
+	}
+}
+
 void	handle_env_expansion(char *s, int *i, char **env, char **str)
 {
 	char	*key;
@@ -55,6 +66,10 @@ void	handle_env_expansion(char *s, int *i, char **env, char **str)
 	key = ft_substr(s, *i, j);
 	*i += j;
 	value = get_env_value(key, env);
+	if (t_exist.dir && t_exist.quote)
+	{
+		ambigious_redirect(key, &value, *str);
+	}
 	free(key);
 	tmp = *str;
 	*str = ft_strjoin(*str, value);

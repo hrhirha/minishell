@@ -21,6 +21,7 @@ char	*handle_dquotes(char *s, int *i, char **env)
 
 	*i += 1;
 	str = ft_calloc(1, 1);
+	t_exist.quote = 0;
 	while (s[*i] != '"' && s[*i])
 	{
 		j = 0;
@@ -83,6 +84,7 @@ char	*handle_noquotes(char *s, int *i, char **env)
 	char	*substr;
 	int	 j;
 
+	t_exist.quote = 1;
 	str = ft_calloc(1, 1);
 	while (s[*i] != '"' && s[*i] != '\'' && s[*i])
 	{
