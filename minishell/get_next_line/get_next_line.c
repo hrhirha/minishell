@@ -35,6 +35,15 @@ static		int	ft_read_file(int fd, char **storage)
 	return (rd);
 }
 
+void			ctrld(char *storage)
+{
+	if (*storage == '\0')
+	{
+		ft_putstr_fd("exit\n", 1);
+		exit(0);
+	}
+}
+
 int				get_next_line(int fd, char **line)
 {
 	static char *storage;
@@ -52,8 +61,8 @@ int				get_next_line(int fd, char **line)
 			return (rd);
 		else if (rd == 0)
 		{
-			*line = ft_strdup(storage);
-			ft_free(&storage);
+			ctrld(storage);
+			get_next_line(fd, line);
 			return (0);
 		}
 	}

@@ -61,10 +61,10 @@ void	handle_env_expansion(char *s, int *i, char **env, char **str)
 		value = ft_itoa(g_last_exec);
 		*i += 1;
 	}
-	else
-	{
+	else if (ft_isalnum(s[*i]) == 1 || s[*i] == '_')
 		value = env_variable(s, i, env, str);
-	}
+	else
+		value = ft_strdup("$");
 	tmp = *str;
 	*str = ft_strjoin(*str, value);
 	free(tmp);

@@ -41,7 +41,7 @@ int	g_last_exec;
 
 struct			s_exist
 {
-	int dir;
+	int	dir;
 	int	quote;
 }				t_exist;
 
@@ -104,7 +104,6 @@ char			*unquoted_str(char *line, int *i);
 /*
 ** ENV
 */
-
 void			set_env(char **s, t_data *data);
 char			*get_env_value(char *key, char **env);
 

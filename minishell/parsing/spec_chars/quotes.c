@@ -84,7 +84,9 @@ char	*handle_noquotes(char *s, int *i, char **env)
 			j++;
 		get_simple_str(&str, s, i, j);
 		if (s[*i] == '\\')
+		{
 			handle_escape(s, i, '\0', &str);
+		}
 		else if (s[*i] == '$')
 			handle_env_expansion(s, i, env, &str);
 		else if (s[*i] == '~')
