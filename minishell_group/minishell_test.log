@@ -1,0 +1,2616 @@
+|> WITH echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+================================================================================
+
+|> WITH echo $PWD; echo $OLDPWD; cd '' ''; pwd; echo $PWD; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+================================================================================
+
+|> WITH echo $PWD; echo $OLDPWD; cd '' '' ''; pwd; echo $PWD; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+================================================================================
+
+|> WITH echo $PWD; echo $OLDPWD; cd ' '; pwd; echo $PWD; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:  : No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:   No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+================================================================================
+
+|> WITH echo $PWD; echo $OLDPWD; cd; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: HOME not set$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell : cd: HOME not set$
+$
+================================================================================
+
+|> WITH echo $PWD; echo $OLDPWD; cd ' /'; pwd; echo $PWD; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:  /: No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:  / No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+================================================================================
+
+|> WITH echo $PWD; echo $OLDPWD; cd ' / '; pwd; echo $PWD; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:  / : No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:  /  No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+================================================================================
+
+|> WITH echo $PWD; echo $OLDPWD; cd '                  /'; pwd; echo $PWD; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:                   /: No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:                   / No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+================================================================================
+
+|> WITH echo $PWD; echo $OLDPWD; cd '                  /              '; pwd; echo $PWD; echo $OLDPWD
+|  STATUS: expected 0 actual -11
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:                   /              : No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+================================================================================
+
+|> WITH echo $PWD; echo $OLDPWD; cd ' // '; pwd; echo $PWD; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:  // : No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:  //  No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+================================================================================
+
+|> WITH echo $PWD; echo $OLDPWD; cd ' //home'; pwd; echo $PWD; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:  //home: No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:  //home No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+================================================================================
+
+|> WITH echo $PWD; echo $OLDPWD; cd '     //home    '; pwd; echo $PWD; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:      //home    : No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd:      //home     No such file or directory$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 001 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 002 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 003 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 004 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 005 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 006 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 007 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 010 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 020 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 030 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 040 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 050 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 060 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 070 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 200 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 400 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 600 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 644 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 222 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 1000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 2000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 3000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 4000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 5000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 6000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 7000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH [SETUP mkdir -m 0000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+|---------------------------------------EXPECTED--------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d: Permission denied$
+$
+|---------------------------------------ACTUAL----------------------------------
+/Users/ler-rech/.cache/minishell_test/sandbox$
+$
+minishell: cd: d No such file or directory$
+$
+================================================================================
+
+|> WITH Cd .
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH cD .
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH echo '' '' ''
+|---------------------------------------EXPECTED--------------------------------
+  $
+|---------------------------------------ACTUAL----------------------------------
+================================================================================
+
+|> WITH Echo bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH eCho bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH ecHo bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH echO bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH EchO bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH eCHo bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH EcHo bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH eChO bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [EXPORTS PATH='/bin:/usr/bin'] Echo bonjour
+|  STATUS: expected 0 actual -11
+|---------------------------------------EXPECTED--------------------------------
+bonjour$
+|---------------------------------------ACTUAL----------------------------------
+================================================================================
+
+|> WITH env
+|---------------------------------------EXPECTED--------------------------------
+$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+TERM=xterm-256color$
+_=/Users/ler-rech/.cache/minishell_test/bin/env
+|---------------------------------------ACTUAL----------------------------------
+$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+TERM=xterm-256color
+================================================================================
+
+|> WITH [SETUP export A=a] env
+|---------------------------------------EXPECTED--------------------------------
+$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+TERM=xterm-256color$
+_=/Users/ler-rech/.cache/minishell_test/bin/env
+|---------------------------------------ACTUAL----------------------------------
+$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+TERM=xterm-256color
+================================================================================
+
+|> WITH [SETUP export A=a B=b C=c] env
+|---------------------------------------EXPECTED--------------------------------
+$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+TERM=xterm-256color$
+_=/Users/ler-rech/.cache/minishell_test/bin/env
+|---------------------------------------ACTUAL----------------------------------
+$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+TERM=xterm-256color
+================================================================================
+
+|> WITH [SETUP export A=a B=b C=c] env | cat -e
+|---------------------------------------EXPECTED--------------------------------
+$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$$
+SHLVL=1$$
+TERM=xterm-256color$$
+_=/Users/ler-rech/.cache/minishell_test/bin/env$
+|---------------------------------------ACTUAL----------------------------------
+$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$$
+SHLVL=1$$
+TERM=xterm-256color$
+================================================================================
+
+|> WITH Env
+|---------------------------------------EXPECTED--------------------------------
+TERM=xterm-256color$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+_=/Users/ler-rech/.cache/minishell_test/bin/Env$
+|---------------------------------------ACTUAL----------------------------------
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+TERM=xterm-256color$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+OLDPWD$
+SHLVL=1$
+================================================================================
+
+|> WITH enV
+|---------------------------------------EXPECTED--------------------------------
+TERM=xterm-256color$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+_=/Users/ler-rech/.cache/minishell_test/bin/enV$
+|---------------------------------------ACTUAL----------------------------------
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+TERM=xterm-256color$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+OLDPWD$
+SHLVL=1$
+================================================================================
+
+|> WITH [EXPORTS PATH='/bin:/usr/bin'] Env
+|---------------------------------------EXPECTED--------------------------------
+TERM=xterm-256color$
+PATH=/bin:/usr/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+_=/usr/bin/Env$
+|---------------------------------------ACTUAL----------------------------------
+PATH=/bin:/usr/bin$
+TERM=xterm-256color$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+OLDPWD$
+SHLVL=1$
+================================================================================
+
+|> WITH [EXPORTS PATH='/bin:/usr/bin'] enV
+|---------------------------------------EXPECTED--------------------------------
+TERM=xterm-256color$
+PATH=/bin:/usr/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+_=/usr/bin/enV$
+|---------------------------------------ACTUAL----------------------------------
+PATH=/bin:/usr/bin$
+TERM=xterm-256color$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+OLDPWD$
+SHLVL=1$
+================================================================================
+
+|> WITH exit
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 1
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 2
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 3
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit ' 3'
+|  STATUS: expected 3 actual 255
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit:  3: numeric argument required $
+================================================================================
+
+|> WITH exit '\t3'
+|  STATUS: expected 3 actual 255
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 	3: numeric argument required $
+================================================================================
+
+|> WITH exit '\t\f\r 3'
+|  STATUS: expected 3 actual 255
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 	 3: numeric argument required $
+================================================================================
+
+|> WITH exit '3 '
+|  STATUS: expected 3 actual 255
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 3 : numeric argument required $
+================================================================================
+
+|> WITH exit '3\t'
+|  STATUS: expected 3 actual 255
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 3	: numeric argument required $
+================================================================================
+
+|> WITH exit '3\r'
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: 3: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 3: numeric argument required $
+================================================================================
+
+|> WITH exit '3\t\f\r '
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: 3	 : numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 3	 : numeric argument required $
+================================================================================
+
+|> WITH exit '3     a'
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: 3     a: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 3     a: numeric argument required $
+================================================================================
+
+|> WITH exit '3\t\t\ta'
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: 3			a: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 3			a: numeric argument required $
+================================================================================
+
+|> WITH exit 0
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit -0
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit -1
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 255
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 256
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 2000000
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit -2000000
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 2147483647
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit -2147483648
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 2147483648
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit -2147483649
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 3147483648
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit -3147483649
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 4294967295
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 4294967296
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit -9223372036854775808
+|  STATUS: expected 0 actual 255
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: -9223372036854775808: numeric argument required $
+================================================================================
+
+|> WITH exit 9223372036854775807
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit -9223372036854775809
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: -9223372036854775809: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: -9223372036854775809: numeric argument required $
+================================================================================
+
+|> WITH exit 9223372036854775808
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: 9223372036854775808: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 9223372036854775808: numeric argument required $
+================================================================================
+
+|> WITH exit 18446744073709551615
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: 18446744073709551615: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 18446744073709551615: numeric argument required $
+================================================================================
+
+|> WITH exit 18446744073709551616
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: 18446744073709551616: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 18446744073709551616: numeric argument required $
+================================================================================
+
+|> WITH exit +1
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit +2
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit +3
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit +0
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit +255
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit +256
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit +2000000
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit +2147483647
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit ++1
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: ++1: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: ++1: numeric argument required $
+================================================================================
+
+|> WITH exit ++2
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: ++2: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: ++2: numeric argument required $
+================================================================================
+
+|> WITH exit ++3
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: ++3: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: ++3: numeric argument required $
+================================================================================
+
+|> WITH exit ++0
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: ++0: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: ++0: numeric argument required $
+================================================================================
+
+|> WITH exit ++255
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: ++255: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: ++255: numeric argument required $
+================================================================================
+
+|> WITH exit ++256
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: ++256: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: ++256: numeric argument required $
+================================================================================
+
+|> WITH exit ++2000000
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: ++2000000: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: ++2000000: numeric argument required $
+================================================================================
+
+|> WITH exit ++2147483647
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: ++2147483647: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: ++2147483647: numeric argument required $
+================================================================================
+
+|> WITH exit --1
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: --1: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: --1: numeric argument required $
+================================================================================
+
+|> WITH exit --2
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: --2: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: --2: numeric argument required $
+================================================================================
+
+|> WITH exit --3
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: --3: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: --3: numeric argument required $
+================================================================================
+
+|> WITH exit --0
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: --0: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: --0: numeric argument required $
+================================================================================
+
+|> WITH exit --255
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: --255: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: --255: numeric argument required $
+================================================================================
+
+|> WITH exit --256
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: --256: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: --256: numeric argument required $
+================================================================================
+
+|> WITH exit --2000000
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: --2000000: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: --2000000: numeric argument required $
+================================================================================
+
+|> WITH exit --2147483647
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: --2147483647: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: --2147483647: numeric argument required $
+================================================================================
+
+|> WITH exit bonjour
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: bonjour: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: bonjour: numeric argument required $
+================================================================================
+
+|> WITH exit 0_
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: 0_: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 0_: numeric argument required $
+================================================================================
+
+|> WITH exit _0
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: _0: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: _0: numeric argument required $
+================================================================================
+
+|> WITH exit 0123456789
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit -0123456789
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH exit 00000000000000000000000000000000000000000000001
+|  STATUS: expected 1 actual 255
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 00000000000000000000000000000000000000000000001: numeric argument required $
+================================================================================
+
+|> WITH exit 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
+|  STATUS: expected 1 actual 255
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001: numeric argument required $
+================================================================================
+
+|> WITH exit 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+|  STATUS: expected 0 actual 255
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000: numeric argument required $
+================================================================================
+
+|> WITH exit -0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: -0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001: numeric argument required $
+================================================================================
+
+|> WITH exit -9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: -9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: -9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999: numeric argument required $
+================================================================================
+
+|> WITH exit 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999: numeric argument required $
+================================================================================
+
+|> WITH exit 0 bonjour
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: too many arguments$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: too many arguments $
+================================================================================
+
+|> WITH exit bonjour 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: bonjour: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: bonjour: numeric argument required $
+================================================================================
+
+|> WITH exit 0 1
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: too many arguments$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: too many arguments $
+================================================================================
+
+|> WITH exit 0 1 2 3 4 5 6 7 8 9
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: too many arguments$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: too many arguments $
+================================================================================
+
+|> WITH exit Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas molestiae corporis et quibusdam maiores. Molestiae sed unde aut at sed. Deserunt quidem quidem aspernatur pariatur vel illum voluptatum. Culpa unde dolor aspernatur sit. Mollitia tenetur sed eaque autem placeat a aut in. Ipsam ea consequuntur omnis. Non et qui vel corrupti similique eum aut voluptatibus. Iste consequatur voluptatum et omnis debitis. Sit quia neque nihil consequatur sint. Velit libero ut aut et et rerum. Placeat cumque incidunt non repellat sunt perspiciatis ullam. Repellendus repudiandae nostrum quia quis corrupti. Rerum veniam earum cumque pariatur accusantium voluptatum omnis. Alias ut et et adipisci. Tempore omnis numquam ullam et animi et eveniet. Dolor itaque distinctio in. Magnam rerum quia est laboriosam repellat perspiciatis eos. Consequuntur quae corrupti atque. Numquam enim ut ut. Perspiciatis ut maxime et libero quo voluptas consequatur illum. Pariatur porro dolor cumque molestiae harum. 
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: Mollitia: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: Mollitia: numeric argument required $
+================================================================================
+
+|> WITH exit bonjoru; echo should have exited
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: bonjoru: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: bonjoru: numeric argument required $
+================================================================================
+
+|> WITH exit 99999999999999999999999999999999999999999999999999999; echo should have exited
+|---------------------------------------EXPECTED--------------------------------
+minishell: exit: 99999999999999999999999999999999999999999999999999999: numeric argument required$
+|---------------------------------------ACTUAL----------------------------------
+exit$
+minishell: exit: 99999999999999999999999999999999999999999999999999999: numeric argument required $
+================================================================================
+
+|> WITH exit 9999; echo should have exited
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+exit$
+================================================================================
+
+|> WITH [EXPORTS A=''] export
+|  STATUS: expected 0 actual -11
+|---------------------------------------EXPECTED--------------------------------
+$
+declare -x A=""$
+declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
+declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x SHLVL="1"$
+declare -x TERM="xterm-256color"
+|---------------------------------------ACTUAL----------------------------------
+================================================================================
+
+|> WITH [EXPORTS A='"'] export
+|---------------------------------------EXPECTED--------------------------------
+$
+declare -x A="\""$
+declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
+declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x SHLVL="1"$
+declare -x TERM="xterm-256color"
+|---------------------------------------ACTUAL----------------------------------
+$
+declare -x A="""$
+declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
+declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x SHLVL="1"$
+declare -x TERM="xterm-256color"
+================================================================================
+
+|> WITH [EXPORTS A='\'] export
+|---------------------------------------EXPECTED--------------------------------
+$
+declare -x A="\\"$
+declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
+declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x SHLVL="1"$
+declare -x TERM="xterm-256color"
+|---------------------------------------ACTUAL----------------------------------
+$
+declare -x A="\"$
+declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
+declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x SHLVL="1"$
+declare -x TERM="xterm-256color"
+================================================================================
+
+|> WITH [EXPORTS A='$'] export
+|---------------------------------------EXPECTED--------------------------------
+$
+declare -x A="\$"$
+declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
+declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x SHLVL="1"$
+declare -x TERM="xterm-256color"
+|---------------------------------------ACTUAL----------------------------------
+$
+declare -x A="$"$
+declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
+declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x SHLVL="1"$
+declare -x TERM="xterm-256color"
+================================================================================
+
+|> WITH export 1=a
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `1=a': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: '1=a': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOURJESUIS =a
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `=a': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+================================================================================
+
+|> WITH export BONJOUR\\JESUIS=a
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR\JESUIS=a': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR\JESUIS=a': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\'JESUIS=a
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR'JESUIS=a': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR'JESUIS=a': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\"JESUIS=a
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR"JESUIS=a': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR"JESUIS=a': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\$JESUIS=a
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR$JESUIS=a': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR$JESUIS=a': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\&JESUIS=a
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR&JESUIS=a': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR&JESUIS=a': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\|JESUIS=a
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR|JESUIS=a': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR|JESUIS=a': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\;JESUIS=a
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR;JESUIS=a': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR;JESUIS=a': not a valid identifier$
+================================================================================
+
+|> WITH export \B\O\N\ \ \ \ \ \ \ JOURJESUIS=a
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BON       JOURJESUIS=a': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BON       JOURJESUIS=a': not a valid identifier$
+================================================================================
+
+|> WITH export A=a=a=a=a=a; echo $A
+|  STATUS: expected 0 actual -11
+|---------------------------------------EXPECTED--------------------------------
+a=a=a=a=a$
+|---------------------------------------ACTUAL----------------------------------
+================================================================================
+
+|> WITH export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C
+|  STATUS: expected 0 actual -11
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `asdf ': not a valid identifier$
+minishell: export: ` asdf asdf asd f': not a valid identifier$
+minishell: export: ` asdf ': not a valid identifier$
+minishell: export: `': not a valid identifier$
+minishell: export: `asdf ': not a valid identifier$
+$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'asdf ': not a valid identifier$
+minishell: export: ' asdf asdf asd f': not a valid identifier$
+minishell: export: ' asdf ': not a valid identifier$
+minishell: export: '': not a valid identifier$
+minishell: export: 'asdf ': not a valid identifier$
+================================================================================
+
+|> WITH export 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `asdf ': not a valid identifier$
+minishell: export: ` asdf asdf asd f': not a valid identifier$
+minishell: export: ` asdf ': not a valid identifier$
+minishell: export: `': not a valid identifier$
+minishell: export: `asdf ': not a valid identifier$
+$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'asdf ': not a valid identifier$
+minishell: export: ' asdf asdf asd f': not a valid identifier$
+minishell: export: ' asdf ': not a valid identifier$
+minishell: export: '': not a valid identifier$
+minishell: export: 'asdf ': not a valid identifier$
+$
+================================================================================
+
+|> WITH export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf '; echo $A$B$C
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `asdf ': not a valid identifier$
+minishell: export: ` asdf asdf asd f': not a valid identifier$
+minishell: export: ` asdf ': not a valid identifier$
+minishell: export: `': not a valid identifier$
+minishell: export: `asdf ': not a valid identifier$
+$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'asdf ': not a valid identifier$
+minishell: export: ' asdf asdf asd f': not a valid identifier$
+minishell: export: ' asdf ': not a valid identifier$
+minishell: export: '': not a valid identifier$
+minishell: export: 'asdf ': not a valid identifier$
+$
+================================================================================
+
+|> WITH export A B C; echo $A$B$C
+|  STATUS: expected 0 actual -11
+|---------------------------------------EXPECTED--------------------------------
+$
+|---------------------------------------ACTUAL----------------------------------
+================================================================================
+
+|> WITH export A B C; env
+|---------------------------------------EXPECTED--------------------------------
+$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+TERM=xterm-256color$
+_=/Users/ler-rech/.cache/minishell_test/bin/env
+|---------------------------------------ACTUAL----------------------------------
+$
+PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+SHLVL=1$
+TERM=xterm-256color
+================================================================================
+
+|> WITH export 'AH@'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `AH@=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'AH@=nop': not a valid identifier$
+================================================================================
+
+|> WITH export "AH'"=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `AH'=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'AH'=nop': not a valid identifier$
+================================================================================
+
+|> WITH export 'AH"'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `AH"=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'AH"=nop': not a valid identifier$
+================================================================================
+
+|> WITH export 'AH$'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `AH$=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'AH$=nop': not a valid identifier$
+================================================================================
+
+|> WITH export 'AH!'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `AH!=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'AH!=nop': not a valid identifier$
+================================================================================
+
+|> WITH export 'AH|'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `AH|=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'AH|=nop': not a valid identifier$
+================================================================================
+
+|> WITH export 'AH;'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `AH;=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'AH;=nop': not a valid identifier$
+================================================================================
+
+|> WITH export 'AH&'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `AH&=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'AH&=nop': not a valid identifier$
+================================================================================
+
+|> WITH export 'AH\'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `AH\=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'AH\=nop': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\\JESUIS
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR\JESUIS': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR\JESUIS': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\'JESUIS
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR'JESUIS': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR'JESUIS': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\"JESUIS
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR"JESUIS': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR"JESUIS': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\$JESUIS
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR$JESUIS': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR$JESUIS': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\&JESUIS
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR&JESUIS': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR&JESUIS': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\|JESUIS
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR|JESUIS': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR|JESUIS': not a valid identifier$
+================================================================================
+
+|> WITH export BONJOUR\;JESUIS
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: export: `BONJOUR;JESUIS': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: export: 'BONJOUR;JESUIS': not a valid identifier$
+================================================================================
+
+|> WITH Export B=bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH exporT B=bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [EXPORTS PATH='/bin:/usr/bin'] Export B=bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [EXPORTS PATH='/bin:/usr/bin'] exporT B=bonjour
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH Pwd
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH pwD
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [EXPORTS A='a'] unset 'A '; echo $A
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `A ': not a valid identifier$
+a$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'A ': not a valid identifier$
+a$
+================================================================================
+
+|> WITH [EXPORTS A='a'] unset 'A='; echo $A
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `A=': not a valid identifier$
+a$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'A=': not a valid identifier$
+a$
+================================================================================
+
+|> WITH [EXPORTS A='a' B='b' C='c'] unset A B C; echo $A$B$C
+|  STATUS: expected 0 actual -11
+|---------------------------------------EXPECTED--------------------------------
+$
+|---------------------------------------ACTUAL----------------------------------
+================================================================================
+
+|> WITH [EXPORTS A='a' B='b' C='c'] unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `asdf ': not a valid identifier$
+minishell: unset: ` asdf asdf asd f': not a valid identifier$
+minishell: unset: ` asdf ': not a valid identifier$
+minishell: unset: `': not a valid identifier$
+minishell: unset: `asdf ': not a valid identifier$
+$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'asdf ': not a valid identifier$
+minishell: unset: ' asdf asdf asd f': not a valid identifier$
+minishell: unset: ' asdf ': not a valid identifier$
+minishell: unset: 'asdf ': not a valid identifier$
+$
+================================================================================
+
+|> WITH [EXPORTS A='a' B='b' C='c'] unset 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `asdf ': not a valid identifier$
+minishell: unset: ` asdf asdf asd f': not a valid identifier$
+minishell: unset: ` asdf ': not a valid identifier$
+minishell: unset: `': not a valid identifier$
+minishell: unset: `asdf ': not a valid identifier$
+a$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'asdf ': not a valid identifier$
+minishell: unset: ' asdf asdf asd f': not a valid identifier$
+minishell: unset: ' asdf ': not a valid identifier$
+minishell: unset: 'asdf ': not a valid identifier$
+a$
+================================================================================
+
+|> WITH [EXPORTS A='a' B='b' C='c'] unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf '; echo $A$B$C
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `asdf ': not a valid identifier$
+minishell: unset: ` asdf asdf asd f': not a valid identifier$
+minishell: unset: ` asdf ': not a valid identifier$
+minishell: unset: `': not a valid identifier$
+minishell: unset: `asdf ': not a valid identifier$
+c$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'asdf ': not a valid identifier$
+minishell: unset: ' asdf asdf asd f': not a valid identifier$
+minishell: unset: ' asdf ': not a valid identifier$
+minishell: unset: 'asdf ': not a valid identifier$
+c$
+================================================================================
+
+|> WITH [EXPORTS A='a' B='b' C='c'] unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `asdf ': not a valid identifier$
+minishell: unset: ` asdf asdf asd f': not a valid identifier$
+minishell: unset: ` asdf ': not a valid identifier$
+minishell: unset: `': not a valid identifier$
+minishell: unset: `asdf ': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'asdf ': not a valid identifier$
+minishell: unset: ' asdf asdf asd f': not a valid identifier$
+minishell: unset: ' asdf ': not a valid identifier$
+minishell: unset: 'asdf ': not a valid identifier$
+================================================================================
+
+|> WITH [EXPORTS A='a' B='b' C='c'] unset 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `asdf ': not a valid identifier$
+minishell: unset: ` asdf asdf asd f': not a valid identifier$
+minishell: unset: ` asdf ': not a valid identifier$
+minishell: unset: `': not a valid identifier$
+minishell: unset: `asdf ': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'asdf ': not a valid identifier$
+minishell: unset: ' asdf asdf asd f': not a valid identifier$
+minishell: unset: ' asdf ': not a valid identifier$
+minishell: unset: 'asdf ': not a valid identifier$
+================================================================================
+
+|> WITH [EXPORTS A='a' B='b' C='c'] unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf '
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `asdf ': not a valid identifier$
+minishell: unset: ` asdf asdf asd f': not a valid identifier$
+minishell: unset: ` asdf ': not a valid identifier$
+minishell: unset: `': not a valid identifier$
+minishell: unset: `asdf ': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'asdf ': not a valid identifier$
+minishell: unset: ' asdf asdf asd f': not a valid identifier$
+minishell: unset: ' asdf ': not a valid identifier$
+minishell: unset: 'asdf ': not a valid identifier$
+================================================================================
+
+|> WITH unset 'AH@'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `AH@=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'AH@=nop': not a valid identifier$
+================================================================================
+
+|> WITH unset "AH'"=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `AH'=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'AH'=nop': not a valid identifier$
+================================================================================
+
+|> WITH unset 'AH"'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `AH"=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'AH"=nop': not a valid identifier$
+================================================================================
+
+|> WITH unset 'AH$'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `AH$=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'AH$=nop': not a valid identifier$
+================================================================================
+
+|> WITH unset 'AH!'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `AH!=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'AH!=nop': not a valid identifier$
+================================================================================
+
+|> WITH unset 'AH|'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `AH|=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'AH|=nop': not a valid identifier$
+================================================================================
+
+|> WITH unset 'AH;'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `AH;=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'AH;=nop': not a valid identifier$
+================================================================================
+
+|> WITH unset 'AH&'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `AH&=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'AH&=nop': not a valid identifier$
+================================================================================
+
+|> WITH unset 'AH\'=nop
+|  STATUS: expected 1 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: unset: `AH\=nop': not a valid identifier$
+|---------------------------------------ACTUAL----------------------------------
+minishell: unset: 'AH\=nop': not a valid identifier$
+================================================================================
+
+|> WITH Unset TERM
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH unseT TERM
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [EXPORTS PATH='/bin:/usr/bin'] Unset TERM
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [EXPORTS PATH='/bin:/usr/bin'] unseT TERM
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH notfound
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH notfound a b c
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH echo \t\v\f\r !#$%*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_abcdefghijklmnopqrstuvwxyz{}~
+|  STATUS: expected 127 actual 0
+|---------------------------------------EXPECTED--------------------------------
+  !#$%*+,-./0123456789:$
+minishell: =?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_abcdefghijklmnopqrstuvwxyz{}~: command not found$
+|---------------------------------------ACTUAL----------------------------------
+  !#$%*+,-./0123456789:$
+minishell: =?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_abcdefghijklmnopqrstuvwxyz{}: command not found$
+================================================================================
+
+|> WITH [SETUP touch a b c; echo bonjour > a; cp /bin/cat ls] ./ls . a b c
+|  STATUS: expected 1 actual 0
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 000 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 001 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 002 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 003 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 004 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 005 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 006 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 007 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 010 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 020 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 030 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 040 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 050 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 060 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 070 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 100 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 200 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 300 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 400 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 500 somefile] ./somefile
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 600 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 700 somefile] ./somefile
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 755 somefile] ./somefile
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 644 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 311 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 111 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 222 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile; chmod 333 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir somedir] somedir/
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: somedir/: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: somedir/: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir somedir] ./somedir/
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir/: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir/: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir somedir] somedir
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [SETUP mkdir somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir somedir] somedir
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [SETUP mkdir somedir; ln -s somedir somedirsoftlink] somedirsoftlink/
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: somedirsoftlink/: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: somedirsoftlink/: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir somedir; ln -s somedir somedirsoftlink] ./somedirsoftlink/
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedirsoftlink/: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedirsoftlink/: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir somedir; ln -s somedir somedirsoftlink] somedirsoftlink
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [SETUP mkdir somedir; ln -s somedir somedirsoftlink] ./somedirsoftlink
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedirsoftlink: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedirsoftlink: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir somedir; ln -s somedir somedirsoftlink] somedirsoftlink
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [SETUP touch somefile; ln -s somefile someremovedlink; rm -f somefile] ./someremovedlink
+|  STATUS: expected 127 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./someremovedlink: No such file or directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./someremovedlink: command not found$
+================================================================================
+
+|> WITH [SETUP touch somefile; ln -s somefile somelink1; ln -s somelink1 somelink2] ./somelink2
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somelink2: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somelink2: command not found$
+================================================================================
+
+|> WITH [SETUP touch somefile; ln -s somefile somelink1; ln -s somelink1 somelink2;ln -s somelink2 somelink3] ./somelink3
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somelink3: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somelink3: command not found$
+================================================================================
+
+|> WITH [SETUP touch somefile; ln -s somefile somelink1; ln -s somelink1 somelink2;ln -s somelink2 somelink3; ln -s somelink3 somelink4] ./somelink4
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somelink4: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somelink4: command not found$
+================================================================================
+
+|> WITH [SETUP cp /bin/ls somefile;ln -s somefile somelink1; ln -s somelink1 somelink2] ./somelink2ls
+|  STATUS: expected 127 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somelink2ls: No such file or directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somelink2ls: command not found$
+================================================================================
+
+|> WITH [SETUP cp /bin/ls somefile;ln -s somefile somelink1; ln -s somelink1 somelink2;ln -s somelink2 somelink3] ./somelink3ls
+|  STATUS: expected 127 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somelink3ls: No such file or directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somelink3ls: command not found$
+================================================================================
+
+|> WITH [SETUP cp /bin/ls somefile;ln -s somefile somelink1; ln -s somelink1 somelink2;ln -s somelink2 somelink3; ln -s somelink3 somelink4] ./somelink4ls
+|  STATUS: expected 127 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somelink4ls: No such file or directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somelink4ls: command not found$
+================================================================================
+
+|> WITH [SETUP touch _] _
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [SETUP touch -] '-'
+|  STATUS: expected 127 actual 0
+================================================================================
+
+|> WITH [SETUP touch _] ./_
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./_: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./_: command not found$
+================================================================================
+
+|> WITH [SETUP touch a; mv a ./-] ./-
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./-: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./-: command not found$
+================================================================================
+
+|> WITH [SETUP touch .] ./.
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./.: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./.: command not found$
+================================================================================
+
+|> WITH [SETUP touch ..] ./..
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./..: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./..: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 0777 somefile] ./somefile
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 1000 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 2000 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 3000 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 4000 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 5000 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 6000 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 7000 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 1777 somefile] ./somefile
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 2777 somefile] ./somefile
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 3777 somefile] ./somefile
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 4777 somefile] ./somefile
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 5777 somefile] ./somefile
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 6777 somefile] ./somefile
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 7777 somefile] ./somefile
+|---------------------------------------EXPECTED--------------------------------
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 0000 somefile] ./somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somefile: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 0777 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 1000 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 2000 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 3000 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 4000 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 5000 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 6000 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 7000 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 1777 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 2777 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 3777 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 4777 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 5777 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 6777 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP mkdir -m 0000 somedir] ./somedir
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./somedir: is a directory$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./somedir: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 000 somefile] ./Somefile
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./Somefile: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./Somefile: command not found$
+================================================================================
+
+|> WITH [SETUP echo > somefile && chmod 000 somefile] ./someFILE
+|  STATUS: expected 126 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: ./someFILE: Permission denied$
+|---------------------------------------ACTUAL----------------------------------
+minishell: ./someFILE: command not found$
+================================================================================
+
+|> WITH >
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `newline'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near 'newline' $
+================================================================================
+
+|> WITH >>
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `newline'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near 'newline' $
+================================================================================
+
+|> WITH <
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `newline'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near 'newline' $
+================================================================================
+
+|> WITH echo >
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `newline'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near 'newline' $
+================================================================================
+
+|> WITH echo >>
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `newline'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near 'newline' $
+================================================================================
+
+|> WITH echo <
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `newline'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near 'newline' $
+================================================================================
+
+|> WITH echo foo >>> bar
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `>'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near >$
+================================================================================
+
+|> WITH echo foo >>>> bar
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `>>'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near >$
+================================================================================
+
+|> WITH echo foo >>>>> bar
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `>>'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near >$
+================================================================================
+
+|> WITH [SETUP echo bonjour > bar] cat << < bar
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `<'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near <$
+================================================================================
+
+|> WITH [SETUP echo bonjour > bar] cat << << bar
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `<<'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near <$
+================================================================================
+
+|> WITH [SETUP echo bonjour > bar] cat <<<<< bar
+|  STATUS: expected 2 actual 0
+|---------------------------------------EXPECTED--------------------------------
+minishell: syntax error near unexpected token `<<'$
+|---------------------------------------ACTUAL----------------------------------
+minishell: syntax error near <$
+================================================================================
+
+|> WITH cat < doesnotexist
+|  STATUS: expected 1 actual 0
+================================================================================
+
