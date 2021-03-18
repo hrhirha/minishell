@@ -31,6 +31,8 @@ void	handle_escape(char *s, int *i, char c, char **str)
 	if (s[*i + 1] != '$' && s[*i + 1] != '"'
 		&& s[*i + 1] != '\\' && s[*i + 1] != '\0' && c == '"')
 		sub = ft_substr(s, *i, 2);
+	else if (s[*i + 1] == ' ')
+		sub = ft_strdup(" ");
 	else
 		sub = ft_substr(s, *i + 1, 1);
 	*i += 2;

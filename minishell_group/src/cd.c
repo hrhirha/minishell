@@ -56,7 +56,7 @@ int		shell_cd(t_command *command, char **env)
 		home = get_env_value("HOME", env);
 		if (*home == '\0')
 		{
-			ft_putstr_fd("minishell : cd: HOME not set\n", 1);
+			ft_putstr_fd("minishell: cd: HOME not set\n", 1);
 			g_exist.last_exec = 1;
 		}
 		else

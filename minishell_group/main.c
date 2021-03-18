@@ -61,6 +61,7 @@ int		main(int ac, char **av, char **env)
 	data->command->in = dup(0);
 	while (1)
 	{
+		g_exist.pid = 0;
 		if (ac == 3 && !ft_strcmp(av[1], "-c"))
 		{
 			int parsing_ret;

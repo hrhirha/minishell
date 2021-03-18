@@ -1,569 +1,9 @@
-|> WITH echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-================================================================================
-
-|> WITH echo $PWD; echo $OLDPWD; cd '' ''; pwd; echo $PWD; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-================================================================================
-
-|> WITH echo $PWD; echo $OLDPWD; cd '' '' ''; pwd; echo $PWD; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-================================================================================
-
-|> WITH echo $PWD; echo $OLDPWD; cd ' '; pwd; echo $PWD; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:  : No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:   No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-================================================================================
-
-|> WITH echo $PWD; echo $OLDPWD; cd; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: HOME not set$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell : cd: HOME not set$
-$
-================================================================================
-
-|> WITH echo $PWD; echo $OLDPWD; cd ' /'; pwd; echo $PWD; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:  /: No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:  / No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-================================================================================
-
-|> WITH echo $PWD; echo $OLDPWD; cd ' / '; pwd; echo $PWD; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:  / : No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:  /  No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-================================================================================
-
-|> WITH echo $PWD; echo $OLDPWD; cd '                  /'; pwd; echo $PWD; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:                   /: No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:                   / No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-================================================================================
-
-|> WITH echo $PWD; echo $OLDPWD; cd '                  /              '; pwd; echo $PWD; echo $OLDPWD
-|  STATUS: expected 0 actual -11
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:                   /              : No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-================================================================================
-
-|> WITH echo $PWD; echo $OLDPWD; cd ' // '; pwd; echo $PWD; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:  // : No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:  //  No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-================================================================================
-
-|> WITH echo $PWD; echo $OLDPWD; cd ' //home'; pwd; echo $PWD; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:  //home: No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:  //home No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-================================================================================
-
-|> WITH echo $PWD; echo $OLDPWD; cd '     //home    '; pwd; echo $PWD; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:      //home    : No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd:      //home     No such file or directory$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 001 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 002 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 003 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 004 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 005 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 006 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 007 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 010 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 020 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 030 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 040 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 050 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 060 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 070 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 200 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 400 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 600 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 644 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 222 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 1000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 2000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 3000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 4000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 5000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 6000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 7000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
-|> WITH [SETUP mkdir -m 0000 d] echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
-|---------------------------------------EXPECTED--------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d: Permission denied$
-$
-|---------------------------------------ACTUAL----------------------------------
-/Users/ler-rech/.cache/minishell_test/sandbox$
-$
-minishell: cd: d No such file or directory$
-$
-================================================================================
-
 |> WITH Cd .
 |  STATUS: expected 127 actual 0
 ================================================================================
 
 |> WITH cD .
 |  STATUS: expected 127 actual 0
-================================================================================
-
-|> WITH echo '' '' ''
-|---------------------------------------EXPECTED--------------------------------
-  $
-|---------------------------------------ACTUAL----------------------------------
 ================================================================================
 
 |> WITH Echo bonjour
@@ -598,25 +38,18 @@ $
 |  STATUS: expected 127 actual 0
 ================================================================================
 
-|> WITH [EXPORTS PATH='/bin:/usr/bin'] Echo bonjour
-|  STATUS: expected 0 actual -11
-|---------------------------------------EXPECTED--------------------------------
-bonjour$
-|---------------------------------------ACTUAL----------------------------------
-================================================================================
-
 |> WITH env
 |---------------------------------------EXPECTED--------------------------------
 $
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
 TERM=xterm-256color$
-_=/Users/ler-rech/.cache/minishell_test/bin/env
+_=/Users/hrhirha/.cache/minishell_test/bin/env
 |---------------------------------------ACTUAL----------------------------------
 $
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
 TERM=xterm-256color
 ================================================================================
@@ -624,15 +57,15 @@ TERM=xterm-256color
 |> WITH [SETUP export A=a] env
 |---------------------------------------EXPECTED--------------------------------
 $
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
 TERM=xterm-256color$
-_=/Users/ler-rech/.cache/minishell_test/bin/env
+_=/Users/hrhirha/.cache/minishell_test/bin/env
 |---------------------------------------ACTUAL----------------------------------
 $
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
 TERM=xterm-256color
 ================================================================================
@@ -640,15 +73,15 @@ TERM=xterm-256color
 |> WITH [SETUP export A=a B=b C=c] env
 |---------------------------------------EXPECTED--------------------------------
 $
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
 TERM=xterm-256color$
-_=/Users/ler-rech/.cache/minishell_test/bin/env
+_=/Users/hrhirha/.cache/minishell_test/bin/env
 |---------------------------------------ACTUAL----------------------------------
 $
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
 TERM=xterm-256color
 ================================================================================
@@ -656,15 +89,15 @@ TERM=xterm-256color
 |> WITH [SETUP export A=a B=b C=c] env | cat -e
 |---------------------------------------EXPECTED--------------------------------
 $
-PATH=/Users/ler-rech/.cache/minishell_test/bin$$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$$
 SHLVL=1$$
 TERM=xterm-256color$$
-_=/Users/ler-rech/.cache/minishell_test/bin/env$
+_=/Users/hrhirha/.cache/minishell_test/bin/env$
 |---------------------------------------ACTUAL----------------------------------
 $
-PATH=/Users/ler-rech/.cache/minishell_test/bin$$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$$
 SHLVL=1$$
 TERM=xterm-256color$
 ================================================================================
@@ -672,14 +105,14 @@ TERM=xterm-256color$
 |> WITH Env
 |---------------------------------------EXPECTED--------------------------------
 TERM=xterm-256color$
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
-_=/Users/ler-rech/.cache/minishell_test/bin/Env$
+_=/Users/hrhirha/.cache/minishell_test/bin/Env$
 |---------------------------------------ACTUAL----------------------------------
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
 TERM=xterm-256color$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 OLDPWD$
 SHLVL=1$
 ================================================================================
@@ -687,14 +120,14 @@ SHLVL=1$
 |> WITH enV
 |---------------------------------------EXPECTED--------------------------------
 TERM=xterm-256color$
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
-_=/Users/ler-rech/.cache/minishell_test/bin/enV$
+_=/Users/hrhirha/.cache/minishell_test/bin/enV$
 |---------------------------------------ACTUAL----------------------------------
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
 TERM=xterm-256color$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 OLDPWD$
 SHLVL=1$
 ================================================================================
@@ -703,13 +136,13 @@ SHLVL=1$
 |---------------------------------------EXPECTED--------------------------------
 TERM=xterm-256color$
 PATH=/bin:/usr/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
 _=/usr/bin/Env$
 |---------------------------------------ACTUAL----------------------------------
 PATH=/bin:/usr/bin$
 TERM=xterm-256color$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 OLDPWD$
 SHLVL=1$
 ================================================================================
@@ -718,13 +151,13 @@ SHLVL=1$
 |---------------------------------------EXPECTED--------------------------------
 TERM=xterm-256color$
 PATH=/bin:/usr/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
 _=/usr/bin/enV$
 |---------------------------------------ACTUAL----------------------------------
 PATH=/bin:/usr/bin$
 TERM=xterm-256color$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 OLDPWD$
 SHLVL=1$
 ================================================================================
@@ -1285,31 +718,19 @@ minishell: exit: 99999999999999999999999999999999999999999999999999999: numeric 
 exit$
 ================================================================================
 
-|> WITH [EXPORTS A=''] export
-|  STATUS: expected 0 actual -11
-|---------------------------------------EXPECTED--------------------------------
-$
-declare -x A=""$
-declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
-declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
-declare -x SHLVL="1"$
-declare -x TERM="xterm-256color"
-|---------------------------------------ACTUAL----------------------------------
-================================================================================
-
 |> WITH [EXPORTS A='"'] export
 |---------------------------------------EXPECTED--------------------------------
 $
 declare -x A="\""$
-declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
-declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x PATH="/Users/hrhirha/.cache/minishell_test/bin"$
+declare -x PWD="/Users/hrhirha/.cache/minishell_test/sandbox"$
 declare -x SHLVL="1"$
 declare -x TERM="xterm-256color"
 |---------------------------------------ACTUAL----------------------------------
 $
 declare -x A="""$
-declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
-declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x PATH="/Users/hrhirha/.cache/minishell_test/bin"$
+declare -x PWD="/Users/hrhirha/.cache/minishell_test/sandbox"$
 declare -x SHLVL="1"$
 declare -x TERM="xterm-256color"
 ================================================================================
@@ -1318,15 +739,15 @@ declare -x TERM="xterm-256color"
 |---------------------------------------EXPECTED--------------------------------
 $
 declare -x A="\\"$
-declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
-declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x PATH="/Users/hrhirha/.cache/minishell_test/bin"$
+declare -x PWD="/Users/hrhirha/.cache/minishell_test/sandbox"$
 declare -x SHLVL="1"$
 declare -x TERM="xterm-256color"
 |---------------------------------------ACTUAL----------------------------------
 $
 declare -x A="\"$
-declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
-declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x PATH="/Users/hrhirha/.cache/minishell_test/bin"$
+declare -x PWD="/Users/hrhirha/.cache/minishell_test/sandbox"$
 declare -x SHLVL="1"$
 declare -x TERM="xterm-256color"
 ================================================================================
@@ -1335,15 +756,15 @@ declare -x TERM="xterm-256color"
 |---------------------------------------EXPECTED--------------------------------
 $
 declare -x A="\$"$
-declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
-declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x PATH="/Users/hrhirha/.cache/minishell_test/bin"$
+declare -x PWD="/Users/hrhirha/.cache/minishell_test/sandbox"$
 declare -x SHLVL="1"$
 declare -x TERM="xterm-256color"
 |---------------------------------------ACTUAL----------------------------------
 $
 declare -x A="$"$
-declare -x PATH="/Users/ler-rech/.cache/minishell_test/bin"$
-declare -x PWD="/Users/ler-rech/.cache/minishell_test/sandbox"$
+declare -x PATH="/Users/hrhirha/.cache/minishell_test/bin"$
+declare -x PWD="/Users/hrhirha/.cache/minishell_test/sandbox"$
 declare -x SHLVL="1"$
 declare -x TERM="xterm-256color"
 ================================================================================
@@ -1427,15 +848,7 @@ minishell: export: `BON       JOURJESUIS=a': not a valid identifier$
 minishell: export: 'BON       JOURJESUIS=a': not a valid identifier$
 ================================================================================
 
-|> WITH export A=a=a=a=a=a; echo $A
-|  STATUS: expected 0 actual -11
-|---------------------------------------EXPECTED--------------------------------
-a=a=a=a=a$
-|---------------------------------------ACTUAL----------------------------------
-================================================================================
-
 |> WITH export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C
-|  STATUS: expected 0 actual -11
 |---------------------------------------EXPECTED--------------------------------
 minishell: export: `asdf ': not a valid identifier$
 minishell: export: ` asdf asdf asd f': not a valid identifier$
@@ -1449,6 +862,7 @@ minishell: export: ' asdf asdf asd f': not a valid identifier$
 minishell: export: ' asdf ': not a valid identifier$
 minishell: export: '': not a valid identifier$
 minishell: export: 'asdf ': not a valid identifier$
+$
 ================================================================================
 
 |> WITH export 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C
@@ -1485,25 +899,18 @@ minishell: export: 'asdf ': not a valid identifier$
 $
 ================================================================================
 
-|> WITH export A B C; echo $A$B$C
-|  STATUS: expected 0 actual -11
-|---------------------------------------EXPECTED--------------------------------
-$
-|---------------------------------------ACTUAL----------------------------------
-================================================================================
-
 |> WITH export A B C; env
 |---------------------------------------EXPECTED--------------------------------
 $
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
 TERM=xterm-256color$
-_=/Users/ler-rech/.cache/minishell_test/bin/env
+_=/Users/hrhirha/.cache/minishell_test/bin/env
 |---------------------------------------ACTUAL----------------------------------
 $
-PATH=/Users/ler-rech/.cache/minishell_test/bin$
-PWD=/Users/ler-rech/.cache/minishell_test/sandbox$
+PATH=/Users/hrhirha/.cache/minishell_test/bin$
+PWD=/Users/hrhirha/.cache/minishell_test/sandbox$
 SHLVL=1$
 TERM=xterm-256color
 ================================================================================
@@ -1676,13 +1083,6 @@ a$
 |---------------------------------------ACTUAL----------------------------------
 minishell: unset: 'A=': not a valid identifier$
 a$
-================================================================================
-
-|> WITH [EXPORTS A='a' B='b' C='c'] unset A B C; echo $A$B$C
-|  STATUS: expected 0 actual -11
-|---------------------------------------EXPECTED--------------------------------
-$
-|---------------------------------------ACTUAL----------------------------------
 ================================================================================
 
 |> WITH [EXPORTS A='a' B='b' C='c'] unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C

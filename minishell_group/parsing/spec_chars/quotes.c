@@ -44,11 +44,15 @@ char	*handle_dquotes(char *s, int *i, char **env)
 			handle_escape(s, i, '"', &str);
 		else if (s[*i] == '$')
 			handle_env_expansion(s	, i, env, &str);
-		if (s[*i] == '"')
-		{
-			*i += 1;
-			break ;
-		}
+		// if (s[*i] == '"')
+		// {
+		// 	*i += 1;
+		// 	break ;
+		// }
+	}
+	if (s[*i] == '"')
+	{
+		*i += 1;
 	}
 	return (str);
 }

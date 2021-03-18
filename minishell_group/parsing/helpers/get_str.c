@@ -17,6 +17,7 @@ char	*dquoted_str(char *line, int *i)
 	char	*substr;
 	int		j;
 
+	g_exist.quote = 0;
 	j = 1;
 	while ((line[*i + j] != '"' || line[*i + j - 1] == '\\') && line[*i + j])
 		j++;
@@ -33,6 +34,7 @@ char	*squoted_str(char *line, int *i)
 	char	*substr;
 	int		j;
 
+	g_exist.quote = 0;
 	j = 1;
 	while (line[*i + j] != '\'' && line[*i + j])
 		j++;
@@ -49,6 +51,7 @@ char	*unquoted_str(char *line, int *i)
 	char	*substr;
 	int		j;
 
+	g_exist.quote = 1;
 	j = 0;
 	while ((line[*i + j] != ';' && line[*i + j] != '|' &&
 			line[*i + j] != '>' && line[*i + j] != '<' && line[*i + j] &&

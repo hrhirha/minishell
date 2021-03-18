@@ -17,7 +17,7 @@ void	echo_display(char **full_args, int i)
 	int br;
 
 	br = i;
-	while (full_args[i] != NULL)
+	while (full_args[i])
 	{
 		ft_putstr_fd(full_args[i], 1);
 		if (full_args[i + 1])
@@ -26,7 +26,7 @@ void	echo_display(char **full_args, int i)
 		}
 		i++;
 	}
-	// if (br == 1)
+	if (br == 1)
 		ft_putstr_fd("\n", 1);
 }
 
@@ -37,6 +37,8 @@ int		shell_echo2(t_command *command, int i)
 
 	br = 0;
 	j = 0;
+	if (command->full_args[i][j] == '\0')
+		br = 1;
 	while (command->full_args[i][j] != '\0')
 	{
 		if (j == 0 && command->full_args[i][j] != '-')

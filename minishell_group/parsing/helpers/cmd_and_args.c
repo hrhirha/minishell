@@ -29,7 +29,7 @@ char	**get_arg_tab(char *cmd, int acount)
 		while (isblank(cmd[j]) == 0)
 			j++;
 		args[ac] = get_str(cmd, &j);
-		if (args[ac][ft_strlen(args[ac]) - 1] == ' ')
+		if (args[ac][ft_strlen(args[ac]) - 1] == ' ' && !g_exist.quote)
 		{
 			tmp = args[ac];
 			args[ac] = ft_substr(args[ac], 0, ft_strlen(args[ac]) - 1);
