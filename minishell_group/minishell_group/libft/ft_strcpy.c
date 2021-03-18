@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ler-rech <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/21 18:14:06 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/02/21 18:14:08 by hrhirha          ###   ########.fr       */
+/*   Created: 2019/10/12 10:12:11 by ler-rech          #+#    #+#             */
+/*   Updated: 2019/10/21 15:51:29 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+char	*ft_strcpy(char *dest, char *src)
+{
+	int	i;
 
-# define SNTXERR 1
-
-void	exit_errno(int errnum);
-int		error(int errnum, char c);
-void	print_error();
-
-#endif
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}

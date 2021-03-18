@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ler-rech <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/21 18:14:06 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/02/21 18:14:08 by hrhirha          ###   ########.fr       */
+/*   Created: 2019/10/12 10:12:11 by ler-rech          #+#    #+#             */
+/*   Updated: 2019/10/12 10:43:18 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
-
-# define SNTXERR 1
-
-void	exit_errno(int errnum);
-int		error(int errnum, char c);
-void	print_error();
-
-#endif
+int	ft_toupper(int c)
+{
+	if ((c <= 122) && (c >= 97))
+		return (c - 32);
+	else
+		return (c);
+}

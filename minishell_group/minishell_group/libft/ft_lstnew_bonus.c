@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ler-rech <ler-rech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/21 18:14:06 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/02/21 18:14:08 by hrhirha          ###   ########.fr       */
+/*   Created: 2019/07/10 09:55:54 by ler-rech          #+#    #+#             */
+/*   Updated: 2019/10/23 23:43:54 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "libft.h"
 
-# define SNTXERR 1
+t_list		*ft_lstnew(void *content)
+{
+	t_list	*list_elem;
 
-void	exit_errno(int errnum);
-int		error(int errnum, char c);
-void	print_error();
-
-#endif
+	list_elem = malloc(sizeof(t_list));
+	if (list_elem == NULL)
+		return (NULL);
+	list_elem->content = content;
+	list_elem->next = NULL;
+	return (list_elem);
+}

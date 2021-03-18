@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ler-rech <ler-rech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/21 18:14:06 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/02/21 18:14:08 by hrhirha          ###   ########.fr       */
+/*   Created: 2019/10/12 10:12:11 by ler-rech          #+#    #+#             */
+/*   Updated: 2020/01/04 18:03:47 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "libft.h"
 
-# define SNTXERR 1
+size_t		ft_strlen(const char *s)
+{
+	size_t	num;
+	size_t	i;
 
-void	exit_errno(int errnum);
-int		error(int errnum, char c);
-void	print_error();
-
-#endif
+	if (s == NULL)
+		return (0);
+	num = 0;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		num++;
+		i++;
+	}
+	return (num);
+}

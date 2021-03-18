@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/21 18:14:06 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/02/21 18:14:08 by hrhirha          ###   ########.fr       */
+/*   Created: 2019/11/06 12:23:59 by hrhirha           #+#    #+#             */
+/*   Updated: 2021/02/20 11:25:02 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include "../libft/libft.h"
+# include <signal.h>
 
-# define SNTXERR 1
+# define BUFFER_SIZE 1024
 
-void	exit_errno(int errnum);
-int		error(int errnum, char c);
-void	print_error();
+int		get_next_line(int fd, char **line);
+void	ft_free(char **s);
+int		ft_line_found(char *s);
+char	*ft_fill_line(char *s);
 
 #endif

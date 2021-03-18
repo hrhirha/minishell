@@ -1,0 +1,19 @@
+{
+	"files.associations": {
+		"array": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c",
+		"iterator": "c",
+		"sstream": "c",
+		"complex": "c",
+		"__locale": "c",
+		"ios": "c",
+		"minishell.h": "c",
+		"__bit_reference": "c",
+		"algorithm": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"unordered_map": "c"
+	}
+}
