@@ -6,7 +6,7 @@
 /*   By: ler-rech <ler-rech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:51:06 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/03/13 18:57:38 by ler-rech         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:59:49 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	handle_tilde_expansion(char *s, int *i, char **env, char **str)
 	char	*tmp;
 	char	*tilde;
 
-	if (isblank(s[*i + 1]) == 0 || s[*i + 1] == '/' || (!s[*i + 1] && isblank(s[*i - 1]) == 0))
+	if (isblank(s[*i + 1]) == 0 || s[*i + 1] == '/'
+		|| (!s[*i + 1] && isblank(s[*i - 1]) == 0))
 	{
 		tilde = get_env_value("HOME", env);
 		tmp = *str;

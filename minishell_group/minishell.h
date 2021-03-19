@@ -6,7 +6,7 @@
 /*   By: ler-rech <ler-rech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 10:12:11 by ler-rech          #+#    #+#             */
-/*   Updated: 2021/03/17 17:25:06 by ler-rech         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:32:40 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <sys/errno.h>
 # include "get_next_line/get_next_line.h"
 # include "parsing/errors/errors.h"
+# include <sys/wait.h>
+
 # define PROMPT "user@minishell$ "
 # define EXIT_SUCCESS		0
 # define EXIT_FAILURE		1
@@ -187,9 +189,19 @@ int				commands_loop(t_minishell *minishell, t_list *pipe);
 int				pipes_loop(t_minishell *minishell);
 void			set_pwd_oldpwd(char *new_path, char **env, int type);
 int				arg_exist(char *arg, t_minishell *minishell);
-void 			export_varible(char *arg, t_minishell *minishell);
-void 			unset_varible(char *arg, t_minishell *minishell);
-void 			export_varible_edit(char *arg, t_minishell *minishell);
+void			export_varible(char *arg, t_minishell *minishell);
+void			unset_varible(char *arg, t_minishell *minishell);
+void			export_varible_edit(char *arg, t_minishell *minishell);
 int				export_arg_exist(char *full_arg, t_minishell *minishell);
 int				shell_pwd(t_minishell *minishell);
+int				export_env_compair(char *var1, char *var2);
+void			export_invalid_arg_msg(char *arg);
+int				valid_arg_export(char *str);
+char			*env_value(char *arg);
+char			**copy_env(char **env, int len);
+void			display_env_ordred2(char **env, int count);
+int				display_env_ordred(char **env);
+void			unset_invalid_arg_msg(char *arg);
+void			check_lower_case(t_command *command);
+void			update_env_pwd(t_data *data);
 #endif

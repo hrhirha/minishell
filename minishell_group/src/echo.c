@@ -6,7 +6,7 @@
 /*   By: ler-rech <ler-rech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 10:12:11 by ler-rech          #+#    #+#             */
-/*   Updated: 2021/03/16 15:32:56 by ler-rech         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:08:53 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		shell_echo(t_command *command, t_minishell *minishell)
 	int i;
 	int br;
 
+	(void)minishell;
 	if (command->full_args[1] == NULL)
 	{
 		ft_putstr_fd("\n", 1);

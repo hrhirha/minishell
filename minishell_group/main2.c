@@ -6,7 +6,7 @@
 /*   By: ler-rech <ler-rech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 12:32:27 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/03/16 17:47:54 by ler-rech         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:08:00 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		commands_loop2(t_minishell *minishell, t_list *my_pipe)
 {
-	t_list		*current;
 	int			status;
 	t_command	*command;
 

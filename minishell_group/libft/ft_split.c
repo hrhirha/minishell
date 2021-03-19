@@ -14,11 +14,9 @@
 
 static int		words_num(char *str, char c)
 {
-	int			i;
 	int			words;
 	int			length;
 
-	i = 0;
 	words = 0;
 	length = 0;
 	if (!str)

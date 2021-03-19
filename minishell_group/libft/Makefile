@@ -40,7 +40,7 @@ ALLO = $(wildcard *.o)
 all : $(NAME)
 
 $(NAME):
-	@$(G) -c $(SRC) -c $(SRCB) -I ${NAMEH}
+	@$(G) -c $(SRC)
 	@ar rc $(NAME) $(LIBFTO)
 
 bonus:

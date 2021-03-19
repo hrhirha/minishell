@@ -6,7 +6,7 @@
 /*   By: ler-rech <ler-rech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 10:12:11 by ler-rech          #+#    #+#             */
-/*   Updated: 2021/03/14 15:44:28 by ler-rech         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:09:42 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	**get_paths(char **env)
 	char	*tmp;
 
 	tmp = NULL;
+	paths = NULL;
 	i = 0;
 	while (env[i] != NULL)
 	{

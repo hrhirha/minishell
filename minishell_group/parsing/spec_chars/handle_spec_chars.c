@@ -6,7 +6,7 @@
 /*   By: ler-rech <ler-rech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:25:56 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/03/14 16:32:05 by ler-rech         ###   ########.fr       */
+/*   Updated: 2021/03/18 17:00:15 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,37 +56,40 @@ void	scan_redirs(t_list *redirs, char **env)
 	}
 }
 
-void    scan_args(t_command *cmd, char **env)
+void	scan_args(t_command *cmd, char **env)
 {
-    int exp;
-    int i;
-    i = 0;
-    while (cmd->full_args[i])
-    {
-        exp = 0;
-        g_exist.dir = 0;
-        if (ft_strchr(cmd->full_args[i], '$'))
-            exp = 1;
-        scan_str(&cmd->full_args[i], env);
-        if (g_exist.quote && exp)
-            i += split_arg_exp(i, cmd);
-        else
-            i++;
-    }
+	int	exp;
+	int	i;
+
+	i = 0;
+	while (cmd->full_args[i])
+	{
+		exp = 0;
+		g_exist.dir = 0;
+		if (ft_strchr(cmd->full_args[i], '$'))
+			exp = 1;
+		scan_str(&cmd->full_args[i], env);
+		if (g_exist.quote && exp)
+			i += split_arg_exp(i, cmd);
+		else
+			i++;
+	}
 }
-void    scan_command(t_list *pipes, char **env)
+
+void	scan_command(t_list *pipes, char **env)
 {
-    t_list          *tmp;
-    t_command       *cmd;
-    tmp = pipes;
-    while (tmp)
-    {
-        cmd = (t_command *)tmp->content;
-        scan_redirs(cmd->redirections, env);
-        if (cmd->full_args)
-        {
-            scan_args(cmd, env);
-        }
-        tmp = tmp->next;
-    }
+	t_list		*tmp;
+	t_command	*cmd;
+
+	tmp = pipes;
+	while (tmp)
+	{
+		cmd = (t_command *)tmp->content;
+		scan_redirs(cmd->redirections, env);
+		if (cmd->full_args)
+		{
+			scan_args(cmd, env);
+		}
+		tmp = tmp->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ler-rech <ler-rech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 10:12:11 by ler-rech          #+#    #+#             */
-/*   Updated: 2021/03/17 17:37:12 by ler-rech         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:10:27 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int	shell_pwd(t_minishell *minishell)
 {
-	int i;
-	char *pwd;
+	char	*pwd;
 
+	(void)minishell;
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 	{
-		ft_putstr_fd("minishell: cd: error retrieving current directory: getcwd: cannot access parent directories: ", 2);
+		ft_putstr_fd("minishell: cd: error retrieving current directory: \
+		getcwd: cannot access parent directories: ", 2);
 		ft_putendl_fd(strerror(errno), 2);
 		g_exist.last_exec = 1;
 	}

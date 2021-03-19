@@ -6,7 +6,7 @@
 /*   By: ler-rech <ler-rech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 18:13:23 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/03/17 17:37:15 by ler-rech         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:29:09 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		error(int errnum, char c)
 	return (err);
 }
 
-void	print_error()
+void	print_error(void)
 {
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);

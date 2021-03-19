@@ -6,7 +6,7 @@
 /*   By: ler-rech <ler-rech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 12:41:39 by hrhirha           #+#    #+#             */
-/*   Updated: 2021/03/14 18:23:30 by ler-rech         ###   ########.fr       */
+/*   Updated: 2021/03/18 17:00:38 by ler-rech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,6 @@ char	*handle_dquotes(char *s, int *i, char **env)
 			handle_escape(s, i, '"', &str);
 		else if (s[*i] == '$')
 			handle_env_expansion(s	, i, env, &str);
-		// if (s[*i] == '"')
-		// {
-		// 	*i += 1;
-		// 	break ;
-		// }
 	}
 	if (s[*i] == '"')
 	{
