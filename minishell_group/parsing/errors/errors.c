@@ -25,7 +25,7 @@ int		error(int errnum, char c)
 	err = 0;
 	if (errnum == SNTXERR)
 	{
-		ft_putstr_fd("minishell: syntax error near  unexpected token ", 1);
+		ft_putstr_fd("minishell: syntax error near unexpected token ", 1);
 		if (c == '\0')
 			ft_putstr_fd("`newline'", 1);
 		else
