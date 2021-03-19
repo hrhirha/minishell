@@ -40,7 +40,7 @@ void	signals(int sig)
 	if (sig == SIGQUIT)
 	{
 		if (g_exist.pid == 1)
-			ft_putstr_fd("Quit: 3\n", 1);
+			ft_putstr_fd("Quit:\n", 1);
 		else if (g_exist.pid == 0)
 			ft_putstr_fd("\b\b  \b\b", 1);
 	}
