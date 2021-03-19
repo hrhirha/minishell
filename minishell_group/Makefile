@@ -40,7 +40,7 @@ lib:
 $(NAME):
 	@$(GCC) -o minishell $(FILES_C) libft/libft.a
 
-san:
+san: fclean all
 	@$(GCC) -o minishell $(FILES_C) libft/libft.a -fsanitize=address
 
 clean:

@@ -40,6 +40,7 @@ struct			s_exist
 	int			last_exec;
 	int			dir;
 	int			quote;
+	char		*storage;
 }				g_exist;
 
 typedef struct	s_redirection

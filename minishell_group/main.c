@@ -25,27 +25,6 @@ void	ft_getline(char **line, t_data *data)
 	free_data(data);
 }
 
-void	signals(int sig)
-{
-	if (sig == SIGINT)
-	{
-		if (g_exist.pid == 0)
-		{
-			ft_putstr_fd("\b\b  \b\n", 1);
-			write(1, PROMPT, ft_strlen(PROMPT));
-		}
-		else if (g_exist.pid == 1)
-			ft_putstr_fd("\n", 1);
-	}
-	if (sig == SIGQUIT)
-	{
-		if (g_exist.pid == 1)
-			ft_putstr_fd("Quit:\n", 1);
-		else if (g_exist.pid == 0)
-			ft_putstr_fd("\b\b  \b\b", 1);
-	}
-}
-
 int		main(int ac, char **av, char **env)
 {
 	t_data	*data;
@@ -60,8 +39,6 @@ int		main(int ac, char **av, char **env)
 	if (!data->command)
 		exit_errno(ENOMEM);
 	set_env(env, data);
-	signal(SIGINT, signals);
-	signal(SIGQUIT, signals);
 	data->command->out = dup(1);
 	data->command->in = dup(0);
 	while (1)

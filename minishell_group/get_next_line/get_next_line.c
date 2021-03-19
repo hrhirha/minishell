@@ -11,6 +11,27 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "../minishell.h"
+
+static	void	signals(int sig)
+{
+	if (sig == SIGINT)
+	{
+		ft_free(&g_exist.storage);
+		if (g_exist.pid == 0)
+		{
+			ft_putstr_fd("\n", 1);
+			write(1, PROMPT, ft_strlen(PROMPT));
+		}
+		else if (g_exist.pid == 1)
+			ft_putstr_fd("\n", 1);
+	}
+	if (sig == SIGQUIT)
+	{
+		if (g_exist.pid == 1)
+			ft_putstr_fd("Quit:\n", 1);
+	}
+}
 
 static		int	ft_read_file(int fd, char **storage)
 {
@@ -18,6 +39,8 @@ static		int	ft_read_file(int fd, char **storage)
 	char	*tmp;
 	int		rd;
 
+	signal(SIGINT, signals);
+	signal(SIGQUIT, signals);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (-1);
@@ -35,42 +58,40 @@ static		int	ft_read_file(int fd, char **storage)
 	return (rd);
 }
 
-void			ctrld(char *storage)
+static	void	ctrld(char *storage)
 {
-	if (*storage == '\0')
+	if (!storage || *storage == '\0')
 	{
 		ft_putstr_fd("exit\n", 1);
 		exit(0);
 	}
-	else
-		ft_putstr_fd("  \b\b", 1);
 }
 
 int				get_next_line(int fd, char **line)
 {
-	static char *storage;
 	char		*tmp;
 	int			rd;
 
 	if (fd < 0 || line == NULL || BUFFER_SIZE < 0)
 		return (-1);
-	if (!storage && !(storage = ft_calloc(1, 1)))
+	if (!g_exist.storage && !(g_exist.storage = ft_calloc(1, 1)))
 		return (-1);
-	if (ft_line_found(storage) == -1)
+	if (ft_line_found(g_exist.storage) == -1)
 	{
-		rd = ft_read_file(fd, &storage);
+		rd = ft_read_file(fd, &g_exist.storage);
 		if (rd == -1)
 			return (rd);
 		else if (rd == 0)
 		{
-			ctrld(storage);
+			ctrld(g_exist.storage);
 			get_next_line(fd, line);
 			return (0);
 		}
 	}
-	*line = ft_fill_line(storage);
-	tmp = storage;
-	storage = ft_strdup(storage + ft_line_found(storage) + 1);
+	*line = ft_fill_line(g_exist.storage);
+	tmp = g_exist.storage;
+	g_exist.storage = ft_strdup(g_exist.storage
+					+ ft_line_found(g_exist.storage) + 1);
 	ft_free(&tmp);
 	return (1);
 }
