@@ -23,10 +23,9 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <sys/errno.h>
-# include "get_next_line/get_next_line.h"
+# include "libft/libft.h"
 # include "parsing/errors/errors.h"
 # include <sys/wait.h>
-
 # include <term.h>
 # include <termios.h>
 # include <curses.h>
@@ -55,7 +54,6 @@ typedef struct	s_hist
 	struct s_hist	*prev;
 }				t_hist;
 
-
 struct			s_exist
 {
 	int			pid;
@@ -66,6 +64,7 @@ struct			s_exist
 	t_tc		tc;
 	t_hist		*hist;
 	t_hist		*tmp_hist;
+	char		*tmp_line;
 }				g_exist;
 
 typedef struct	s_redirection

@@ -1,10 +1,10 @@
-#include "../minishell.h"
+#include "gnl_term.h"
 
 void	add_hist(char *s)
 {
 	t_hist *new;
 
-	if (!s)
+	if (!s || !*s)
 		return ;
 	if (!g_exist.hist)
 	{
@@ -17,6 +17,7 @@ void	add_hist(char *s)
 	new = malloc(sizeof(t_hist));
 	new->s = ft_strdup(s);
 	new->next = g_exist.hist;
+	new->prev = NULL;
 	g_exist.hist->prev = new;
 	g_exist.hist = new;
 }
@@ -27,7 +28,7 @@ void	add_tmp_hist(char *s)
 
 	if (!s)
 		return ;
-	if (!g_exist.hist)
+	if (!g_exist.tmp_hist)
 	{
 		g_exist.tmp_hist = malloc(sizeof(t_hist));
 		g_exist.tmp_hist->s = ft_strdup(s);
@@ -38,6 +39,7 @@ void	add_tmp_hist(char *s)
 	new = malloc(sizeof(t_hist));
 	new->s = ft_strdup(s);
 	new->next = g_exist.tmp_hist;
+	new->prev = NULL;
 	g_exist.tmp_hist->prev = new;
 	g_exist.tmp_hist = new;
 }

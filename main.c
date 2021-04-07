@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int		gnl_term(char **line);
+int	gnl_term(char **line);
 
 void	ft_getline(char **line, t_data *data)
 {
@@ -21,14 +21,43 @@ void	ft_getline(char **line, t_data *data)
 	data->i = 0;
 	write(1, PROMPT, ft_strlen(PROMPT));
 	// get_next_line(0, line);
+	tcgetattr(0, &g_exist.tc.init);
 	gnl_term(line);
+	tcsetattr(0, TCSANOW, &g_exist.tc.init);
 	parsing_ret = parse_line(*line, data);
 	if (parsing_ret == 0)
 		pipes_loop(data->command);
 	free_data(data);
 }
 
-int		main(int ac, char **av, char **env)
+void	init_data(t_data *data, char **env)
+{
+	data->command = malloc(sizeof(t_minishell));
+	if (!data->command)
+		exit_errno(ENOMEM);
+	set_env(env, data);
+	data->command->out = dup(1);
+	data->command->in = dup(0);
+	g_exist.hist = NULL;
+}
+
+void	free_hist()
+{
+	t_hist *h;
+	t_hist *tmp;
+	
+	h = g_exist.hist;
+	while (h)
+	{
+		printf("`%s`\n", h->s);
+		free(h->s);
+		tmp = h->next;
+		h = tmp;
+	}
+	free(h);
+}
+
+int	main(int ac, char **av, char **env)
 {
 	t_data	*data;
 	char	*line;
@@ -38,13 +67,7 @@ int		main(int ac, char **av, char **env)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		exit_errno(ENOMEM);
-	data->command = malloc(sizeof(t_minishell));
-	if (!data->command)
-		exit_errno(ENOMEM);
-	set_env(env, data);
-	data->command->out = dup(1);
-	data->command->in = dup(0);
-	g_exist.hist = NULL;
+	init_data(data, env);
 	while (1)
 	{
 		line = NULL;
@@ -54,5 +77,6 @@ int		main(int ac, char **av, char **env)
 	}
 	free_tab(data->command->env);
 	free(data->command);
+	free_hist();
 	free(data);
 }
