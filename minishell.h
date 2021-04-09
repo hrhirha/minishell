@@ -26,13 +26,16 @@
 # include "libft/libft.h"
 # include "parsing/errors/errors.h"
 # include <sys/wait.h>
+# include "get_next_line/gnl_term.h"
 # include <term.h>
 # include <termios.h>
 # include <curses.h>
 
 # define PROMPT "user@minishell$ "
+
 # define EXIT_SUCCESS		0
 # define EXIT_FAILURE		1
+
 # define LEFT_REDIR 1
 # define RIGHT_REDIR 2
 # define DRIGHT_REDIR 3
@@ -60,7 +63,7 @@ struct			s_exist
 	int			last_exec;
 	int			dir;
 	int			quote;
-	char		*storage;
+	char		*line;
 	t_tc		tc;
 	t_hist		*hist;
 	t_hist		*tmp_hist;
@@ -105,9 +108,6 @@ typedef struct	s_helper1
 	int			*forks;
 	int			commands_len;
 }				t_helper1;
-
-void			add_hist(char *s);
-void			add_tmp_hist(char *s);
 
 int				parse_line(char *line, t_data *data);
 int				get_redirection(char *line, t_data *data);

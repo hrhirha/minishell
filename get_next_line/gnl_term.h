@@ -1,14 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl_term.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/09 11:14:34 by hrhirha           #+#    #+#             */
+/*   Updated: 2021/04/09 11:14:36 by hrhirha          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GNL_TERM_H
 # define GNL_TERM_H
 # include "../minishell.h"
 
+int		gnl_term(void);
+void	setup_term(void);
+void	get_printable(long c);
 int		putchar_tc(int c);
-void	backspace(char **line);
-void	up_key(char **line);
-void	down_key(char **line);
-void	handle_keys(char **line, long c);
-int     gnl_term(char **line);
-void	get_printable(char **line, long c);
-void	setup_term();
+void	backspace(void);
+void	handle_keys(long c);
+void	ft_free(char **s);
+void	signals(int sig);
+void	add_hist(char *s);
+void	up_hist(void);
+void	down_hist(void);
 
 #endif

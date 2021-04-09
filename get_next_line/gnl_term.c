@@ -1,6 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl_term.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/09 11:14:31 by hrhirha           #+#    #+#             */
+/*   Updated: 2021/04/09 11:14:32 by hrhirha          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "gnl_term.h"
 
-void	setup_term()
+void	ft_free(char **s)
+{
+	free(*s);
+	*s = NULL;
+}
+
+void	signals(int sig)
+{
+	if (sig == SIGINT)
+	{
+		ft_free(&g_exist.line);
+		if (g_exist.tmp_line)
+			ft_free(&g_exist.tmp_line);
+		g_exist.tmp_hist = NULL;
+		if (g_exist.pid == 0)
+		{
+			ft_putstr_fd("\n", 1);
+			write(1, PROMPT, ft_strlen(PROMPT));
+		}
+		else if (g_exist.pid == 1)
+			ft_putstr_fd("\n", 1);
+	}
+	if (sig == SIGQUIT)
+	{
+		if (g_exist.pid == 1)
+			ft_putstr_fd("Quit:\n", 1);
+	}
+}
+
+void	setup_term(void)
 {
 	g_exist.tc.name = getenv("TERM");
 	if (!g_exist.tc.name)
@@ -18,49 +59,48 @@ void	setup_term()
 	g_exist.tc.dl = tgetstr("dl", NULL);
 }
 
-void	get_printable(char **line, long c)
+void	get_printable(long c)
 {
 	char	bf[2];
 	char	*tmp;
 
 	bf[0] = c;
 	bf[1] = '\0';
-	if (*line)
+	if (g_exist.line)
 	{
-		tmp = *line;
-		*line = ft_strjoin(*line, bf);
+		tmp = g_exist.line;
+		g_exist.line = ft_strjoin(g_exist.line, bf);
 		free(tmp);
-		// if (g_exist.tmp_hist)
-		// {
-		// 	tmp = g_exist.tmp_hist->s;
-		// 	g_exist.tmp_hist->s = ft_strdup(*line);
-		// 	free(tmp);
-		// }
 	}
 	else
-		*line = ft_strdup(bf);
+		g_exist.line = ft_strdup(bf);
 	tputs(bf, 1, putchar_tc);
 }
 
-int	gnl_term(char **line)
+int	gnl_term(void)
 {
 	long	c;
 
 	setup_term();
+	signal(SIGINT, signals);
+	signal(SIGQUIT, signals);
 	c = 0;
-	g_exist.tmp_hist = g_exist.hist;
+	g_exist.tmp_hist = NULL;
+	g_exist.tmp_line = NULL;
 	while (read(0, &c, sizeof(c)) > 0)
 	{
 		if (c >= 32 && c <= 126)
-			get_printable(line, c);
+			get_printable(c);
 		if (c == '\n')
 			break ;
-		handle_keys(line, c);
+		handle_keys(c);
 		c = 0;
 	}
-	add_hist(*line);
-	printf("\n");
-	if (!*line)
-		*line = ft_strdup("");
-	return(1);
+	if (g_exist.tmp_line)
+		ft_free(&g_exist.tmp_line);
+	if (!g_exist.line)
+		g_exist.line = ft_strdup("");
+	add_hist(g_exist.line);
+	tputs("\n", 1, putchar_tc);
+	return (1);
 }

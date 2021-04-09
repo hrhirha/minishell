@@ -12,19 +12,18 @@
 
 #include "minishell.h"
 
-int	gnl_term(char **line);
-
 void	ft_getline(char **line, t_data *data)
 {
 	int parsing_ret;
 
+	(void)line;
 	data->i = 0;
 	write(1, PROMPT, ft_strlen(PROMPT));
 	// get_next_line(0, line);
 	tcgetattr(0, &g_exist.tc.init);
-	gnl_term(line);
+	gnl_term();
 	tcsetattr(0, TCSANOW, &g_exist.tc.init);
-	parsing_ret = parse_line(*line, data);
+	parsing_ret = parse_line(g_exist.line, data);
 	if (parsing_ret == 0)
 		pipes_loop(data->command);
 	free_data(data);
@@ -43,8 +42,8 @@ void	init_data(t_data *data, char **env)
 
 void	free_hist()
 {
-	t_hist *h;
 	t_hist *tmp;
+	t_hist *h;
 	
 	h = g_exist.hist;
 	while (h)
@@ -60,7 +59,6 @@ void	free_hist()
 int	main(int ac, char **av, char **env)
 {
 	t_data	*data;
-	char	*line;
 
 	(void)ac;
 	(void)av;
@@ -70,10 +68,10 @@ int	main(int ac, char **av, char **env)
 	init_data(data, env);
 	while (1)
 	{
-		line = NULL;
+		g_exist.line = NULL;
 		g_exist.pid = 0;
-		ft_getline(&line, data);
-		free(line);
+		ft_getline(&g_exist.line, data);
+		free(g_exist.line);
 	}
 	free_tab(data->command->env);
 	free(data->command);
