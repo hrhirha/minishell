@@ -61,7 +61,7 @@ int	has_exp(t_command *cmd, char **env, int i)
 	int	j;
 
 	j = 0;
-	if (cmd->full_args[i][j] == '$')
+	if (cmd->full_args[i][j] == '$' && cmd->full_args[i][j + 1])
 	{
 		j++;
 		if (is_valid_env(&cmd->full_args[i][j]) == 0)

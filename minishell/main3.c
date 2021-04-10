@@ -23,21 +23,21 @@ int	shell_execute(t_minishell *minishell, t_command *command)
 	if (command->full_args == NULL || command->full_args[0] == NULL)
 		return (1);
 	check_lower_case(command);
-	if (strcmp(command->full_args[0], "exit") != 0)
+	if (ft_strcmp(command->full_args[0], "exit") != 0)
 		g_exist.last_exec = 0;
-	if (strcmp(command->full_args[0], "cd") == 0)
+	if (ft_strcmp(command->full_args[0], "cd") == 0)
 		return (shell_cd(command, minishell));
-	else if (strcmp(command->full_args[0], "echo") == 0)
+	else if (ft_strcmp(command->full_args[0], "echo") == 0)
 		return (shell_echo(command, minishell));
-	else if (strcmp(command->full_args[0], "exit") == 0)
+	else if (ft_strcmp(command->full_args[0], "exit") == 0)
 		return (shell_exit(command, minishell));
-	else if (strcmp(command->full_args[0], "export") == 0)
+	else if (ft_strcmp(command->full_args[0], "export") == 0)
 		return (shell_export(command, minishell));
-	else if (strcmp(command->full_args[0], "unset") == 0)
+	else if (ft_strcmp(command->full_args[0], "unset") == 0)
 		return (shell_unset(command, minishell));
-	else if (strcmp(command->full_args[0], "env") == 0)
+	else if (ft_strcmp(command->full_args[0], "env") == 0)
 		return (shell_env(minishell));
-	else if (strcmp(command->full_args[0], "pwd") == 0)
+	else if (ft_strcmp(command->full_args[0], "pwd") == 0)
 		return (shell_pwd(minishell));
 	else
 		return (shell_launch(minishell, command));
@@ -50,9 +50,12 @@ int	read_file(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(file_name, 2);
-		print_error();
+		if (g_exist.ambiguous == 0)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(file_name, 2);
+			print_error();
+		}
 		g_exist.last_exec = 1;
 		return (-1);
 	}
@@ -67,9 +70,12 @@ int	create_empty_file(char *file_name)
 			| S_IRGRP | S_IWGRP | S_IWUSR, 0644);
 	if (fd < 0)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(file_name, 2);
-		print_error();
+		if (g_exist.ambiguous == 0)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(file_name, 2);
+			print_error();
+		}
 		g_exist.last_exec = 1;
 		return (-1);
 	}
@@ -84,9 +90,12 @@ int	create_append_file(char *file_name)
 			| S_IRGRP | S_IWGRP | S_IWUSR, 0644);
 	if (fd < 0)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(file_name, 2);
-		print_error();
+		if (g_exist.ambiguous == 0)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(file_name, 2);
+			print_error();
+		}
 		return (-1);
 	}
 	return (fd);

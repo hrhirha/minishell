@@ -26,7 +26,16 @@ int	shell_launch3(t_command *command)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(command->full_args[0], 2);
 	print_error();
-	return (126);
+	if(errno == 13)
+	{
+		g_exist.last_exec = 126;
+		return (126);
+	}
+	else
+	{
+		g_exist.last_exec = 127;
+		return (127);
+	}
 }
 
 void	shell_launch4(t_command *command, int pid, char *execter)

@@ -41,7 +41,7 @@ char	*env_variable(char *s, int *i, char **env, char **str)
 		{
 			env_val_has_blanks(s, i, value, str);
 			if (**str == '\0')
-				ft_putstr_fd("ambiguous redirect\n", 2);
+				amb_error(key);
 			free(value);
 			value = ft_strdup("");
 		}

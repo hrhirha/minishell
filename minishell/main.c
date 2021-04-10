@@ -37,6 +37,7 @@ void	init_data(t_data *data, char **env)
 	data->command->out = dup(1);
 	data->command->in = dup(0);
 	g_exist.hist = NULL;
+	g_exist.ambiguous = 0;
 }
 
 void	free_hist(void)
@@ -47,7 +48,6 @@ void	free_hist(void)
 	h = g_exist.hist;
 	while (h)
 	{
-		printf("`%s`\n", h->s);
 		free(h->s);
 		tmp = h->next;
 		h = tmp;
@@ -69,6 +69,7 @@ int	main(int ac, char **av, char **env)
 	{
 		g_exist.line = NULL;
 		g_exist.pid = 0;
+		g_exist.ambiguous = 0;
 		ft_getline(&g_exist.line, data);
 		free(g_exist.line);
 	}

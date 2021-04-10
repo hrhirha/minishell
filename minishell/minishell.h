@@ -68,6 +68,7 @@ struct			s_exist
 	t_hist		*hist;
 	t_hist		*tmp_hist;
 	char		*tmp_line;
+	int			ambiguous;
 }				g_exist;
 typedef struct s_redirection
 {
@@ -237,4 +238,5 @@ void			scan_redirs(t_list *redirs, char **env);
 int				is_valid_env(char *arg);
 int				does_env_exist(char *arg, char **env);
 void			drop_pro(t_command *cmd, int index);
+void			amb_error(char *str);
 #endif

@@ -46,3 +46,11 @@ void	print_error(void)
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
 }
+
+void	amb_error(char *str)
+{
+	ft_putstr_fd("minishell: $", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": ambiguous redirect\n", 2);
+	g_exist.ambiguous = 1;
+}
