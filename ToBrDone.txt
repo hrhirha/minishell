@@ -1,3 +1,0 @@
-segFault:
-    - unset OLDPWD; cd .; unset OLDPWD || env
-    - unset PWD; cd .; unset PWD || env

@@ -1,9 +1,0 @@
-Modifications:
-    parsing/spac_chars/handle_spec_chars.c: l72,l73 added
-
-
-To be handled:
-
-segFault:
-    - unset OLDPWD; cd .; unset OLDPWD || env
-    - unset PWD; cd .; unset PWD || env
