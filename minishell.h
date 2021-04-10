@@ -45,9 +45,6 @@ typedef struct	s_tc
 	char			*name;
 	struct termios	term;
 	struct termios	init;
-	char			*cm;
-	char			*ce;
-	char			*dl;
 }				t_tc;
 
 typedef struct	s_hist
@@ -199,7 +196,7 @@ void			shell_parce(t_minishell *minishell, char *line);
 char			*shell_read(void);
 int				shell_execute(t_minishell *minishell, t_command *current);
 int				shell_launch(t_minishell *minishell, t_command *command);
-int				shell_cd(t_command *command, char **env);
+int				shell_cd(t_command *command, t_minishell *minishell);
 int				shell_exit(t_command *command);
 int				shell_echo(t_command *command, t_minishell *minishell);
 t_list			*ft_lstnew(void *content);
@@ -215,7 +212,7 @@ int				loop_redirections(t_minishell *minishell, t_command *command);
 int				handle_command(t_minishell *minishell, t_command *command);
 int				commands_loop(t_minishell *minishell, t_list *pipe);
 int				pipes_loop(t_minishell *minishell);
-void			set_pwd_oldpwd(char *new_path, char **env, int type);
+void			set_pwd_oldpwd(char *new_path, t_minishell *minishell, int type);
 int				arg_exist(char *arg, t_minishell *minishell);
 void			export_varible(char *arg, t_minishell *minishell);
 void			unset_varible(char *arg, t_minishell *minishell);

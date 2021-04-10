@@ -26,7 +26,7 @@ int		shell_execute(t_minishell *minishell, t_command *command)
 	if (strcmp(command->full_args[0], "exit") != 0)
 		g_exist.last_exec = 0;
 	if (strcmp(command->full_args[0], "cd") == 0)
-		return (shell_cd(command, minishell->env));
+		return (shell_cd(command, minishell));
 	else if (strcmp(command->full_args[0], "echo") == 0)
 		return (shell_echo(command, minishell));
 	else if (strcmp(command->full_args[0], "exit") == 0)

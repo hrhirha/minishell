@@ -100,31 +100,93 @@ char	*get_env_value(char *key, char **env)
 	return (env_value);
 }
 
-void	set_pwd_oldpwd(char *new_path, char **env, int type)
+void	export_env_var(char *arg, t_minishell *minishell)
 {
-	int pwd;
-	int oldpwd;
-	int j;
+	char	**new_env;
+	int		i;
+
+	new_env = (char **)malloc(sizeof(char *) *
+		(words_counter(minishell->env) + 2));
+	i = 0;
+	while (minishell->env[i] != NULL)
+	{
+		new_env[i] = ft_strdup(minishell->env[i]);
+		i++;
+	}
+	new_env[i++] = ft_strdup(arg);
+	new_env[i] = NULL;
+	free_double(minishell->env);
+	minishell->env = new_env;
+}
+
+void	update_env_var(char *arg, t_minishell *minishell)
+{
+	int		i;
+	char	**new;
+
+	new = malloc((tab_size(minishell->env) + 1) * sizeof(char *));
+	i = 0;
+	while (minishell->env[i] != NULL)
+	{
+		if (export_env_compair(minishell->env[i], arg) == 1)
+		{
+			new[i] = ft_strdup(arg);
+		}
+		else
+			new[i] = ft_strdup(minishell->env[i]);
+		i++;
+	}
+	new[i] = NULL;
+	free_tab(minishell->env);
+	minishell->env = new;
+}
+
+void	set_pwd_oldpwd(char *new_path, t_minishell *minishell, int type)
+{
+	int		pwd;
+	int		oldpwd;
+	int		j;
+	char	*tmp;
+	char	*tmp1;
 
 	oldpwd = -1;
-	while (env[++oldpwd])
+	while (minishell->env[++oldpwd])
 	{
-		if (search_env("OLDPWD", env, oldpwd, &j) == 0)
+		if (search_env("OLDPWD", minishell->env, oldpwd, &j) == 0)
 			break ;
 	}
 	pwd = 0;
-	while (env[pwd])
+	while (minishell->env[pwd])
 	{
-		if (search_env("PWD", env, pwd, &j) == 0)
+		if (search_env("PWD", minishell->env, pwd, &j) == 0)
 			break ;
 		pwd++;
 	}
-	free(env[oldpwd]);
-	env[oldpwd] = ft_strjoin("OLDPWD=",
-		ft_substr(env[pwd], j + 1, ft_strlen(env[pwd])));
-	free(env[pwd]);
-	if (type == 1)
-		env[pwd] = ft_strjoin("PWD=", new_path);
+	if (!minishell->env[pwd])
+	{
+		export_env_var(ft_strjoin("PWD=", new_path), minishell);
+	}
 	else
-		env[pwd] = ft_strjoin("PWD=", ft_strjoin(&env[oldpwd][7], "/."));
+	{
+		tmp = ft_strjoin("OLDPWD=", get_env_value("PWD", minishell->env));
+		if (!minishell->env[oldpwd] && minishell->env[pwd])
+			export_env_var(tmp, minishell);
+		else if (minishell->env[oldpwd] && minishell->env[pwd])
+			update_env_var(tmp, minishell);
+		free(tmp);
+		tmp = ft_strjoin(&minishell->env[oldpwd][7], "/.");
+		if (type == 1)
+		{
+			tmp1 = ft_strjoin("PWD=", new_path);
+			update_env_var(tmp1, minishell);
+			free(tmp1);
+		}
+		else
+		{
+			tmp1 = ft_strjoin("PWD=", tmp);
+			update_env_var(tmp, minishell);
+			free(tmp1);
+		}
+		free(tmp);
+	}
 }

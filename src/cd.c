@@ -12,10 +12,10 @@
 
 #include "../minishell.h"
 
-void	shell_cd2(t_command *command, char **env)
+void	shell_cd2(t_command *command, t_minishell *minishell)
 {
-	char *pwd;
-
+	char	*pwd;
+	
 	if (chdir(command->full_args[1]) == -1)
 	{
 		ft_putstr_fd("minishell: cd: ", 2);
@@ -31,23 +31,23 @@ void	shell_cd2(t_command *command, char **env)
 			ft_putstr_fd("minishell: cd: error retrieving current directory: \
 			getcwd: cannot access parent directories: ", 2);
 			ft_putendl_fd(strerror(errno), 2);
-			set_pwd_oldpwd(pwd, env, 2);
+			set_pwd_oldpwd(pwd, minishell, 2);
 		}
 		else
 		{
-			set_pwd_oldpwd(pwd, env, 1);
+			set_pwd_oldpwd(pwd, minishell, 1);
 			g_exist.last_exec = 0;
 		}
 	}
 }
 
-int		shell_cd(t_command *command, char **env)
+int		shell_cd(t_command *command, t_minishell *minishell)
 {
 	char	*home;
 
 	if (command->full_args[1] == NULL)
 	{
-		home = get_env_value("HOME", env);
+		home = get_env_value("HOME", minishell->env);
 		if (*home == '\0')
 		{
 			ft_putstr_fd("minishell: cd: HOME not set\n", 1);
@@ -55,13 +55,14 @@ int		shell_cd(t_command *command, char **env)
 		}
 		else
 		{
-			chdir(get_env_value("HOME", env));
-			set_pwd_oldpwd(get_env_value("HOME", env), env, 1);
+			chdir(home);
+			set_pwd_oldpwd(home, minishell, 1);
+			ft_free(&home);
 		}
 	}
 	else if (command->full_args[1][0] == '\0')
-		set_pwd_oldpwd(get_env_value("PWD", env), env, 1);
+		set_pwd_oldpwd(get_env_value("PWD", minishell->env), minishell, 1);
 	else
-		shell_cd2(command, env);
+		shell_cd2(command, minishell);
 	return (1);
 }

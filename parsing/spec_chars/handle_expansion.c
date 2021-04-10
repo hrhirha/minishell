@@ -76,8 +76,8 @@ void	handle_tilde_expansion(char *s, int *i, char **env, char **str)
 	char	*tmp;
 	char	*tilde;
 
-	if (isblank(s[*i + 1]) == 0 || s[*i + 1] == '/'
-		|| (!s[*i + 1] && isblank(s[*i - 1]) == 0))
+	if ((isblank(s[*i + 1]) == 0 || s[*i + 1] == '/'
+		|| !s[*i + 1]) && (isblank(s[*i - 1]) == 0 || *i == 0))
 	{
 		tilde = get_env_value("HOME", env);
 		tmp = *str;

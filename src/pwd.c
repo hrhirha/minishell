@@ -27,6 +27,7 @@ int	shell_pwd(t_minishell *minishell)
 	}
 	ft_putstr_fd(pwd, 1);
 	ft_putstr_fd("\n", 1);
+	ft_free(&pwd);
 	g_exist.last_exec = 0;
 	return (1);
 }

@@ -44,19 +44,16 @@ void	signals(int sig)
 void	setup_term(void)
 {
 	g_exist.tc.name = getenv("TERM");
-	if (!g_exist.tc.name)
-		printf("TERM not set\n");
+	// if (!g_exist.tc.name)
+	// 	printf("TERM environment variable not set.\n");
 	tgetent(NULL, g_exist.tc.name);
-	setupterm(NULL, STDOUT_FILENO, NULL);
+	setupterm(g_exist.tc.name, STDOUT_FILENO, NULL);
 	tcgetattr(0, &g_exist.tc.term);
 	g_exist.tc.term.c_lflag = g_exist.tc.term.c_lflag & ~ICANON;
 	g_exist.tc.term.c_lflag = g_exist.tc.term.c_lflag & ~ECHO;
 	g_exist.tc.term.c_cc[VMIN] = 1;
 	g_exist.tc.term.c_cc[VTIME] = 0;
 	tcsetattr(0, TCSANOW, &g_exist.tc.term);
-	g_exist.tc.cm = tgetstr("cm", NULL);
-	g_exist.tc.ce = tgetstr("ce", NULL);
-	g_exist.tc.dl = tgetstr("dl", NULL);
 }
 
 void	get_printable(long c)
