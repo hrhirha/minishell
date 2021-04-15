@@ -40,14 +40,14 @@ int	shell_launch3(t_command *command)
 
 void	shell_launch4(t_command *command, int pid, char *execter)
 {
-	if (pid > 0)
-	{
-		waitpid(pid, &g_exist.last_exec, 0);
+	waitpid(pid, &g_exist.last_exec, 0);
+	if (WIFSIGNALED(g_exist.last_exec))
+		g_exist.last_exec = WTERMSIG(g_exist.last_exec) + 128;
+	else
 		g_exist.last_exec = WEXITSTATUS(g_exist.last_exec);
-		if (ft_str_has_char(command->full_args[0], '/') == 0)
-		{
-			free(execter);
-		}
+	if (ft_str_has_char(command->full_args[0], '/') == 0)
+	{
+		free(execter);
 	}
 }
 
