@@ -55,7 +55,7 @@ void	add_last_cmd(char *line, t_data *data)
 	data->i--;
 	while (isblank(line[data->i]) == 0)
 		data->i--;
-	if (line[data->i] != ';')
+	if (line[data->i] != ';' || line[data->i - 1] == '\\')
 	{
 		ft_lstadd_back(&data->pipes, ft_lstnew(data->simple_cmd));
 		ft_lstadd_back(&data->command->cmds, ft_lstnew(data->pipes));

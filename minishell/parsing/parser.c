@@ -28,7 +28,9 @@ int	line_loop(char *line, t_data *data)
 			ret = add_cmd_to_pipes(line, data);
 		}
 		else if (line[data->i] == ';')
+		{
 			ret = add_pipes_to_cmds(line, data);
+		}
 		else
 			get_command_and_args(line, data, ret);
 		if (!line[data->i] || ret == 1)
