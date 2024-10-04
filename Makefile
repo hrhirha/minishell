@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fcommon
 GCC = gcc $(FLAGS)
 FILES_C =	main.c \
 			main2.c \
